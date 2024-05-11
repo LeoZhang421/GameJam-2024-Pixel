@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="roguelike demo"
-run/main_scene="res://Scenes/game_start.tscn"
+config/name="GameJam-2024-Pixel"
+run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
