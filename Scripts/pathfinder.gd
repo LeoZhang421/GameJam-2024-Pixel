@@ -12,32 +12,32 @@ var maze : Array
 var scale : int
 var debug : bool
 
-# Called when the node enters the scene tree for the first time.
-func _init(new_room_borders, new_floor_history, new_scale, new_debug := false):
-	debug = new_debug
-	scale = new_scale
-	room_borders.position = new_room_borders.position/scale
-	room_borders.size = new_room_borders.size/scale
-	floor_history = new_floor_history
-	for x in room_borders.size.x:
+# 直接传入tile_map，debug模式默认关闭
+func _init(tile_map:Object, new_debug := false):
+	# 初始化maze
+	ROW = get_viewport().size.x
+	COL = get_viewport().size.y
+	for x in ROW:
 		var maze_column : Array = []
-		for y in room_borders.size.y:
-			var point = room_borders.position + Vector2(x,y)
-			if floor_history.has(point):
-				maze_column.append(0)
-			else:
-				maze_column.append(1)
+		maze_column.resize(COL)
+		maze_column.fill(0)
 		maze_original.append(maze_column)
+	# 添加陆地信息
+	var ground_history = tile_map.get_used_cells(1)
+	for ground_position in ground_history:
+		maze_original[ground_position.x][ground_position.y] = 1
+	debug = new_debug
+	scale = tile_map.tile_set.tile_size.x
+	room_borders.position = Vector2.ZERO
+	room_borders.size = get_viewport().size/scale
 	maze = maze_original
-	ROW = maze.size()
-	COL = maze[maze.size() - 1].size()
 
 
-#下面这条需要写测试用例(已在enemy.gd中添加）
+# 等效于tilemap的map_to_local方法
 func get_standard_position(current_position):
 	return Vector2(int(current_position.x/scale), int(current_position.y/scale)) - room_borders.position
 		
-		
+#输入起点和终点，获得一条路径，路径的坐标为全局坐标，可以直接拿来用		
 func find_path(start, end):
 	if end == Vector2.ZERO:
 		return null
@@ -60,110 +60,17 @@ func find_path(start, end):
 			path_normalized[i] = (room_borders.position + path_normalized[i]) * scale + Vector2(scale*1/2, scale/4)
 			continue
 		path_normalized[i] = (room_borders.position + path_normalized[i]) * scale + Vector2(scale/2, scale/2)
-	if debug == true:
-		for child in get_parent().get_parent().get_children():
-			if child.is_in_group("debug"):
-				child.queue_free()
-		for i in path_normalized:
-			var debug_scene = load("res://Scenes/Debug/debug_node.tscn")
-			var debug = debug_scene.instantiate()
-			debug.position = i
-			get_parent().get_parent().add_child(debug)
+	#debug_node在node_tree中的位置根据项目而异，需要灵活变通，先全部注释掉了，防止出bug
+	#if debug == true:
+		#for child in get_parent().get_parent().get_children():
+			#if child.is_in_group("debug"):
+				#child.queue_free()
+		#for i in path_normalized:
+			#var debug_scene = load("res://Scenes/Debug/debug_node.tscn")
+			#var debug = debug_scene.instantiate()
+			#debug.position = i
+			#get_parent().get_parent().add_child(debug)
 	return path_normalized
-		
-#func astar(start, end):
-#
-#	# Create start and end node
-#	print("finding from" + str(start) + "to" + str(end))
-#	var start_node = Pathfinding_Node.new(null, start)
-#	start_node.g = 0
-#	start_node.h = 0
-#	start_node.f = 0
-#	var end_node = Pathfinding_Node.new(null, end)
-#	end_node.g = 0
-#	end_node.h = 0
-#	end_node.f = 0
-#
-#	# Initialize both open and closed list
-#	var open_list = []
-#	var closed_list = []
-#	var steps = 0
-#	# Add the start node
-#	open_list.append(start_node)
-#
-#	# Loop until you find the end
-#	while len(open_list) > 0:
-#
-#		# Get the current node
-#		var current_node = open_list[0]
-#		var current_index = 0
-#		for index in open_list.size():
-#			if open_list[index].f < current_node.f:
-#				current_node = open_list[index]
-#				current_index = index
-#
-#		# Pop current off open list, add to closed list
-#		open_list.pop_at(current_index)
-#		closed_list.append(current_node)
-#
-#		# Found the goal
-#		if current_node.position == end_node.position:
-#			var path : Array = []
-#			var current = current_node
-#			while current != null:
-#				path.append(current.position)
-#				current = current.parent
-#			path.reverse()
-#			print("finding complete!")
-#			return path # Return reversed path
-#
-#		# Generate children
-#		var children : Array = []
-#		for new_position in DIRECTIONS: # Adjacent squares
-#			# Get node position
-#			var node_position = Vector2(current_node.position.x + new_position.x, current_node.position.y + new_position.y)
-#
-#			# Make sure within range
-#			if node_position.x > (maze.size() - 1) or node_position.x < 0 or node_position.y > ((maze[maze.size() - 1]).size() -1) or node_position.y < 0:
-#				continue
-#
-#			# Make sure walkable terrain
-#			if maze[node_position.x][node_position.y] != 0 or maze[node_position.x][node_position.y - new_position.y] != 0 or maze[node_position.x - new_position.x][node_position.y] != 0:
-#				continue
-#
-#			# Create new node
-#			steps += 1
-#			print("walk" + str(steps))
-#			var new_node = Pathfinding_Node.new(current_node, node_position)
-#
-#			# Append
-#			children.append(new_node)
-#
-#		# Loop through children
-#		for child in children:
-#
-#			# Child is on the closed list
-#			for closed_child in closed_list:
-#				if child == closed_child:
-#					continue
-#
-#			# Create the f, g, and h values
-#			child.g = current_node.g + 1
-#			var dx : float = abs(child.position.x - end_node.position.x)
-#			var dy : float = abs(child.position.y - end_node.position.y)
-#			child.h = dx + dy + (1.414 - 2) * min(dx, dy)
-#			child.h *= (1.0 + 1/room_borders.get_area())
-#			child.f = child.g + child.h
-#
-#			# Child is already in the open list
-#			for open_node in open_list:
-#				if child == open_node and child.g > open_node.g:
-#					continue
-#
-#			# Add the child to the open list
-#			open_list.append(child)
-			
-
 
  
 # Check if a cell is valid (within the grid)
@@ -216,7 +123,7 @@ func astar(grid, src, dest):
 		print("Source or destination is invalid")
 		return
  
-	# Check if the source and destination are unblocked
+	# Check if the source and destination are unblocked，这段根据需求可能会删除
 	if not is_unblocked(grid, src[0], src[1]) or not is_unblocked(grid, dest[0], dest[1]):
 		print("Source or the destination is blocked")
 		return
@@ -309,19 +216,22 @@ func astar(grid, src, dest):
 		print("Failed to find the destination cell")
 
 
-			
+# 更新地图信息，并重新寻路
 func maze_update_and_reroute(start, end, position_array:PackedVector2Array):
 	maze_update(position_array)
 	return find_path(start, end)
 	
+# 重置地图信息为初始化时的值并重新寻路
 func maze_reset_and_reroute(start, end):
 	maze_reset()
 	return find_path(start, end)
 			
+# 更新地图信息，传入的变量为新的陆地阻挡
 func maze_update(position_array:PackedVector2Array):
 	for i in position_array:
 		var temp = get_standard_position(i)
 		maze[temp.x][temp.y] = 1
-		
+
+# 重置地图信息为初始化时的值
 func maze_reset():
 	maze = maze_original
