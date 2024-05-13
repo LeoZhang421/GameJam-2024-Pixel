@@ -62,14 +62,14 @@ func find_path(start, end):
 		path_normalized[i] = (room_borders.position + path_normalized[i]) * scale + Vector2(scale/2, scale/2)
 	#debug_node在node_tree中的位置根据项目而异，需要灵活变通，先全部注释掉了，防止出bug
 	#if debug == true:
-		#for child in get_parent().get_parent().get_children():
+		#for child in self.get_parent().get_children():
 			#if child.is_in_group("debug"):
 				#child.queue_free()
 		#for i in path_normalized:
 			#var debug_scene = load("res://Scenes/Debug/debug_node.tscn")
 			#var debug = debug_scene.instantiate()
 			#debug.position = i
-			#get_parent().get_parent().add_child(debug)
+			#self.get_parent().add_child(debug)
 	return path_normalized
 
  
@@ -235,3 +235,22 @@ func maze_update(position_array:PackedVector2Array):
 # 重置地图信息为初始化时的值
 func maze_reset():
 	maze = maze_original
+	
+# 判断当前位置是否是近海地块，传入全局坐标
+func is_shallow_water(position:Vector2):
+	var temp = get_standard_position(position)
+	if maze[temp.x][temp.y] != 0:
+		return false
+	if temp.x == 0:
+		if temp.y == 0:
+			return maze[temp.x + 1][temp.y] == 1 || maze[temp.x][temp.y + 1] == 1
+		if temp.y == maze[0].size() - 1:
+			return maze[temp.x + 1][temp.y] == 1 || maze[temp.x][temp.y - 1] == 1
+		return maze[temp.x + 1][temp.y] == 1 || maze[temp.x][temp.y - 1] == 1 || maze[temp.x][temp.y + 1] == 1
+	if temp.x == maze[0].size() - 1:
+		if temp.y == 0:
+			return maze[temp.x - 1][temp.y] == 1 || maze[temp.x][temp.y + 1] == 1
+		if temp.y == maze[0].size() - 1:
+			return maze[temp.x - 1][temp.y] == 1 || maze[temp.x][temp.y - 1] == 1
+		return maze[temp.x - 1][temp.y] == 1 || maze[temp.x][temp.y - 1] == 1 || maze[temp.x][temp.y + 1] == 1
+	return maze[temp.x + 1][temp.y] == 1 || maze[temp.x - 1][temp.y] == 1 || maze[temp.x][temp.y + 1] == 1 || maze[temp.x][temp.y - 1] == 1
