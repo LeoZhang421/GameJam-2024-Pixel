@@ -15,8 +15,8 @@ var debug : bool
 # 直接传入tile_map，debug模式默认关闭
 func _init(tile_map:Object, new_debug := false):
 	# 初始化maze
-	ROW = get_viewport().size.x
-	COL = get_viewport().size.y
+	ROW = tile_map.get_viewport().size.x
+	COL = tile_map.get_viewport().size.y
 	for x in ROW:
 		var maze_column : Array = []
 		maze_column.resize(COL)
@@ -29,7 +29,7 @@ func _init(tile_map:Object, new_debug := false):
 	debug = new_debug
 	scale = tile_map.tile_set.tile_size.x
 	room_borders.position = Vector2.ZERO
-	room_borders.size = get_viewport().size/scale
+	room_borders.size = Vector2(tile_map.get_viewport().size/scale)
 	maze = maze_original
 
 
