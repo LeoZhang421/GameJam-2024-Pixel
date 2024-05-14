@@ -5,7 +5,8 @@ var pathfinder
 func _ready():
 	print(get_viewport().size.x)
 	pathfinder = Pathfinder.new($TileMap_Test)
-	print(pathfinder.find_path(Vector2(50,0), Vector2(1000,700)))
+	print(pathfinder.find_path(Vector2(0,300), Vector2(1000,700)))
+	print(pathfinder.get_sail_routes())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
