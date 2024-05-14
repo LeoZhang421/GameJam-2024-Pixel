@@ -1,4 +1,8 @@
-res://Scenes/VFX/Hit_Effect.tscn
-res://Scenes/VFX/Explosion.gd
+res://Scenes/Buildings/Turrent_example.tscn
+res://Scenes/Buildings/Turrent_example.gd
 res://Scenes/Main.tscn
-res://Scenes/Debug_Node/debug_node.tscn
+res://README.md
+res://Scenes/Enemies/EnemyExample.tscn
+res://Scenes/Enemies/EnemyExample.gd
+res://Scenes/Buildings/TurrentExample.tscn
+res://Scenes/Buildings/TurrentExample.gd
