@@ -1,3 +1,4 @@
+res://Scenes/VFX/Hit_Effect.tscn
+res://Scenes/VFX/Explosion.gd
 res://Scenes/Main.tscn
-res://Scripts/Main.gd
-res://Scripts/pathfinder.gd
+res://Scenes/Debug_Node/debug_node.tscn

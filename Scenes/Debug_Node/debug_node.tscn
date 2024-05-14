@@ -1,9 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://socdkee88wow"]
-
-[ext_resource type="Texture2D" uid="uid://2004vv7emjjs" path="res://Assets/Debug-0001.png" id="1_nilfl"]
+[gd_scene format=3 uid="uid://socdkee88wow"]
 
 [node name="Debug_Node" type="Node2D" groups=["debug"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["debug"]]
 z_index = 4096
-texture = ExtResource("1_nilfl")
