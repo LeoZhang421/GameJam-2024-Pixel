@@ -1,3 +1,8 @@
+res://Scenes/Buildings/Turrent_example.tscn
+res://Scenes/Buildings/Turrent_example.gd
 res://Scenes/Main.tscn
-res://Scripts/Main.gd
-res://Scripts/pathfinder.gd
+res://README.md
+res://Scenes/Enemies/EnemyExample.tscn
+res://Scenes/Enemies/EnemyExample.gd
+res://Scenes/Buildings/TurrentExample.tscn
+res://Scenes/Buildings/TurrentExample.gd
