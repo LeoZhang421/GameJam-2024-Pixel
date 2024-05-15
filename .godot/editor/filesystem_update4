@@ -8,3 +8,4 @@ res://Scenes/Cursor.tscn
 res://Scripts/Cursor.gd
 res://Scripts/pathfinder.gd
 res://README.md
+res://Scripts/Camera2D.gd
