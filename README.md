@@ -32,4 +32,4 @@ is_shallow_water(position:Vector2) -> bool: 判断当前位置是否是可扩展
 is_deep_water(position:Vector2) -> bool: 判断当前位置是否是不可扩展的深海地块，传入全局坐标</br>
 get_harbour_position() -> Array of Vector2: 获取地图上的所有港口全局坐标</br>
 get_enemy_spawn_position() -> Array of Vector2: 获取地图上的所有敌人出生点</br>
-get_sail_routes() -> Array of Array of Vector2: 获取所有航线的路径，每条路径从码头到终点，该方法未写完，现在返回的是归一化坐标</br>
+get_sail_routes() -> Array of Array of Vector2: 获取所有航线的路径，从码头到终点，返回的是全局坐标</br>

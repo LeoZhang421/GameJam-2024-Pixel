@@ -339,7 +339,14 @@ func get_enemy_spawn_position():
 		temp.append(get_global_position(i))
 	return temp
 	
-# 获取所有航线的归一化路径，从码头到终点
+# 获取所有航线的路径，从码头到终点，返回的是全局坐标
 func get_sail_routes():
-	return sail_routes
+	var sail_routes_global = sail_routes.duplicate(true)
+	for single_sail_route in sail_routes_global:
+		for i in single_sail_route.size():
+			single_sail_route[i - 1] = get_global_position(single_sail_route[i - 1])
+	return sail_routes_global
 		
+# 获取当前坐标所处地块的中心点，用来建造建筑用
+func get_tile_center(position:Vector2):
+	return get_global_position(get_standard_position(position))
