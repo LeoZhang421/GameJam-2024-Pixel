@@ -34,6 +34,12 @@ func _process(delta):
 			if Input.is_action_just_pressed("click"):
 				expand(get_global_mouse_position())
 		else: print("cannot expand!")
+	if is_predemolishing:
+		if main.pathfinder.is_building(get_global_mouse_position()):
+			print("can demolish!")
+			if Input.is_action_just_pressed("click"):
+				demolish(get_global_mouse_position())
+		else: print("cannot demolish!")
 
 func _on_expand_button_pressed():
 	if not is_preexpanding:
@@ -48,10 +54,11 @@ func _on_build_button_pressed():
 		stop_prebuilding()
 
 func _on_demolish_button_pressed():
-	pass # Replace with function body.
+	start_predemolishing()
 
 func start_prebuilding(building_name:String):
 	stop_preexpanding()
+	stop_predemolishing()
 	is_prebuilding = true
 	build_button_text.text = "Cancel!"
 	var building_texture = load("res://Assets/Buildings/turrents_1_left.png")
@@ -64,6 +71,7 @@ func stop_prebuilding():
 	
 func start_preexpanding():
 	stop_prebuilding()
+	stop_predemolishing()
 	is_preexpanding = true
 	expand_button_text.text = "Cancel!"
 
@@ -71,13 +79,23 @@ func stop_preexpanding():
 	is_preexpanding = false
 	expand_button_text.text = "Expand!"
 	
+func start_predemolishing():
+	stop_prebuilding()
+	stop_preexpanding()
+	is_predemolishing = true
+	demolish_button_text.text = "Cancel!"
+
+func stop_predemolishing():
+	is_predemolishing = false
+	demolish_button_text.text = "Demolish!"
+	
 func build(building_scene:PackedScene, position:Vector2):
 	if not main.pathfinder.is_constructable_land(position):
 		pass
 	else:
 		var building = building_scene.instantiate()
 		building.start_location = main.pathfinder.get_tile_center(position)
-		main.add_child(building)
+		main.get_node("BuildingLayer").add_child(building)
 		main.pathfinder.maze_add_building(position)
 		stop_prebuilding()
 		
@@ -87,5 +105,16 @@ func expand(position:Vector2):
 	else:
 		main.tile_map.erase_cell(0, main.pathfinder.get_standard_position(position))
 		main.tile_map.set_cells_terrain_connect(1, [main.pathfinder.get_standard_position(position)], 0, 0)
-		main.pathfinder.maze_update(position)
+		main.pathfinder.maze_update("ground", position)
 		stop_preexpanding()
+		
+func demolish(position:Vector2):
+	if not main.pathfinder.is_building(position):
+		pass
+	else:
+		for i in main.get_node("BuildingLayer").get_children():
+			if i.global_position  == main.pathfinder.get_tile_center(position):
+				i.queue_free()
+				break
+		main.pathfinder.maze_update("ground", position)
+		stop_predemolishing()

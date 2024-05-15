@@ -238,7 +238,7 @@ func astar(grid, src, dest):
 # 更新地图信息，并重新寻路
 func maze_update_and_reroute(start, end, position_array:PackedVector2Array):
 	for i in position_array:
-		maze_update(i)
+		maze_update("ground", i)
 	return find_path(start, end)
 	
 # 重置地图信息为初始化时的值并重新寻路
@@ -247,9 +247,12 @@ func maze_reset_and_reroute(start, end):
 	return find_path(start, end)
 			
 # 更新地图信息，传入的变量为新的陆地阻挡
-func maze_update(position:Vector2):
+func maze_update(type:String, position:Vector2):
 		var temp = get_standard_position(position)
-		maze[temp.x][temp.y] = 1
+		if type == "ground":
+			maze[temp.x][temp.y] = 1
+		if type == "water":
+			maze[temp.x][temp.y] = 0
 		
 # 更新地图信息，传入的变量为新的建筑
 func maze_add_building(position:Vector2):
@@ -329,6 +332,14 @@ func is_deep_water(position:Vector2):
 	if maze[temp.x][temp.y] == 3:
 		return false
 	return not is_shallow_water(position)
+	
+func is_building(position:Vector2):
+	var temp = get_standard_position(position)
+	# 如果是航线或敌人出生点
+	if maze[temp.x][temp.y] != 5:
+		return false
+	else:
+		return true
 	
 func is_constructable_land(position:Vector2):
 	var temp = get_standard_position(position)
