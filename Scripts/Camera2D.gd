@@ -1,5 +1,5 @@
 extends Camera2D
-var dead_zone = 100
+var dead_zone = 200
 
 # Called when the node enters the scene tree for the first time.
 func _input(event):

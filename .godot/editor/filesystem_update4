@@ -1,11 +1,7 @@
 res://Scenes/Main.tscn
+res://Scripts/Camera2D.gd
 res://Scenes/Buildings/TurrentExample.tscn
 res://Scenes/Enemies/EnemyExample.tscn
 res://Scenes/UI/HUD.tscn
-res://Scripts/HUD.gd
-res://Scripts/Main.gd
 res://Scenes/Cursor.tscn
-res://Scripts/Cursor.gd
-res://Scripts/pathfinder.gd
-res://README.md
-res://Scripts/Camera2D.gd
+res://Scripts/Main.gd

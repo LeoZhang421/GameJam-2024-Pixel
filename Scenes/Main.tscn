@@ -256,6 +256,11 @@ layer_3/tile_data = PackedInt32Array(458760, 131072, 13)
 layer_4/tile_data = PackedInt32Array(196637, 65536, 13)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(780, 510)
+limit_left = -720
+limit_top = -450
+limit_right = 960
+limit_bottom = 450
 script = ExtResource("3_l3cjw")
 
 [node name="BuildingLayer" type="Node" parent="."]
