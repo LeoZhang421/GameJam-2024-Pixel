@@ -3,8 +3,8 @@ var pathfinder
 
 # 测试寻路的代码
 func _ready():
-	$HUD.main = self
 	pathfinder = Pathfinder.new($TileMap_Test)
+	$HUD.main = self
 	$Camera2D.offset = $TileMap_Test.tile_set.tile_size
 	$Camera2D.limit_left = 0
 	$Camera2D.limit_top = 0

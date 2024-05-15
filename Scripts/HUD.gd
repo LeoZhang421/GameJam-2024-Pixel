@@ -3,7 +3,7 @@ class_name HUD
 @onready var is_prebuilding := false
 @onready var is_preexpanding := false
 @onready var is_predemolishing := false
-@onready var main:Object
+@onready var main
 @onready var life_value = $Container/VBoxContainer/MarginContainer/VBoxContainer/Life/Life_Value
 @onready var money_value = $Container/VBoxContainer/MarginContainer/VBoxContainer/Money/Money_Value
 @onready var expand_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Expand_Button/Expand_Text

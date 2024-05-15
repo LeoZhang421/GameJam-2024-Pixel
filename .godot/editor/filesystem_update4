@@ -1,5 +1,4 @@
+res://Scenes/UI/HUD.tscn
 res://Scenes/Main.tscn
 res://Scenes/Buildings/TurrentExample.tscn
 res://Scenes/Enemies/EnemyExample.tscn
-res://Scripts/pathfinder.gd
-res://Scripts/Main.gd

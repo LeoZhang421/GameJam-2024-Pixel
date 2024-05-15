@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://comy3j8oaolau"]
 
-[ext_resource type="FontFile" uid="uid://btlwj4ns0xium" path="res://Assets/Fonts/joystix/joystix monospace.otf" id="1_4g8sv"]
+[ext_resource type="FontFile" uid="uid://yb7i6tqe1e6c" path="res://Assets/Fonts/joystix/joystix monospace.otf" id="1_4g8sv"]
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_wjan7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_utnn8"]
