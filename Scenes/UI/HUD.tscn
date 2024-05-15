@@ -1,0 +1,151 @@
+[gd_scene load_steps=9 format=3 uid="uid://comy3j8oaolau"]
+
+[ext_resource type="FontFile" uid="uid://btlwj4ns0xium" path="res://Assets/Fonts/joystix/joystix monospace.otf" id="1_4g8sv"]
+[ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_wjan7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_utnn8"]
+font = ExtResource("1_4g8sv")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_urgk4"]
+font = ExtResource("1_4g8sv")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ntwy"]
+font = ExtResource("1_4g8sv")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_1shf8"]
+font = ExtResource("1_4g8sv")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_jsxky"]
+font = ExtResource("1_4g8sv")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_xlshe"]
+font = ExtResource("1_4g8sv")
+font_size = 32
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_wjan7")
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 1080.0
+offset_top = 60.0
+offset_right = 1440.0
+offset_bottom = 960.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="MarginContainer" type="MarginContainer" parent="Container/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="Container/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level info"
+label_settings = SubResource("LabelSettings_utnn8")
+horizontal_alignment = 1
+
+[node name="Life" type="HBoxContainer" parent="Container/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Life_Name" type="Label" parent="Container/VBoxContainer/MarginContainer/VBoxContainer/Life"]
+layout_mode = 2
+text = "Life:"
+label_settings = SubResource("LabelSettings_urgk4")
+
+[node name="Life_Value" type="Label" parent="Container/VBoxContainer/MarginContainer/VBoxContainer/Life"]
+layout_mode = 2
+text = "99999"
+label_settings = SubResource("LabelSettings_2ntwy")
+
+[node name="Money" type="HBoxContainer" parent="Container/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Money_Name" type="Label" parent="Container/VBoxContainer/MarginContainer/VBoxContainer/Money"]
+layout_mode = 2
+text = "money:"
+label_settings = SubResource("LabelSettings_1shf8")
+
+[node name="Money_Value" type="Label" parent="Container/VBoxContainer/MarginContainer/VBoxContainer/Money"]
+layout_mode = 2
+text = "99999
+"
+label_settings = SubResource("LabelSettings_jsxky")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Container/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Expand_Button" type="Button" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Expand_Text" type="Label" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer/Expand_Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Expand!"
+label_settings = SubResource("LabelSettings_xlshe")
+horizontal_alignment = 1
+
+[node name="Build_Button" type="Button" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Build_Text" type="Label" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer/Build_Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "build!"
+label_settings = SubResource("LabelSettings_xlshe")
+horizontal_alignment = 1
+
+[node name="Demolish_Button" type="Button" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Demolish_Text" type="Label" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "demolish!"
+label_settings = SubResource("LabelSettings_xlshe")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Expand_Button" to="." method="_on_expand_button_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Build_Button" to="." method="_on_build_button_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button" to="." method="_on_demolish_button_pressed"]

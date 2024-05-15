@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhe13dl2lsh1"]
+[gd_scene load_steps=8 format=3 uid="uid://dhe13dl2lsh1"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_t4kyd"]
 [ext_resource type="Texture2D" uid="uid://ch52obihadyen" path="res://Assets/Water+.png" id="2_gwxmh"]
+[ext_resource type="PackedScene" uid="uid://comy3j8oaolau" path="res://Scenes/UI/HUD.tscn" id="2_utsvi"]
 [ext_resource type="PackedScene" uid="uid://b3tgm76g3axnl" path="res://Scenes/Buildings/TurrentExample.tscn" id="4_roy33"]
 [ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemyExample.tscn" id="5_qx87c"]
 
@@ -253,11 +254,6 @@ layer_3/tile_data = PackedInt32Array(458760, 131072, 13)
 layer_4/tile_data = PackedInt32Array(196637, 65536, 13)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(60, 60)
-limit_left = 0
-limit_top = 0
-limit_right = 1680
-limit_bottom = 900
 
 [node name="BuildingLayer" type="Node" parent="."]
 
@@ -272,3 +268,5 @@ position = Vector2(216, 392)
 move_speed = 100
 start_location = Vector2(500, 350)
 end_location = Vector2(1000, 350)
+
+[node name="HUD" parent="." instance=ExtResource("2_utsvi")]

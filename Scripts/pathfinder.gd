@@ -43,7 +43,7 @@ func _init(tile_map:Object, new_debug := false):
 	debug = new_debug
 	scale = tile_map.tile_set.tile_size.x
 	room_borders.position = Vector2.ZERO
-	room_borders.size = Vector2(tile_map.get_viewport().size/scale)
+	room_borders.size = Vector2(tile_map.get_used_rect().size)
 	maze = maze_original
 	initialize_sail_routes()
 
@@ -237,7 +237,8 @@ func astar(grid, src, dest):
 
 # 更新地图信息，并重新寻路
 func maze_update_and_reroute(start, end, position_array:PackedVector2Array):
-	maze_update(position_array)
+	for i in position_array:
+		maze_update(i)
 	return find_path(start, end)
 	
 # 重置地图信息为初始化时的值并重新寻路
@@ -246,10 +247,14 @@ func maze_reset_and_reroute(start, end):
 	return find_path(start, end)
 			
 # 更新地图信息，传入的变量为新的陆地阻挡
-func maze_update(position_array:PackedVector2Array):
-	for i in position_array:
-		var temp = get_standard_position(i)
+func maze_update(position:Vector2):
+		var temp = get_standard_position(position)
 		maze[temp.x][temp.y] = 1
+		
+# 更新地图信息，传入的变量为新的建筑
+func maze_add_building(position:Vector2):
+		var temp = get_standard_position(position)
+		maze[temp.x][temp.y] = 5
 
 # 重置地图信息为初始化时的值
 func maze_reset():
@@ -324,6 +329,14 @@ func is_deep_water(position:Vector2):
 	if maze[temp.x][temp.y] == 3:
 		return false
 	return not is_shallow_water(position)
+	
+func is_constructable_land(position:Vector2):
+	var temp = get_standard_position(position)
+	# 如果是航线或敌人出生点
+	if maze[temp.x][temp.y] != 1:
+		return false
+	else:
+		return true
 	
 # 获取港口的全局坐标
 func get_harbour_position():

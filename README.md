@@ -27,9 +27,11 @@ get_standard_position(current_position) -> Vector2: 等效于tilemap的map_to_lo
 get_global_position(normalized_position) -> Vector2: 等效于tilemap的local_to_map方法</br>
 find_path(start, end): -> Array of Vector2: 输入起点和终点的全局坐标，获得一条路径，路径也都为全局坐标</br>
 maze_update_and_reroute(start, end, position_array:PackedVector2Array) -> Array of Vector2: 增加position_array中的地块为阻挡并重新寻路</br>
-maze_update(position_array:PackedVector2Array) -> void: 增加position_array中的地块为阻挡</br>
+maze_update(position:Vector2) -> void: 增加position中的地块为阻挡</br>
+maze_add_building(position:Vector2) -> void: 增加position中的地块为建筑</br>
 is_shallow_water(position:Vector2) -> bool: 判断当前位置是否是可扩展的近海地块，传入全局坐标</br>
 is_deep_water(position:Vector2) -> bool: 判断当前位置是否是不可扩展的深海地块，传入全局坐标</br>
 get_harbour_position() -> Array of Vector2: 获取地图上的所有港口全局坐标</br>
 get_enemy_spawn_position() -> Array of Vector2: 获取地图上的所有敌人出生点</br>
 get_sail_routes() -> Array of Array of Vector2: 获取所有航线的路径，从码头到终点，返回的是全局坐标</br>
+get_tile_center(position) -> Vector2: 返回输入坐标所在地块的中心坐标，用来放置建筑物和船的</br>
