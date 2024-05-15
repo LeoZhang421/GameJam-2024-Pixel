@@ -9,11 +9,12 @@ class_name HUD
 @onready var expand_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Expand_Button/Expand_Text
 @onready var build_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Build_Button/Build_Text
 @onready var demolish_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button/Demolish_Text
+@onready var building_list = $Container/VBoxContainer/BuildingListContainer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#life_value.text = str(main.current_life)
 	#money_value.text = str(main.current_money)
-	pass
+	building_list.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -48,9 +49,8 @@ func _on_expand_button_pressed():
 		stop_preexpanding()
 
 func _on_build_button_pressed():
-	if not is_prebuilding:
-		start_prebuilding("TurrentExample")
-	else:
+	building_list.visible = !building_list.visible
+	if is_prebuilding:
 		stop_prebuilding()
 
 func _on_demolish_button_pressed():
@@ -118,3 +118,8 @@ func demolish(position:Vector2):
 				break
 		main.pathfinder.maze_update("ground", position)
 		stop_predemolishing()
+
+
+func _on_build_turrent_pressed():
+	if not is_prebuilding:
+		start_prebuilding("TurrentExample")
