@@ -22,9 +22,12 @@ func _process(delta):
 	if is_prebuilding:
 		if main.pathfinder.is_constructable_land(get_global_mouse_position()):
 			print("can build!")
+			main.get_node("Cursor/Sprite2D").self_modulate = Color(0,1,0,0.5)
 			if Input.is_action_just_pressed("click"):
 				build(load("res://Scenes/Buildings/TurrentExample.tscn"), get_global_mouse_position())
-		else: print("cannot build!")
+		else:
+			print("cannot build!")
+			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
 	if is_preexpanding:
 		if main.pathfinder.is_shallow_water(get_global_mouse_position()):
 			print("can expand!")
@@ -40,21 +43,24 @@ func _on_expand_button_pressed():
 
 func _on_build_button_pressed():
 	if not is_prebuilding:
-		start_prebuilding()
+		start_prebuilding("TurrentExample")
 	else:
 		stop_prebuilding()
 
 func _on_demolish_button_pressed():
 	pass # Replace with function body.
 
-func start_prebuilding():
+func start_prebuilding(building_name:String):
 	stop_preexpanding()
 	is_prebuilding = true
 	build_button_text.text = "Cancel!"
+	var building_texture = load("res://Assets/Buildings/turrents_1_left.png")
+	main.get_node("Cursor/Sprite2D").texture = building_texture
 
 func stop_prebuilding():
 	is_prebuilding = false
 	build_button_text.text = "Build!"
+	main.get_node("Cursor/Sprite2D").texture = null
 	
 func start_preexpanding():
 	stop_prebuilding()
@@ -79,4 +85,7 @@ func expand(position:Vector2):
 	if not main.pathfinder.is_shallow_water(position):
 		pass
 	else:
+		main.tile_map.erase_cell(0, main.pathfinder.get_standard_position(position))
+		main.tile_map.set_cells_terrain_connect(1, [main.pathfinder.get_standard_position(position)], 0, 0)
 		main.pathfinder.maze_update(position)
+		stop_preexpanding()

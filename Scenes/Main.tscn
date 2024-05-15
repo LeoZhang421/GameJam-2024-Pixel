@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhe13dl2lsh1"]
+[gd_scene load_steps=9 format=3 uid="uid://dhe13dl2lsh1"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_t4kyd"]
 [ext_resource type="Texture2D" uid="uid://ch52obihadyen" path="res://Assets/Water+.png" id="2_gwxmh"]
 [ext_resource type="PackedScene" uid="uid://comy3j8oaolau" path="res://Scenes/UI/HUD.tscn" id="2_utsvi"]
 [ext_resource type="PackedScene" uid="uid://b3tgm76g3axnl" path="res://Scenes/Buildings/TurrentExample.tscn" id="4_roy33"]
 [ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemyExample.tscn" id="5_qx87c"]
+[ext_resource type="PackedScene" uid="uid://cctmyju5of6qw" path="res://Scenes/Cursor.tscn" id="6_npyoo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eohcr"]
 texture = ExtResource("2_gwxmh")
@@ -270,3 +271,5 @@ start_location = Vector2(500, 350)
 end_location = Vector2(1000, 350)
 
 [node name="HUD" parent="." instance=ExtResource("2_utsvi")]
+
+[node name="Cursor" parent="." instance=ExtResource("6_npyoo")]

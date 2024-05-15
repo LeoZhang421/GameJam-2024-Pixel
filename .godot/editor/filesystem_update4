@@ -1,4 +1,8 @@
-res://Scenes/UI/HUD.tscn
 res://Scenes/Main.tscn
 res://Scenes/Buildings/TurrentExample.tscn
 res://Scenes/Enemies/EnemyExample.tscn
+res://Scenes/UI/HUD.tscn
+res://Scripts/HUD.gd
+res://Scripts/Main.gd
+res://Scenes/Cursor.tscn
+res://Scripts/Cursor.gd
