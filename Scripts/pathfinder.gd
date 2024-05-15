@@ -2,6 +2,7 @@ extends Node
 class_name Pathfinder
 
 const DIRECTIONS = [Vector2(0, -1), Vector2(0, 1), Vector2(-1, 0), Vector2(1, 0), Vector2(-1, -1), Vector2(-1, 1), Vector2(1, -1), Vector2(1, 1)]
+const DIRECTIONS_MANHATTAN = [Vector2(0, -1), Vector2(0, 1), Vector2(-1, 0), Vector2(1, 0),]
 
 var ROW
 var COL
@@ -11,6 +12,10 @@ var maze_original : Array
 var maze : Array
 var scale : int
 var debug : bool
+var sail_history:Array
+var sail_routes:Array
+var harbour_history:Array
+var enemy_spawn_history:Array
 
 # 直接传入tile_map，debug模式默认关闭
 func _init(tile_map:Object, new_debug := false):
@@ -22,20 +27,34 @@ func _init(tile_map:Object, new_debug := false):
 		maze_column.resize(COL)
 		maze_column.fill(0)
 		maze_original.append(maze_column)
-	# 添加陆地信息
+	# 添加陆地、航线、码头、出生点信息
 	var ground_history = tile_map.get_used_cells(1)
 	for ground_position in ground_history:
 		maze_original[ground_position.x][ground_position.y] = 1
+	sail_history = tile_map.get_used_cells(2)
+	for sail_position in sail_history:
+		maze_original[sail_position.x][sail_position.y] = 2
+	harbour_history = tile_map.get_used_cells(3)
+	for harbour_position in harbour_history:
+		maze_original[harbour_position.x][harbour_position.y] = 3
+	enemy_spawn_history = tile_map.get_used_cells(3)
+	for enemy_spawn_position in enemy_spawn_history:
+		maze_original[enemy_spawn_position.x][enemy_spawn_position.y] = 3
 	debug = new_debug
 	scale = tile_map.tile_set.tile_size.x
 	room_borders.position = Vector2.ZERO
 	room_borders.size = Vector2(tile_map.get_viewport().size/scale)
 	maze = maze_original
+	initialize_sail_routes()
 
 
 # 等效于tilemap的map_to_local方法
 func get_standard_position(current_position):
 	return Vector2(int(current_position.x/scale), int(current_position.y/scale)) - room_borders.position
+
+# 等效于tilemap的local_to_map方法	
+func get_global_position(normalized_position):
+	return Vector2(normalized_position.x * scale + scale/2, normalized_position.y * scale + scale/2)
 		
 #输入起点和终点，获得一条路径，路径的坐标为全局坐标，可以直接拿来用		
 func find_path(start, end):
@@ -79,7 +98,7 @@ func is_valid(row, col):
  
 # Check if a cell is unblocked
 func is_unblocked(grid, row, col):
-	return grid[row][col] == 0
+	return grid[row][col] != 1 && grid[row][col] != 3
  
 # Check if a cell is the destination
 func is_destination(row, col, dest):
@@ -236,21 +255,91 @@ func maze_update(position_array:PackedVector2Array):
 func maze_reset():
 	maze = maze_original
 	
-# 判断当前位置是否是近海地块，传入全局坐标
+func initialize_sail_routes():
+	var sail_destination = []
+	for i in harbour_history:
+		if maze[i.x + 1][i.y] == 2:
+			sail_destination.append(Vector2(i.x + 1, i.y))
+		if maze[i.x][i.y + 1] == 2:
+			sail_destination.append(Vector2(i.x, i.y + 1))
+		if maze[i.x - 1][i.y] == 2:
+			sail_destination.append(Vector2(i.x - 1, i.y))
+		if maze[i.x][i.y - 1] == 2:
+			sail_destination.append(Vector2(i.x, i.y - 1))
+	for i in sail_destination:
+		var single_sail_route = []
+		get_next_route(single_sail_route, i)
+		sail_routes.append(single_sail_route)
+		
+func get_next_route(result:Array, position:Vector2, parent_position:=Vector2(-1,-1)):
+	var temp = []
+	for direction in DIRECTIONS_MANHATTAN:
+		if maze[(position + direction).x][(position + direction).y] == 2:
+			temp.append(position + direction)
+	# 当前有父节点，寻找与父节点不同的子节点
+	if parent_position != Vector2(-1,-1):
+		for i in temp.size():
+			if temp[i - 1] == parent_position:
+				temp.pop_at(i - 1)
+		# 寻到终点了
+		if temp == []:
+			return
+		else:
+			result.append(temp[0])
+			get_next_route(result, temp[0], position)
+	# 当前无父节点，直接寻找下一个子节点
+	else:
+		result.append(temp[0])
+		get_next_route(result, temp[0], position)
+	
+# 判断当前位置是否是可扩展的近海地块，传入全局坐标
 func is_shallow_water(position:Vector2):
 	var temp = get_standard_position(position)
 	if maze[temp.x][temp.y] != 0:
 		return false
 	if temp.x == 0:
 		if temp.y == 0:
-			return maze[temp.x + 1][temp.y] == 1 || maze[temp.x][temp.y + 1] == 1
+			return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2
 		if temp.y == maze[0].size() - 1:
-			return maze[temp.x + 1][temp.y] == 1 || maze[temp.x][temp.y - 1] == 1
-		return maze[temp.x + 1][temp.y] == 1 || maze[temp.x][temp.y - 1] == 1 || maze[temp.x][temp.y + 1] == 1
+			return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2
+		return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 || maze[temp.x][temp.y + 1] % 2
 	if temp.x == maze[0].size() - 1:
 		if temp.y == 0:
-			return maze[temp.x - 1][temp.y] == 1 || maze[temp.x][temp.y + 1] == 1
+			return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2
 		if temp.y == maze[0].size() - 1:
-			return maze[temp.x - 1][temp.y] == 1 || maze[temp.x][temp.y - 1] == 1
-		return maze[temp.x - 1][temp.y] == 1 || maze[temp.x][temp.y - 1] == 1 || maze[temp.x][temp.y + 1] == 1
-	return maze[temp.x + 1][temp.y] == 1 || maze[temp.x - 1][temp.y] == 1 || maze[temp.x][temp.y + 1] == 1 || maze[temp.x][temp.y - 1] == 1
+			return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2
+		return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 || maze[temp.x][temp.y + 1] % 2
+	return maze[temp.x + 1][temp.y] % 2 || maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2 || maze[temp.x][temp.y - 1] % 2
+	
+# 判断当前位置是否是不可扩展的深海地块，传入全局坐标
+func is_deep_water(position:Vector2):
+	var temp = get_standard_position(position)
+	# 如果是航线或敌人出生点
+	if maze[temp.x][temp.y] == 2 || maze[temp.x][temp.y] == 4:
+		return true
+	# 不是航线，水域和敌人出生点
+	if maze[temp.x][temp.y] != 0:
+		return false
+	# 如果是码头
+	if maze[temp.x][temp.y] == 3:
+		return false
+	return not is_shallow_water(position)
+	
+# 获取港口的全局坐标
+func get_harbour_position():
+	var temp = []
+	for i in harbour_history:
+		temp.append(get_global_position(i))
+	return temp
+	
+# 获取敌人出生点的全局坐标
+func get_enemy_spawn_position():
+	var temp = []
+	for i in enemy_spawn_history:
+		temp.append(get_global_position(i))
+	return temp
+	
+# 获取所有航线的归一化路径，从码头到终点
+func get_sail_routes():
+	return sail_routes
+		
