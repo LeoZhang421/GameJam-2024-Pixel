@@ -4,17 +4,22 @@ class_name HUD
 @onready var is_preexpanding := false
 @onready var is_predemolishing := false
 @onready var main
+@onready var title = $Level_Control/Title
+@onready var done = $Level_Control/Done_Button
 @onready var life_value = $Container/VBoxContainer/MarginContainer/VBoxContainer/Life/Life_Value
 @onready var money_value = $Container/VBoxContainer/MarginContainer/VBoxContainer/Money/Money_Value
 @onready var expand_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Expand_Button/Expand_Text
 @onready var build_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Build_Button/Build_Text
 @onready var demolish_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button/Demolish_Text
 @onready var building_list = $Container/VBoxContainer/MarginContainer3/BuildingList
+@onready var skill_list = $Container/MarginContainer/Skill_List
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#life_value.text = str(main.current_life)
 	#money_value.text = str(main.current_money)
 	building_list.visible = false
+	title.text = Level.get_current_phase()
+	done.visible = (Level.get_current_phase() == "preparation")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -49,20 +54,23 @@ func _process(delta):
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
 
 func _on_expand_button_pressed():
-	if not is_preexpanding:
-		start_preexpanding()
-	else:
-		stop_preexpanding()
+	if Level.get_current_phase() == "preperation":
+		if not is_preexpanding:
+			start_preexpanding()
+		else:
+			stop_preexpanding()
 
 func _on_build_button_pressed():
-	stop_preexpanding()
-	stop_predemolishing()
-	building_list.visible = !building_list.visible
-	if is_prebuilding:
-		stop_prebuilding()
+	if Level.get_current_phase() == "preperation":
+		stop_preexpanding()
+		stop_predemolishing()
+		building_list.visible = !building_list.visible
+		if is_prebuilding:
+			stop_prebuilding()
 
 func _on_demolish_button_pressed():
-	start_predemolishing()
+	if Level.get_current_phase() == "preperation":
+		start_predemolishing()
 
 func start_prebuilding(building_name:String):
 	stop_preexpanding()
@@ -141,3 +149,13 @@ func demolish(position:Vector2):
 func _on_build_turrent_pressed():
 	if not is_prebuilding:
 		start_prebuilding("TurrentExample")
+
+
+func _on_done_button_pressed():
+	stop_prebuilding()
+	building_list.visible = false
+	stop_predemolishing()
+	stop_preexpanding()
+	title.text = "action"
+	done.visible = false
+	Level.complete_phase()

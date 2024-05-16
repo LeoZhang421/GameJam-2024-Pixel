@@ -1,11 +1,9 @@
+res://Scenes/Buildings/PortExample.gd
+res://Scenes/Buildings/PortExample.tscn
+res://Scripts/Level_Manager.gd
+res://Scenes/UI/HUD.tscn
+res://Scripts/Start.gd
 res://Scenes/Main.tscn
-res://Scripts/Main.gd
 res://Scenes/Buildings/TurrentExample.tscn
 res://Scenes/Enemies/EnemyExample.tscn
-res://Scenes/UI/HUD.tscn
-res://Scenes/Cursor.tscn
 res://Scripts/HUD.gd
-res://Scripts/Camera2D.gd
-res://Scenes/start_scene.tscn
-res://Scripts/start_scene.gd
-res://Scenes/Start.tscn
