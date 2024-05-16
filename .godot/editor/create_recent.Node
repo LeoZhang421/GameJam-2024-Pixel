@@ -1,6 +1,7 @@
-Button
 Label
+Button
 TextureRect
+CanvasLayer
 VBoxContainer
 GridContainer
 MarginContainer
@@ -11,5 +12,3 @@ Node
 ProgressBar
 CollisionShape2D
 Area2D
-Timer
-Node2D

@@ -1,5 +1,5 @@
 extends Camera2D
-var dead_zone = 200
+var dead_zone = 500
 
 # Called when the node enters the scene tree for the first time.
 func _input(event):
@@ -8,7 +8,7 @@ func _input(event):
 		if target.length() < dead_zone:
 			self.position = Vector2.ZERO
 		else:
-			self.position = target.normalized() * (target.length() - dead_zone) * 0.5
+			self.position = target.normalized() * (target.length() - dead_zone) * 1.5
 
 
 

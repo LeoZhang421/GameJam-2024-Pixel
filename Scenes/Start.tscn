@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv4jyvenhbrej"]
+
+[ext_resource type="Script" path="res://Scripts/Start.gd" id="1_w2tjq"]
+[ext_resource type="FontFile" uid="uid://yb7i6tqe1e6c" path="res://Assets/Fonts/joystix/joystix monospace.otf" id="2_t6ka2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y5awq"]
+font = ExtResource("2_t6ka2")
+font_size = 48
+
+[node name="Start" type="Node2D"]
+script = ExtResource("1_w2tjq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Start_Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -30.0
+offset_right = 120.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="Label" parent="Start_Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start!"
+label_settings = SubResource("LabelSettings_y5awq")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Start_Button" to="." method="_on_start_button_pressed"]
