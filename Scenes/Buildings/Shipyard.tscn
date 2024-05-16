@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bq8jj03bffibs"]
 
-[ext_resource type="Script" path="res://Scenes/Buildings/PortExample.gd" id="1_mruf1"]
-[ext_resource type="Texture2D" uid="uid://rsgrhpp26vr4" path="res://Assets/Buildings/turrents_1_left.png" id="2_v31yk"]
-[ext_resource type="Texture2D" uid="uid://dw4shqmnqop87" path="res://Assets/Buildings/turrents_2_right.png" id="3_7kbsn"]
+[ext_resource type="Script" path="res://Scenes/Buildings/ShipyardExample.gd" id="1_01snm"]
+[ext_resource type="Texture2D" uid="uid://rsgrhpp26vr4" path="res://Assets/Buildings/turrents_1_left.png" id="2_uj1po"]
+[ext_resource type="Texture2D" uid="uid://dw4shqmnqop87" path="res://Assets/Buildings/turrents_2_right.png" id="3_ixrph"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lg42b"]
 size = Vector2(128, 128)
@@ -11,10 +11,10 @@ size = Vector2(128, 128)
 animations = [{
 "frames": [{
 "duration": 2.0,
-"texture": ExtResource("2_v31yk")
+"texture": ExtResource("2_uj1po")
 }, {
 "duration": 2.0,
-"texture": ExtResource("3_7kbsn")
+"texture": ExtResource("3_ixrph")
 }],
 "loop": true,
 "name": &"default",
@@ -24,9 +24,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_w4igf"]
 radius = 384.0
 
-[node name="PortExample" type="Area2D" groups=["Building"]]
+[node name="ShipyardExample" type="Area2D" groups=["Building"]]
 collision_mask = 3
-script = ExtResource("1_mruf1")
+script = ExtResource("1_01snm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_lg42b")

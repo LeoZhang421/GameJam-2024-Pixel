@@ -1,9 +1,2 @@
-res://Scenes/Buildings/PortExample.gd
 res://Scenes/Buildings/PortExample.tscn
-res://Scripts/Level_Manager.gd
-res://Scenes/UI/HUD.tscn
-res://Scripts/Start.gd
-res://Scenes/Main.tscn
-res://Scenes/Buildings/TurrentExample.tscn
-res://Scenes/Enemies/EnemyExample.tscn
-res://Scripts/HUD.gd
+res://Scenes/Buildings/Shipyard.tscn
