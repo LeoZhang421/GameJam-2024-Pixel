@@ -213,6 +213,8 @@ func _on_done_button_pressed():
 	title.text = "action"
 	done.visible = false
 	Level.complete_phase()
+	main.get_node("Music").fade_out()
+	main.get_node("Pirate_Invasion_Timer").start()
 
 
 func _on_build_ship_pressed():

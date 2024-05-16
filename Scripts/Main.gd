@@ -19,3 +19,19 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_music_finished():
+	$Music.play()
+
+
+func _on_sound_effect_finished():
+	$Sound_Effect.play()
+
+
+func _on_pirate_music_finished():
+	$Pirate_Music.play()
+
+
+func _on_pirate_invasion_timer_timeout():
+	$Pirate_Music.play()

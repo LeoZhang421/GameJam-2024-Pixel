@@ -1,5 +1,6 @@
-Label
 Timer
+AudioStreamPlayer
+Label
 HBoxContainer
 GridContainer
 Button
@@ -11,4 +12,3 @@ CanvasLayer
 AnimatedSprite2D
 Sprite2D
 Camera2D
-Node

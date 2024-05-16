@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhe13dl2lsh1"]
+[gd_scene load_steps=14 format=3 uid="uid://dhe13dl2lsh1"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_t4kyd"]
 [ext_resource type="Texture2D" uid="uid://ch52obihadyen" path="res://Assets/Water+.png" id="2_gwxmh"]
@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://b3tgm76g3axnl" path="res://Scenes/Buildings/TurrentExample.tscn" id="4_roy33"]
 [ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemyExample.tscn" id="5_qx87c"]
 [ext_resource type="PackedScene" uid="uid://cctmyju5of6qw" path="res://Scenes/Cursor.tscn" id="6_npyoo"]
+[ext_resource type="AudioStream" uid="uid://vm2k5vryu7d6" path="res://Assets/Audio/music_0003.mp3" id="8_u6pfl"]
+[ext_resource type="Script" path="res://Scripts/Music.gd" id="9_b8i5n"]
+[ext_resource type="AudioStream" uid="uid://dv7ocusihfkpj" path="res://Assets/Audio/background-0003.mp3" id="9_vqwgq"]
+[ext_resource type="AudioStream" uid="uid://brukou3f6q8q3" path="res://Assets/Audio/pirate_0001.mp3" id="10_m3u06"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eohcr"]
 texture = ExtResource("2_gwxmh")
@@ -280,3 +284,24 @@ end_location = Vector2(1000, 350)
 [node name="HUD" parent="." instance=ExtResource("2_utsvi")]
 
 [node name="Cursor" parent="." instance=ExtResource("6_npyoo")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_u6pfl")
+autoplay = true
+script = ExtResource("9_b8i5n")
+
+[node name="Sound_Effect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_vqwgq")
+autoplay = true
+
+[node name="Pirate_Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_m3u06")
+
+[node name="Pirate_Invasion_Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]
+[connection signal="finished" from="Sound_Effect" to="." method="_on_sound_effect_finished"]
+[connection signal="finished" from="Pirate_Music" to="." method="_on_pirate_music_finished"]
+[connection signal="timeout" from="Pirate_Invasion_Timer" to="." method="_on_pirate_invasion_timer_timeout"]

@@ -3,7 +3,6 @@ res://Scenes/Buildings/TurrentExample.tscn
 res://Scenes/Enemies/EnemyExample.tscn
 res://Scenes/UI/HUD.tscn
 res://Scenes/Buildings/Shipyard.tscn
-res://Scripts/pathfinder.gd
-res://README.md
+res://Scripts/Main.gd
 res://Scripts/HUD.gd
-res://Scripts/Level_Manager.gd
+res://Scripts/Music.gd
