@@ -3,6 +3,7 @@ class_name HUD
 @onready var is_prebuilding := false
 @onready var is_preexpanding := false
 @onready var is_predemolishing := false
+@onready var is_prebuildingship := false
 @onready var main
 @onready var title = $Level_Control/Title
 @onready var done = $Level_Control/Done_Button
@@ -11,6 +12,7 @@ class_name HUD
 @onready var expand_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Expand_Button/Expand_Text
 @onready var build_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Build_Button/Build_Text
 @onready var demolish_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button/Demolish_Text
+@onready var buildship_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Buildship_Button/Buildship_Text
 @onready var building_list = $Container/VBoxContainer/MarginContainer3/BuildingList
 @onready var skill_list = $Container/MarginContainer/Skill_List
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +22,8 @@ func _ready():
 	building_list.visible = false
 	title.text = Level.get_current_phase()
 	done.visible = (Level.get_current_phase() == "preparation")
+	$Level_Control/Turn_Display.set_text("Turn " + str(Level.get_current_turn()))
+	$Turn_Count_Timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -52,16 +56,25 @@ func _process(delta):
 		else:
 			print("cannot demolish!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
+	if is_prebuildingship:
+		if main.pathfinder.is_shallow_water(main.get_global_mouse_position()) || main.pathfinder.is_deep_water(main.get_global_mouse_position()):
+			print("can buildship!")
+			main.get_node("Cursor/Sprite2D").self_modulate = Color(0,1,0,0.5)
+			if Input.is_action_just_pressed("click"):
+				buildship(load("res://Scenes/Enemies/EnemyExample.tscn"), main.get_global_mouse_position())
+		else:
+			print("cannot buildship!")
+			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
 
 func _on_expand_button_pressed():
-	if Level.get_current_phase() == "preperation":
+	if Level.get_current_phase() == "preparation":
 		if not is_preexpanding:
 			start_preexpanding()
 		else:
 			stop_preexpanding()
 
 func _on_build_button_pressed():
-	if Level.get_current_phase() == "preperation":
+	if Level.get_current_phase() == "preparation":
 		stop_preexpanding()
 		stop_predemolishing()
 		building_list.visible = !building_list.visible
@@ -69,12 +82,24 @@ func _on_build_button_pressed():
 			stop_prebuilding()
 
 func _on_demolish_button_pressed():
-	if Level.get_current_phase() == "preperation":
-		start_predemolishing()
+	if Level.get_current_phase() == "preparation":
+		if not is_predemolishing:
+			start_predemolishing()
+		else:
+			stop_predemolishing()
+		
+func _on_buildship_button_pressed():
+	if Level.get_current_phase() == "preparation":
+		stop_preexpanding()
+		stop_predemolishing()
+		building_list.visible = !building_list.visible
+		if is_prebuildingship:
+			stop_prebuildingship()
 
 func start_prebuilding(building_name:String):
 	stop_preexpanding()
 	stop_predemolishing()
+	stop_prebuildingship()
 	is_prebuilding = true
 	build_button_text.text = "Cancel!"
 	var cursor_texture = load("res://Assets/Buildings/turrents_1_left.png")
@@ -84,10 +109,12 @@ func stop_prebuilding():
 	is_prebuilding = false
 	build_button_text.text = "Build!"
 	main.get_node("Cursor/Sprite2D").texture = null
+	building_list.visible = false
 	
 func start_preexpanding():
 	stop_prebuilding()
 	stop_predemolishing()
+	stop_prebuildingship()
 	is_preexpanding = true
 	expand_button_text.text = "Cancel!"
 	var cursor_texture = load("res://Assets/Utility/Select_Cursor_0001.png")
@@ -103,6 +130,7 @@ func stop_preexpanding():
 func start_predemolishing():
 	stop_prebuilding()
 	stop_preexpanding()
+	stop_prebuildingship()
 	is_predemolishing = true
 	demolish_button_text.text = "Cancel!"
 	var cursor_texture = load("res://Assets/Utility/Select_Cursor_0001.png")
@@ -114,6 +142,22 @@ func stop_predemolishing():
 	demolish_button_text.text = "Demolish!"
 	main.get_node("Cursor/Sprite2D").texture = null
 	main.get_node("Cursor/Sprite2D").scale = Vector2(1, 1)
+	
+func start_prebuildingship(ship_name:String):
+	stop_prebuilding()
+	stop_preexpanding()
+	stop_predemolishing()
+	is_prebuildingship = true
+	buildship_button_text.text = "Cancel!"
+	var cursor_texture = load("res://Assets/Enemies/pirates_1_up.png")
+	main.get_node("Cursor/Sprite2D").texture = cursor_texture
+
+func stop_prebuildingship():
+	is_prebuildingship = false
+	buildship_button_text.text = "Buildship!"
+	main.get_node("Cursor/Sprite2D").texture = null
+	building_list.visible = false
+	
 	
 func build(building_scene:PackedScene, position:Vector2):
 	if not main.pathfinder.is_constructable_land(position):
@@ -144,6 +188,16 @@ func demolish(position:Vector2):
 				break
 		main.pathfinder.maze_update("ground", position)
 		stop_predemolishing()
+		
+func buildship(ship_scene:PackedScene, position:Vector2):
+	if not (main.pathfinder.is_shallow_water(position) || main.pathfinder.is_deep_water(position)):
+		pass
+	else:
+		var ship = ship_scene.instantiate()
+		ship.start_location = main.pathfinder.get_tile_center(position)
+		main.get_node("EnemyLayer").add_child(ship)
+		main.pathfinder.maze_add_ship(position)
+		stop_prebuildingship()
 
 
 func _on_build_turrent_pressed():
@@ -159,3 +213,22 @@ func _on_done_button_pressed():
 	title.text = "action"
 	done.visible = false
 	Level.complete_phase()
+
+
+func _on_build_ship_pressed():
+	if not is_prebuilding:
+		start_prebuildingship("EnemyExample")
+
+
+func _on_turn_count_timer_timeout():
+	$Level_Control/Turn_Display.visible = false
+	
+func complete_turn():
+	main.pathfinder.reload_map_data(main)
+	Level.complete_turn()
+	building_list.visible = false
+	title.text = Level.get_current_phase()
+	done.visible = (Level.get_current_phase() == "preparation")
+	$Level_Control/Turn_Display.set_text("Turn " + str(Level.get_current_turn()))
+	$Turn_Count_Timer.start()
+	

@@ -1,6 +1,7 @@
+Label
+Timer
 HBoxContainer
 GridContainer
-Label
 Button
 Control
 VBoxContainer
@@ -11,4 +12,3 @@ AnimatedSprite2D
 Sprite2D
 Camera2D
 Node
-ProgressBar

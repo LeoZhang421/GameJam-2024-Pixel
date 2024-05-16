@@ -17,6 +17,17 @@ var sail_routes:Array
 var harbour_history:Array
 var enemy_spawn_history:Array
 
+# 地块表征参数：
+# 0：未占用水域
+# 1：未占用陆地
+# 2：航道
+# 3：码头
+# 4：敌人出生点
+# 5：null
+# 6：被建造水域
+# 7: 被占用陆地
+# 8：有船的水域
+
 # 直接传入tile_map，debug模式默认关闭
 func _init(tile_map:Object, new_debug := false):
 	# 初始化maze
@@ -56,6 +67,21 @@ func get_standard_position(current_position):
 func get_global_position(normalized_position):
 	return Vector2(normalized_position.x * scale + scale/2, normalized_position.y * scale + scale/2)
 		
+# 获取当前坐标所处地块的中心点，用来建造建筑用
+func get_tile_center(position:Vector2):
+	return get_global_position(get_standard_position(position))
+	
+func reload_map_data(s:Object):
+	for i in ROW:
+		for j in COL:
+			if maze[i-1][j-1] == 8:
+				maze[i-1][j-1] = 0
+	for i in s.get_node("EnemyLayer").get_children():
+		if i.is_in_group("Enemy"):
+			var temp = get_standard_position(i.global_position)
+			maze[temp.x][temp.y] = 8
+			
+		
 #输入起点和终点，获得一条路径，路径的坐标为全局坐标，可以直接拿来用		
 func find_path(start, end):
 	if end == Vector2.ZERO:
@@ -66,18 +92,6 @@ func find_path(start, end):
 	if path_normalized == null:
 		return null
 	for i in path_normalized.size():
-		if path_normalized[i][0] == 0:
-			path_normalized[i] = (room_borders.position + path_normalized[i]) * scale + Vector2(scale*3/4, scale/2)
-			continue
-		if path_normalized[i][0] == maze.size() - 1:
-			path_normalized[i] = (room_borders.position + path_normalized[i]) * scale + Vector2(scale*1/4, scale/2)
-			continue
-		if path_normalized[i][1] == 0:
-			path_normalized[i] = (room_borders.position + path_normalized[i]) * scale + Vector2(scale*1/2, scale*3/4)
-			continue
-		if path_normalized[i][1] == maze[0].size() - 1:
-			path_normalized[i] = (room_borders.position + path_normalized[i]) * scale + Vector2(scale*1/2, scale/4)
-			continue
 		path_normalized[i] = (room_borders.position + path_normalized[i]) * scale + Vector2(scale/2, scale/2)
 	#debug_node在node_tree中的位置根据项目而异，需要灵活变通，先全部注释掉了，防止出bug
 	#if debug == true:
@@ -256,9 +270,14 @@ func maze_update(type:String, position:Vector2):
 		
 # 更新地图信息，传入的变量为新的建筑
 func maze_add_building(position:Vector2):
-		var temp = get_standard_position(position)
-		maze[temp.x][temp.y] = 5
+	var temp = get_standard_position(position)
+	maze[temp.x][temp.y] += 6
 
+func maze_add_ship(position:Vector2):
+	var temp = get_standard_position(position)
+	maze[temp.x][temp.y] = 8
+	
+	
 # 重置地图信息为初始化时的值
 func maze_reset():
 	maze = maze_original
@@ -307,17 +326,17 @@ func is_shallow_water(position:Vector2):
 		return false
 	if temp.x == 0:
 		if temp.y == 0:
-			return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2
+			return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2 && not maze[temp.x][temp.y]
 		if temp.y == maze[0].size() - 1:
-			return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2
-		return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 || maze[temp.x][temp.y + 1] % 2
+			return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 && not maze[temp.x][temp.y]
+		return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 || maze[temp.x][temp.y + 1] % 2 && not maze[temp.x][temp.y]
 	if temp.x == maze[0].size() - 1:
 		if temp.y == 0:
-			return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2
+			return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2 && not maze[temp.x][temp.y]
 		if temp.y == maze[0].size() - 1:
-			return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2
-		return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 || maze[temp.x][temp.y + 1] % 2
-	return maze[temp.x + 1][temp.y] % 2 || maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2 || maze[temp.x][temp.y - 1] % 2
+			return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 && not maze[temp.x][temp.y]
+		return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 || maze[temp.x][temp.y + 1] % 2 && not maze[temp.x][temp.y]
+	return maze[temp.x + 1][temp.y] % 2 || maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2 || maze[temp.x][temp.y - 1] % 2 && not maze[temp.x][temp.y]
 	
 # 判断当前位置是否是不可扩展的深海地块，传入全局坐标
 func is_deep_water(position:Vector2):
@@ -336,14 +355,14 @@ func is_deep_water(position:Vector2):
 func is_building(position:Vector2):
 	var temp = get_standard_position(position)
 	# 如果是航线或敌人出生点
-	if maze[temp.x][temp.y] != 5:
+	if maze[temp.x][temp.y] != 7:
 		return false
 	else:
 		return true
 	
 func is_constructable_land(position:Vector2):
 	var temp = get_standard_position(position)
-	# 如果是航线或敌人出生点
+	# 如果不是空地块
 	if maze[temp.x][temp.y] != 1:
 		return false
 	else:
@@ -371,6 +390,3 @@ func get_sail_routes():
 			single_sail_route[i - 1] = get_global_position(single_sail_route[i - 1])
 	return sail_routes_global
 		
-# 获取当前坐标所处地块的中心点，用来建造建筑用
-func get_tile_center(position:Vector2):
-	return get_global_position(get_standard_position(position))

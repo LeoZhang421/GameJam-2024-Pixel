@@ -32,6 +32,8 @@ func complete_phase():
 
 func complete_turn():
 	current_turn += 1
+	phase["preparation"] = 1
+	phase["action"] = 0
 	if current_turn > all_turns:
 		complete_level()
 
