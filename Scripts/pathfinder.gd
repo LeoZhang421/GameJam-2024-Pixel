@@ -56,6 +56,7 @@ func _init(s:Object, new_debug := false):
 	room_borders.position = Vector2.ZERO
 	room_borders.size = Vector2(s.tile_map.get_used_rect().size)
 	maze = maze_original
+	print(maze)
 	reload_map_data(s)
 	initialize_sail_routes()
 
