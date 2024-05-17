@@ -1,14 +1,14 @@
+GridContainer
 Node
-AnimationPlayer
-TextureRect
 Area2D
 Timer
 AudioStreamPlayer
 Label
 HBoxContainer
-GridContainer
 Button
 Control
 VBoxContainer
 MarginContainer
+TextureRect
 CanvasLayer
+AnimatedSprite2D

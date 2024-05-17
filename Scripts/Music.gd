@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(volume_db)
+	pass
 	
 func fade_out():
 	db_tween.tween_property(self, "volume_db", -80.0, 5.0)

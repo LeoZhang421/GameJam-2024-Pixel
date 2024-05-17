@@ -61,7 +61,7 @@ func _process(delta):
 			print("can buildship!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(0,1,0,0.5)
 			if Input.is_action_just_pressed("click"):
-				buildship(load("res://Scenes/Enemies/EnemyExample.tscn"), main.get_global_mouse_position())
+				buildship(load("res://Scenes/Ships/ShipExample.tscn"), main.get_global_mouse_position())
 		else:
 			print("cannot buildship!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
@@ -149,7 +149,7 @@ func start_prebuildingship(ship_name:String):
 	stop_predemolishing()
 	is_prebuildingship = true
 	buildship_button_text.text = "Cancel!"
-	var cursor_texture = load("res://Assets/Enemies/pirates_1_up.png")
+	var cursor_texture = load("res://Assets/Ships/ship_0.png")
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 
 func stop_prebuildingship():
@@ -195,7 +195,7 @@ func buildship(ship_scene:PackedScene, position:Vector2):
 	else:
 		var ship = ship_scene.instantiate()
 		ship.start_location = main.pathfinder.get_tile_center(position)
-		main.get_node("EnemyLayer").add_child(ship)
+		main.get_node("ShipLayer").add_child(ship)
 		main.pathfinder.maze_add_ship(position)
 		stop_prebuildingship()
 
