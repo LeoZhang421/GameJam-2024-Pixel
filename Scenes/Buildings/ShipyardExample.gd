@@ -7,6 +7,7 @@ class_name Shipyard extends Area2D
 # inner variables
 var hp: int = 0
 var target: Area2D = null
+var is_on_land := false
 #var resting: bool = true
 
 # signals

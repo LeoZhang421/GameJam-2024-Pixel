@@ -22,10 +22,10 @@ func complete_phase():
 	if get_current_phase() == "preparation":
 		phase["preparation"] = 0
 		phase["action"] = 1
-	if get_current_phase() == "action":
+	elif get_current_phase() == "action":
 		phase["preparation"] = 1
 		phase["action"] = 0
-	if get_current_phase() == null:
+	elif get_current_phase() == null:
 		phase["preparation"] = 1
 		current_turn = 1
 		complete_level()

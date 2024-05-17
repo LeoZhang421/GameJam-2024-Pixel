@@ -56,7 +56,6 @@ func _init(s:Object, new_debug := false):
 	room_borders.position = Vector2.ZERO
 	room_borders.size = Vector2(s.tile_map.get_used_rect().size)
 	maze = maze_original
-	print(maze)
 	reload_map_data(s)
 	initialize_sail_routes()
 
@@ -292,6 +291,10 @@ func maze_add_ship(position:Vector2):
 	var temp = get_standard_position(position)
 	maze[temp.x][temp.y] = 8
 	
+func delete_building(position:Vector2):
+	var temp = get_standard_position(position)
+	maze[temp.x][temp.y] -= 6
+	
 	
 # 重置地图信息为初始化时的值
 func maze_reset():
@@ -370,10 +373,10 @@ func is_deep_water(position:Vector2):
 func is_building(position:Vector2):
 	var temp = get_standard_position(position)
 	# 如果是航线或敌人出生点
-	if maze[temp.x][temp.y] != 7:
-		return false
-	else:
+	if maze[temp.x][temp.y] == 7 || maze[temp.x][temp.y] == 6:
 		return true
+	else:
+		return false
 	
 func is_constructable_land(position:Vector2):
 	var temp = get_standard_position(position)

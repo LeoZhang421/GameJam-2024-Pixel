@@ -12,6 +12,7 @@ class_name Turrent extends Area2D
 var target: Area2D = null
 var target_backup: Array[Area2D] = []
 var attacking: bool = false
+var is_on_land := true
 
 
 # onready node variables

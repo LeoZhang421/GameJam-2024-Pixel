@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq8jj03bffibs"]
+
+[ext_resource type="Script" path="res://Scenes/Buildings/ShipyardExample.gd" id="1_smhgs"]
+[ext_resource type="Texture2D" uid="uid://c7uuakh61mm3n" path="res://Assets/Buildings/shipyard.png" id="2_mclig"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lg42b"]
+size = Vector2(128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_55nld"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mclig")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="ShipyardExample" type="Area2D" groups=["Building"]]
+collision_mask = 3
+script = ExtResource("1_smhgs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lg42b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_55nld")

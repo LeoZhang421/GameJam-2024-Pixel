@@ -5,6 +5,7 @@ class_name HUD
 @onready var is_predemolishing := false
 @onready var is_prebuildingship := false
 @onready var main
+@onready var pending_scene
 @onready var title = $Level_Control/Title
 @onready var done = $Level_Control/Done_Button
 @onready var life_value = $Container/VBoxContainer/MarginContainer/VBoxContainer/Life/Life_Value
@@ -32,11 +33,16 @@ func _process(delta):
 	#life_value.text = str(main.current_life)
 	#money_value.text = str(main.current_money)
 	if is_prebuilding:
-		if main.pathfinder.is_constructable_land(main.get_global_mouse_position()):
+		var can_build:bool
+		if pending_scene.is_on_land:
+			can_build = main.pathfinder.is_constructable_land(main.get_global_mouse_position())
+		else:
+			can_build = main.pathfinder.is_shallow_water(main.get_global_mouse_position())
+		if can_build:
 			print("can build!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(0,1,0,0.5)
 			if Input.is_action_just_pressed("click"):
-				build(load("res://Scenes/Buildings/TurrentExample.tscn"), main.get_global_mouse_position())
+				build(pending_scene, main.get_global_mouse_position())
 		else:
 			print("cannot build!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
@@ -63,7 +69,7 @@ func _process(delta):
 			print("can buildship!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(0,1,0,0.5)
 			if Input.is_action_just_pressed("click"):
-				buildship(load("res://Scenes/Ships/ShipExample.tscn"), main.get_global_mouse_position())
+				buildship(pending_scene, main.get_global_mouse_position())
 		else:
 			print("cannot buildship!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
@@ -106,8 +112,9 @@ func start_prebuilding(building_name:String):
 	stop_prebuildingship()
 	is_prebuilding = true
 	build_button_text.text = "Cancel!"
-	var cursor_texture = load("res://Assets/Buildings/turrents_1_left.png")
+	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/BuildingList/" + building_name + "Container/Build_" + building_name).icon
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
+	pending_scene = load("res://Scenes/Buildings/" + building_name + "Example.tscn").instantiate()
 
 func stop_prebuilding():
 	is_prebuilding = false
@@ -153,8 +160,9 @@ func start_prebuildingship(ship_name:String):
 	stop_predemolishing()
 	is_prebuildingship = true
 	buildship_button_text.text = "Cancel!"
-	var cursor_texture = load("res://Assets/Ships/ship_1.png")
+	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/ShipList/" + ship_name + "Container/Build_" + ship_name).icon
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
+	pending_scene = load("res://Scenes/Ships/" + ship_name + "Example.tscn").instantiate()
 
 func stop_prebuildingship():
 	is_prebuildingship = false
@@ -163,11 +171,16 @@ func stop_prebuildingship():
 	ship_list.visible = false
 	
 	
-func build(building_scene:PackedScene, position:Vector2):
-	if not main.pathfinder.is_constructable_land(position):
+func build(building_scene:Object, position:Vector2):
+	var can_build:bool
+	if building_scene.is_on_land:
+		can_build = main.pathfinder.is_constructable_land(position)
+	else:
+		can_build = main.pathfinder.is_shallow_water(position)
+	if not can_build:
 		pass
 	else:
-		var building = building_scene.instantiate()
+		var building = building_scene
 		building.start_location = main.pathfinder.get_tile_center(position)
 		main.get_node("BuildingLayer").add_child(building)
 		main.pathfinder.maze_add_building(position)
@@ -190,17 +203,14 @@ func demolish(position:Vector2):
 			if i.global_position  == main.pathfinder.get_tile_center(position):
 				i.queue_free()
 				break
-		main.pathfinder.maze_update("ground", position)
+		main.pathfinder.delete_building(position)
 		stop_predemolishing()
 		
-func buildship(ship_scene:PackedScene, position:Vector2):
-	if not (main.pathfinder.is_shallow_water(position) || main.pathfinder.is_deep_water(position)):
-		pass
-	else:
+func buildship(ship_scene:Object, position:Vector2):
 		if Character.current_built_ships >= Character.max_buildable_ships:
 			pass
 		else:
-			var ship = ship_scene.instantiate()
+			var ship = ship_scene
 			ship.start_location = main.pathfinder.get_tile_center(position)
 			main.get_node("ShipLayer").add_child(ship)
 			main.pathfinder.maze_add_ship(position)
@@ -209,8 +219,7 @@ func buildship(ship_scene:PackedScene, position:Vector2):
 
 
 func _on_build_turrent_pressed():
-	if not is_prebuilding:
-		start_prebuilding("TurrentExample")
+	start_prebuilding("Turrent")
 
 
 func _on_done_button_pressed():
@@ -227,7 +236,7 @@ func _on_done_button_pressed():
 
 func _on_build_ship_pressed():
 	if not is_prebuilding:
-		start_prebuildingship("ShipExample")
+		start_prebuildingship("Ship")
 
 
 func _on_turn_count_timer_timeout():
@@ -235,8 +244,7 @@ func _on_turn_count_timer_timeout():
 	
 	
 func _on_build_shipyard_pressed():
-	if not is_prebuilding:
-		start_prebuilding("ShipyardExample")
+	start_prebuilding("Shipyard")
 
 
 func complete_turn():
