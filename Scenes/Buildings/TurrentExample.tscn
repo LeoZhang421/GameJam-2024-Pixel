@@ -32,7 +32,7 @@ shape = SubResource("RectangleShape2D_lg42b")
 position = Vector2(-3.8147e-06, 0)
 scale = Vector2(0.451613, 0.54902)
 sprite_frames = SubResource("SpriteFrames_55nld")
-frame_progress = 0.0356202
+frame_progress = 0.928218
 
 [node name="AreaAttack" type="Area2D" parent="."]
 collision_layer = 0
