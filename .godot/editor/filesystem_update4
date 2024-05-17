@@ -4,4 +4,4 @@ res://Scenes/Main.tscn
 res://Scenes/Buildings/TurrentExample.tscn
 res://Scenes/Ships/ShipExample.tscn
 res://Scenes/Enemies/EnemyExample.tscn
-res://Scripts/Music.gd
+res://Scenes/Start.tscn

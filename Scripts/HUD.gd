@@ -14,12 +14,14 @@ class_name HUD
 @onready var demolish_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button/Demolish_Text
 @onready var buildship_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Buildship_Button/Buildship_Text
 @onready var building_list = $Container/VBoxContainer/MarginContainer3/BuildingList
+@onready var ship_list = $Container/VBoxContainer/MarginContainer3/ShipList
 @onready var skill_list = $Container/MarginContainer/Skill_List
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#life_value.text = str(main.current_life)
 	#money_value.text = str(main.current_money)
 	building_list.visible = false
+	ship_list.visible = false
 	title.text = Level.get_current_phase()
 	done.visible = (Level.get_current_phase() == "preparation")
 	$Level_Control/Turn_Display.set_text("Turn " + str(Level.get_current_turn()))
@@ -78,6 +80,7 @@ func _on_build_button_pressed():
 		stop_preexpanding()
 		stop_predemolishing()
 		building_list.visible = !building_list.visible
+		ship_list.visible = false
 		if is_prebuilding:
 			stop_prebuilding()
 
@@ -92,7 +95,8 @@ func _on_buildship_button_pressed():
 	if Level.get_current_phase() == "preparation":
 		stop_preexpanding()
 		stop_predemolishing()
-		building_list.visible = !building_list.visible
+		ship_list.visible = !ship_list.visible
+		building_list.visible = false
 		if is_prebuildingship:
 			stop_prebuildingship()
 
@@ -149,14 +153,14 @@ func start_prebuildingship(ship_name:String):
 	stop_predemolishing()
 	is_prebuildingship = true
 	buildship_button_text.text = "Cancel!"
-	var cursor_texture = load("res://Assets/Ships/ship_0.png")
+	var cursor_texture = load("res://Assets/Ships/ship_1.png")
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 
 func stop_prebuildingship():
 	is_prebuildingship = false
 	buildship_button_text.text = "Buildship!"
 	main.get_node("Cursor/Sprite2D").texture = null
-	building_list.visible = false
+	ship_list.visible = false
 	
 	
 func build(building_scene:PackedScene, position:Vector2):
@@ -219,7 +223,7 @@ func _on_done_button_pressed():
 
 func _on_build_ship_pressed():
 	if not is_prebuilding:
-		start_prebuildingship("EnemyExample")
+		start_prebuildingship("ShipExample")
 
 
 func _on_turn_count_timer_timeout():
