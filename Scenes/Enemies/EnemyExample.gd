@@ -103,9 +103,7 @@ func attack_event() -> void:
 
 # funcion related to signal
 func _on_area_attack_area_entered(enemy:Node):
-	print("entered: ", enemy.get_groups())
 	if not enemy.is_in_group("Ship"):
-		print("not in, passed")
 		return
 	if not enemy in target_backup:
 		target_backup.append(enemy)

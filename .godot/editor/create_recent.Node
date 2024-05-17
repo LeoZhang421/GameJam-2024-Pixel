@@ -1,4 +1,6 @@
 Node
+AnimationPlayer
+TextureRect
 Area2D
 Timer
 AudioStreamPlayer
@@ -9,7 +11,4 @@ Button
 Control
 VBoxContainer
 MarginContainer
-TextureRect
 CanvasLayer
-AnimatedSprite2D
-Sprite2D
