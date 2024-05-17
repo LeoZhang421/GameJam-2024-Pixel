@@ -1,11 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bahbbbh2aftlk"]
+[gd_scene load_steps=9 format=3 uid="uid://bahbbbh2aftlk"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/EnemyExample.gd" id="1_25bu7"]
 [ext_resource type="Texture2D" uid="uid://cyfdf83daleuq" path="res://Assets/Enemies/pirates_1_up.png" id="2_e776h"]
 [ext_resource type="Texture2D" uid="uid://ihshq6umw7ov" path="res://Assets/Enemies/pirate_1.png" id="3_vyp7d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtkw7"]
-size = Vector2(128, 128)
+size = Vector2(56, 56)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c84q6"]
 animations = [{
@@ -21,28 +21,55 @@ animations = [{
 "speed": 3.0
 }]
 
-[node name="EnemyExample" type="Area2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0mmf"]
+bg_color = Color(0.227451, 0.227451, 0.227451, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4lit"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t0llh"]
+radius = 180.0
+
+[node name="EnemyExample" type="Area2D" groups=["Enemy"]]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 3
 script = ExtResource("1_25bu7")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mtkw7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.627451, 0.450704)
 sprite_frames = SubResource("SpriteFrames_c84q6")
 frame_progress = 0.842161
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-custom_minimum_size = Vector2(150, 30)
+custom_minimum_size = Vector2(80, 15)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -75.0
-offset_top = 65.0
-offset_right = 75.0
-offset_bottom = 95.0
+offset_left = -40.0
+offset_top = 30.0
+offset_right = 40.0
+offset_bottom = 45.0
 grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_x0mmf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p4lit")
 step = 1.0
 value = 79.0
 show_percentage = false
+
+[node name="AreaAttack" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="AreaAttackShape" type="CollisionShape2D" parent="AreaAttack"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_t0llh")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
+[connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

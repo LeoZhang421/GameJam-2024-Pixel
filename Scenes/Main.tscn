@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dhe13dl2lsh1"]
+[gd_scene load_steps=15 format=3 uid="uid://dhe13dl2lsh1"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_t4kyd"]
 [ext_resource type="Texture2D" uid="uid://ch52obihadyen" path="res://Assets/Water+.png" id="2_gwxmh"]
 [ext_resource type="PackedScene" uid="uid://comy3j8oaolau" path="res://Scenes/UI/HUD.tscn" id="2_utsvi"]
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="3_l3cjw"]
 [ext_resource type="PackedScene" uid="uid://b3tgm76g3axnl" path="res://Scenes/Buildings/TurrentExample.tscn" id="4_roy33"]
+[ext_resource type="PackedScene" uid="uid://dkc1542lywa7" path="res://Scenes/Ships/ShipExample.tscn" id="5_kow21"]
 [ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemyExample.tscn" id="5_qx87c"]
 [ext_resource type="PackedScene" uid="uid://cctmyju5of6qw" path="res://Scenes/Cursor.tscn" id="6_npyoo"]
 [ext_resource type="AudioStream" uid="uid://vm2k5vryu7d6" path="res://Assets/Audio/music_0003.mp3" id="8_u6pfl"]
@@ -267,19 +268,35 @@ limit_right = 960
 limit_bottom = 450
 script = ExtResource("3_l3cjw")
 
-[node name="BuildingLayer" type="Node" parent="."]
-
-[node name="TurrentExample" parent="BuildingLayer" instance=ExtResource("4_roy33")]
-position = Vector2(216, 392)
-
 [node name="EnemyLayer" type="Node" parent="."]
 
 [node name="EnemyExample" parent="EnemyLayer" instance=ExtResource("5_qx87c")]
+position = Vector2(700, 500)
+attack_range = 360
+start_location = Vector2(200, 500)
+end_location = Vector2(700, 500)
 
 [node name="EnemyExample2" parent="EnemyLayer" instance=ExtResource("5_qx87c")]
+position = Vector2(400, 240)
+move_speed = 25
+start_location = Vector2(1000, 240)
+end_location = Vector2(400, 240)
+
+[node name="BuildingLayer" type="Node" parent="."]
+
+[node name="TurrentExample" parent="BuildingLayer" instance=ExtResource("4_roy33")]
+position = Vector2(630, 450)
+attack_range = 360
+attack_speed = 2.0
+start_location = Vector2(540, 420)
+
+[node name="ShipLayer" type="Node" parent="."]
+
+[node name="ShipExample" parent="ShipLayer" instance=ExtResource("5_kow21")]
+position = Vector2(400, 200)
 move_speed = 100
-start_location = Vector2(500, 350)
-end_location = Vector2(1000, 350)
+start_location = Vector2(400, 200)
+end_location = Vector2(400, 700)
 
 [node name="HUD" parent="." instance=ExtResource("2_utsvi")]
 
