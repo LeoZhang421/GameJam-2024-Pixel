@@ -262,6 +262,12 @@ layer_2/tile_data = PackedInt32Array(720904, 131072, 1, 655368, 131072, 1, 58983
 layer_3/tile_data = PackedInt32Array(458760, 131072, 13)
 layer_4/tile_data = PackedInt32Array(196637, 65536, 13)
 
+[node name="TurrentExample" parent="TileMap_Test" instance=ExtResource("4_roy33")]
+position = Vector2(224, 152)
+attack_range = 360
+attack_speed = 2.0
+start_location = Vector2(540, 420)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(780, 510)
 limit_left = -720

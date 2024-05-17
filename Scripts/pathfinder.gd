@@ -84,12 +84,12 @@ func reload_map_data(s:Object):
 		if map_object.is_in_group("Ship"):
 			var temp = get_standard_position(map_object.global_position)
 			maze[temp.x][temp.y] = 8
-			map_object.start_location = get_tile_center(map_object.global_position)
+			map_object.position = get_tile_center(map_object.global_position)
 			map_object.reparent(s.get_node("ShipLayer"))
 		if map_object.is_in_group("Building"):
 			var temp = get_standard_position(map_object.global_position)
 			maze[temp.x][temp.y] += 6
-			map_object.start_location = get_tile_center(map_object.global_position)
+			map_object.position = get_tile_center(map_object.global_position)
 			map_object.reparent(s.get_node("BuildingLayer"))
 	# 重新加载所有舰船地图信息
 	for ship in s.get_node("ShipLayer").get_children():
