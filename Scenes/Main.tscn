@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dkc1542lywa7" path="res://Scenes/Ships/ShipExample.tscn" id="5_kow21"]
 [ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemyExample.tscn" id="5_qx87c"]
 [ext_resource type="PackedScene" uid="uid://cctmyju5of6qw" path="res://Scenes/Cursor.tscn" id="6_npyoo"]
-[ext_resource type="PackedScene" uid="uid://dvll5ir0xk07l" path="res://Scenes/Ships/Merchant.tscn" id="7_kaxjd"]
+[ext_resource type="PackedScene" path="res://Scenes/Ships/Merchant.tscn" id="7_kaxjd"]
 [ext_resource type="Script" path="res://Scripts/MerchantLayer.gd" id="7_sh4x1"]
 [ext_resource type="AudioStream" uid="uid://vm2k5vryu7d6" path="res://Assets/Audio/music_0003.mp3" id="8_u6pfl"]
 [ext_resource type="Script" path="res://Scripts/Music.gd" id="9_b8i5n"]
@@ -310,6 +310,7 @@ merchant_scene = ExtResource("7_kaxjd")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_u6pfl")
+volume_db = -10.0
 autoplay = true
 script = ExtResource("9_b8i5n")
 
@@ -319,6 +320,7 @@ autoplay = true
 
 [node name="Pirate_Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_m3u06")
+volume_db = -10.0
 
 [node name="Pirate_Invasion_Timer" type="Timer" parent="."]
 wait_time = 5.0

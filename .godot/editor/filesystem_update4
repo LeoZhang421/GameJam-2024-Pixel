@@ -5,3 +5,4 @@ res://Scenes/Buildings/TurrentExample.tscn
 res://Scenes/Ships/ShipExample.tscn
 res://Scenes/Enemies/EnemyExample.tscn
 res://Scenes/Start.tscn
+res://Scripts/Music.gd

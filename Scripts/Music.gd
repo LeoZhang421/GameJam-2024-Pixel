@@ -1,14 +1,22 @@
 extends AudioStreamPlayer
-@onready var db_tween : Tween = Tween.new()
+@onready var is_fading = false
+@onready var fade_duration:float
+@onready var volume_offset
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	set_process(false)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if is_fading:
+		volume_db += volume_offset * delta
+	if volume_db <= -40:
+		self.stop()
 	
 func fade_out():
-	db_tween.tween_property(self, "volume_db", -80.0, 5.0)
+	is_fading = true
+	fade_duration = 5
+	volume_offset = (-40 - volume_db) /5
+	set_process(true)
