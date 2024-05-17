@@ -380,6 +380,6 @@ one_shot = true
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button" to="." method="_on_demolish_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Buildship_Button" to="." method="_on_buildship_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/BuildingList/TurrentContainer/Build_Turrent" to="." method="_on_build_turrent_pressed"]
-[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/BuildingList/VBoxContainer2/Build_Shipyard" to="." method="_on_build_turrent_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/BuildingList/VBoxContainer2/Build_Shipyard" to="." method="_on_build_shipyard_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/ShipList/ShipContainer/Build_Ship" to="." method="_on_build_ship_pressed"]
 [connection signal="timeout" from="Turn_Count_Timer" to="." method="_on_turn_count_timer_timeout"]
