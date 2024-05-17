@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://comy3j8oaolau"]
+[gd_scene load_steps=20 format=3 uid="uid://comy3j8oaolau"]
 
 [ext_resource type="FontFile" uid="uid://yb7i6tqe1e6c" path="res://Assets/Fonts/joystix/joystix monospace.otf" id="1_4g8sv"]
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_wjan7"]
@@ -44,6 +44,10 @@ font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_mvwwi"]
 font = ExtResource("1_4g8sv")
+
+[sub_resource type="LabelSettings" id="LabelSettings_emr85"]
+font = ExtResource("1_4g8sv")
+font_size = 18
 
 [sub_resource type="LabelSettings" id="LabelSettings_2jfs1"]
 font = ExtResource("1_4g8sv")
@@ -125,6 +129,36 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "D o n e"
+label_settings = SubResource("LabelSettings_lufdm")
+
+[node name="Next_Level_Button" type="Button" parent="Level_Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -40.0
+offset_right = 200.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Text" type="Label" parent="Level_Control/Next_Level_Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Next Level!"
 label_settings = SubResource("LabelSettings_lufdm")
 
 [node name="Container" type="Control" parent="."]
@@ -261,66 +295,77 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="BuildingList" type="GridContainer" parent="Container/VBoxContainer/MarginContainer3"]
-layout_mode = 2
-columns = 3
-
-[node name="TurrentContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/BuildingList"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3"]
 layout_mode = 2
 
-[node name="Build_Turrent" type="Button" parent="Container/VBoxContainer/MarginContainer3/BuildingList/TurrentContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+
+[node name="BuildingList" type="HBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TurrentContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList"]
+layout_mode = 2
+
+[node name="Build_Turrent" type="Button" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/TurrentContainer"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("3_m2whi")
 expand_icon = true
 
-[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/BuildingList/TurrentContainer"]
+[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/TurrentContainer"]
 layout_mode = 2
 text = "Turrent"
 label_settings = SubResource("LabelSettings_mvwwi")
 horizontal_alignment = 1
 
-[node name="ShipyardContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/BuildingList"]
+[node name="ShipyardContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList"]
 layout_mode = 2
 
-[node name="Build_Shipyard" type="Button" parent="Container/VBoxContainer/MarginContainer3/BuildingList/ShipyardContainer"]
+[node name="Build_Shipyard" type="Button" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/ShipyardContainer"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("4_5icg2")
 expand_icon = true
 
-[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/BuildingList/ShipyardContainer"]
+[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/ShipyardContainer"]
 layout_mode = 2
 text = "Shipyard"
 label_settings = SubResource("LabelSettings_mvwwi")
 horizontal_alignment = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/BuildingList"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList"]
 layout_mode = 2
 
-[node name="ShipList" type="GridContainer" parent="Container/VBoxContainer/MarginContainer3"]
+[node name="ShipList" type="HBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="ShipContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/ShipList"]
+[node name="ShipContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList"]
 layout_mode = 2
 
-[node name="Build_Ship" type="Button" parent="Container/VBoxContainer/MarginContainer3/ShipList/ShipContainer"]
+[node name="Build_Ship" type="Button" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipContainer"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("4_sa87j")
 expand_icon = true
 
-[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/ShipList/ShipContainer"]
+[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipContainer"]
 layout_mode = 2
 text = "Ship"
 label_settings = SubResource("LabelSettings_mvwwi")
 horizontal_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/ShipList"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList"]
 layout_mode = 2
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/ShipList"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList"]
 layout_mode = 2
+
+[node name="Introduction" type="Label" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_emr85")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Container"]
 layout_mode = 0
@@ -372,15 +417,21 @@ label_settings = SubResource("LabelSettings_coa8c")
 horizontal_alignment = 1
 
 [node name="Turn_Count_Timer" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 4.0
+one_shot = true
+
+[node name="TestTimer" type="Timer" parent="."]
+wait_time = 10.0
 one_shot = true
 
 [connection signal="pressed" from="Level_Control/Done_Button" to="." method="_on_done_button_pressed"]
+[connection signal="pressed" from="Level_Control/Next_Level_Button" to="." method="_on_next_level_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Expand_Button" to="." method="_on_expand_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Build_Button" to="." method="_on_build_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button" to="." method="_on_demolish_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Buildship_Button" to="." method="_on_buildship_button_pressed"]
-[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/BuildingList/TurrentContainer/Build_Turrent" to="." method="_on_build_turrent_pressed"]
-[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/BuildingList/ShipyardContainer/Build_Shipyard" to="." method="_on_build_shipyard_pressed"]
-[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/ShipList/ShipContainer/Build_Ship" to="." method="_on_build_ship_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/TurrentContainer/Build_Turrent" to="." method="_on_build_turrent_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/ShipyardContainer/Build_Shipyard" to="." method="_on_build_shipyard_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipContainer/Build_Ship" to="." method="_on_build_ship_pressed"]
 [connection signal="timeout" from="Turn_Count_Timer" to="." method="_on_turn_count_timer_timeout"]
+[connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]

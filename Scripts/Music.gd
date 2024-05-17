@@ -14,6 +14,7 @@ func _process(delta):
 		volume_db += volume_offset * delta
 	if volume_db <= -40:
 		self.stop()
+		set_process(false)
 	
 func fade_out():
 	is_fading = true

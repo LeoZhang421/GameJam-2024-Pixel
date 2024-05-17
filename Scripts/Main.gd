@@ -1,10 +1,12 @@
 extends Node2D
 var pathfinder
 var tile_map
+var current_level
 
 # 测试寻路的代码
 func _ready():
-	tile_map = get_node("TileMap_Test" + str(Level.current_level))
+	current_level = Level.current_level
+	tile_map = get_node("TileMap_Test1")
 	pathfinder = Pathfinder.new(self)
 	$HUD.main = self
 	$Camera2D.offset = tile_map.tile_set.tile_size + get_viewport().size/2

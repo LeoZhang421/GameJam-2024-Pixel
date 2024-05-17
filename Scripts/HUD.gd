@@ -8,20 +8,22 @@ class_name HUD
 @onready var pending_scene
 @onready var title = $Level_Control/Title
 @onready var done = $Level_Control/Done_Button
+@onready var level_info = $Container/VBoxContainer/MarginContainer/VBoxContainer/Title
 @onready var life_value = $Container/VBoxContainer/MarginContainer/VBoxContainer/Life/Life_Value
 @onready var money_value = $Container/VBoxContainer/MarginContainer/VBoxContainer/Money/Money_Value
 @onready var expand_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Expand_Button/Expand_Text
 @onready var build_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Build_Button/Build_Text
 @onready var demolish_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button/Demolish_Text
 @onready var buildship_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Buildship_Button/Buildship_Text
-@onready var building_list = $Container/VBoxContainer/MarginContainer3/BuildingList
-@onready var ship_list = $Container/VBoxContainer/MarginContainer3/ShipList
+@onready var building_list = $Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList
+@onready var ship_list = $Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList
+@onready var introduction = $Container/VBoxContainer/MarginContainer3/VBoxContainer/Introduction
 @onready var skill_list = $Container/MarginContainer/Skill_List
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#life_value.text = str(main.current_life)
 	#money_value.text = str(main.current_money)
-	building_list.visible = false
+	level_info.text = "Level " + str(Level.get_current_level())
 	ship_list.visible = false
 	title.text = Level.get_current_phase()
 	done.visible = (Level.get_current_phase() == "preparation")
@@ -112,7 +114,7 @@ func start_prebuilding(building_name:String):
 	stop_prebuildingship()
 	is_prebuilding = true
 	build_button_text.text = "Cancel!"
-	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/BuildingList/" + building_name + "Container/Build_" + building_name).icon
+	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/" + building_name + "Container/Build_" + building_name).icon
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 	pending_scene = load("res://Scenes/Buildings/" + building_name + "Example.tscn").instantiate()
 
@@ -160,7 +162,7 @@ func start_prebuildingship(ship_name:String):
 	stop_predemolishing()
 	is_prebuildingship = true
 	buildship_button_text.text = "Cancel!"
-	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/ShipList/" + ship_name + "Container/Build_" + ship_name).icon
+	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/" + ship_name + "Container/Build_" + ship_name).icon
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 	pending_scene = load("res://Scenes/Ships/" + ship_name + "Example.tscn").instantiate()
 
@@ -201,7 +203,7 @@ func demolish(position:Vector2):
 	else:
 		for i in main.get_node("BuildingLayer").get_children():
 			if i.global_position  == main.pathfinder.get_tile_center(position):
-				i.queue_free()
+				i.demolish()
 				break
 		main.pathfinder.delete_building(position)
 		stop_predemolishing()
@@ -231,7 +233,9 @@ func _on_done_button_pressed():
 	done.visible = false
 	Level.complete_phase()
 	main.get_node("Music").fade_out()
+	main.get_node("Pirate_Music").volume_db = 0
 	main.get_node("Pirate_Invasion_Timer").start()
+	$TestTimer.start()
 
 
 func _on_build_ship_pressed():
@@ -245,6 +249,7 @@ func _on_turn_count_timer_timeout():
 	
 func _on_build_shipyard_pressed():
 	start_prebuilding("Shipyard")
+	introduction.text = "This is Shipyard"
 
 
 func complete_turn():
@@ -252,7 +257,24 @@ func complete_turn():
 	main.pathfinder.reload_map_data(main)
 	Level.complete_turn()
 	building_list.visible = false
-	title.text = Level.get_current_phase()
-	done.visible = (Level.get_current_phase() == "preparation")
-	$Level_Control/Turn_Display.set_text("Turn " + str(Level.get_current_turn()))
-	$Turn_Count_Timer.start()
+	if Level.get_current_level() > main.current_level:
+		$Level_Control/Turn_Display.set_text("Victory!")
+		$Level_Control/Turn_Display.visible = true
+		$Level_Control/Next_Level_Button.visible = true
+	else:
+		title.text = Level.get_current_phase()
+		done.visible = (Level.get_current_phase() == "preparation")
+		$Level_Control/Turn_Display.set_text("Turn " + str(Level.get_current_turn()))
+		$Level_Control/Turn_Display.visible = true
+		$Turn_Count_Timer.start()
+		main.get_node("Pirate_Music").fade_out()
+		main.get_node("Music").volume_db = -10
+		main.get_node("Music").play()
+
+
+func _on_test_timer_timeout():
+	complete_turn()
+
+
+func _on_next_level_button_pressed():
+	get_tree().reload_current_scene()
