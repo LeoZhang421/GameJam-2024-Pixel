@@ -99,7 +99,6 @@ func find_closest() -> Area2D:
 func attack_event() -> void:
 	target.take_damage(self, attack)
 
-
 # funcion related to signal
 func _on_area_attack_area_entered(enemy):
 	if not enemy.is_in_group("Enemy"):

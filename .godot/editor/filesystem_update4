@@ -12,3 +12,5 @@ res://Scenes/Buildings/ShipyardExample.gd
 res://Scripts/Level_Manager.gd
 res://Scripts/Main.gd
 res://Scripts/pathfinder.gd
+res://Scenes/Ships/ShipExample.gd
+res://Scenes/Buildings/TurrentExample.gd

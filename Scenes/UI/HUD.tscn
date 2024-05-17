@@ -282,6 +282,18 @@ horizontal_alignment = 1
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/BuildingList"]
 layout_mode = 2
 
+[node name="Build_Shipyard" type="Button" parent="Container/VBoxContainer/MarginContainer3/BuildingList/VBoxContainer2"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+icon = ExtResource("3_m2whi")
+expand_icon = true
+
+[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/BuildingList/VBoxContainer2"]
+layout_mode = 2
+text = "Shipyard"
+label_settings = SubResource("LabelSettings_mvwwi")
+horizontal_alignment = 1
+
 [node name="VBoxContainer3" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/BuildingList"]
 layout_mode = 2
 
@@ -368,5 +380,6 @@ one_shot = true
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button" to="." method="_on_demolish_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Buildship_Button" to="." method="_on_buildship_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/BuildingList/TurrentContainer/Build_Turrent" to="." method="_on_build_turrent_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/BuildingList/VBoxContainer2/Build_Shipyard" to="." method="_on_build_turrent_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/ShipList/ShipContainer/Build_Ship" to="." method="_on_build_ship_pressed"]
 [connection signal="timeout" from="Turn_Count_Timer" to="." method="_on_turn_count_timer_timeout"]

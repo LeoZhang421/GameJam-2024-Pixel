@@ -197,11 +197,15 @@ func buildship(ship_scene:PackedScene, position:Vector2):
 	if not (main.pathfinder.is_shallow_water(position) || main.pathfinder.is_deep_water(position)):
 		pass
 	else:
-		var ship = ship_scene.instantiate()
-		ship.start_location = main.pathfinder.get_tile_center(position)
-		main.get_node("ShipLayer").add_child(ship)
-		main.pathfinder.maze_add_ship(position)
-		stop_prebuildingship()
+		if Character.current_built_ships >= Character.max_buildable_ships:
+			pass
+		else:
+			var ship = ship_scene.instantiate()
+			ship.start_location = main.pathfinder.get_tile_center(position)
+			main.get_node("ShipLayer").add_child(ship)
+			main.pathfinder.maze_add_ship(position)
+			stop_prebuildingship()
+			Character.current_built_ships += 1
 
 
 func _on_build_turrent_pressed():
@@ -229,7 +233,14 @@ func _on_build_ship_pressed():
 func _on_turn_count_timer_timeout():
 	$Level_Control/Turn_Display.visible = false
 	
+	
+func _on_build_shipyard_pressed():
+	if not is_prebuilding:
+		start_prebuilding("ShipyardExample")
+
+
 func complete_turn():
+	Character.current_built_ships = 0
 	main.pathfinder.reload_map_data(main)
 	Level.complete_turn()
 	building_list.visible = false
@@ -237,4 +248,3 @@ func complete_turn():
 	done.visible = (Level.get_current_phase() == "preparation")
 	$Level_Control/Turn_Display.set_text("Turn " + str(Level.get_current_turn()))
 	$Turn_Count_Timer.start()
-	

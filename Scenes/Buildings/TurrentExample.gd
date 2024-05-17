@@ -71,6 +71,9 @@ func find_closest() -> Area2D:
 func attack_event() -> void:
 	target.take_damage(self, attack)
 
+func demolish():
+	self.queue_free()
+
 # funcion related to signal
 # when enemy Area2D entered attack area
 func _on_area_attack_area_entered(enemy):
