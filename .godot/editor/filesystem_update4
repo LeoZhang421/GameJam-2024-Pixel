@@ -6,3 +6,9 @@ res://Scenes/Ships/ShipExample.tscn
 res://Scenes/Enemies/EnemyExample.tscn
 res://Scenes/Start.tscn
 res://Scripts/Music.gd
+res://Scenes/Buildings/Shipyard.tscn
+res://Scripts/Character.gd
+res://Scenes/Buildings/ShipyardExample.gd
+res://Scripts/Level_Manager.gd
+res://Scripts/Main.gd
+res://Scripts/pathfinder.gd

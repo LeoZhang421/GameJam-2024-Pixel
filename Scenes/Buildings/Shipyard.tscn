@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq8jj03bffibs"]
+[gd_scene load_steps=6 format=3 uid="uid://bq8jj03bffibs"]
 
 [ext_resource type="Script" path="res://Scenes/Buildings/ShipyardExample.gd" id="1_01snm"]
 [ext_resource type="Texture2D" uid="uid://rsgrhpp26vr4" path="res://Assets/Buildings/turrents_1_left.png" id="2_uj1po"]
@@ -21,9 +21,6 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_w4igf"]
-radius = 384.0
-
 [node name="ShipyardExample" type="Area2D" groups=["Building"]]
 collision_mask = 3
 script = ExtResource("1_01snm")
@@ -34,16 +31,3 @@ shape = SubResource("RectangleShape2D_lg42b")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_55nld")
 frame_progress = 0.619254
-
-[node name="AreaAttack" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="AreaAttack"]
-shape = SubResource("CircleShape2D_w4igf")
-
-[node name="AttackTimer" type="Timer" parent="."]
-
-[connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
-[connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

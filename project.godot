@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Level="*res://Scripts/Level_Manager.gd"
+Character="*res://Scripts/Character.gd"
 
 [display]
 

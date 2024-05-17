@@ -29,33 +29,34 @@ var enemy_spawn_history:Array
 # 8：有船的水域
 
 # 直接传入tile_map，debug模式默认关闭
-func _init(tile_map:Object, new_debug := false):
+func _init(s:Object, new_debug := false):
 	# 初始化maze
-	ROW = tile_map.get_viewport().size.x
-	COL = tile_map.get_viewport().size.y
+	ROW = s.tile_map.get_viewport().size.x
+	COL = s.tile_map.get_viewport().size.y
 	for x in ROW:
 		var maze_column : Array = []
 		maze_column.resize(COL)
 		maze_column.fill(0)
 		maze_original.append(maze_column)
 	# 添加陆地、航线、码头、出生点信息
-	var ground_history = tile_map.get_used_cells(1)
+	var ground_history = s.tile_map.get_used_cells(1)
 	for ground_position in ground_history:
 		maze_original[ground_position.x][ground_position.y] = 1
-	sail_history = tile_map.get_used_cells(2)
+	sail_history = s.tile_map.get_used_cells(2)
 	for sail_position in sail_history:
 		maze_original[sail_position.x][sail_position.y] = 2
-	harbour_history = tile_map.get_used_cells(3)
+	harbour_history = s.tile_map.get_used_cells(3)
 	for harbour_position in harbour_history:
 		maze_original[harbour_position.x][harbour_position.y] = 3
-	enemy_spawn_history = tile_map.get_used_cells(3)
+	enemy_spawn_history = s.tile_map.get_used_cells(3)
 	for enemy_spawn_position in enemy_spawn_history:
 		maze_original[enemy_spawn_position.x][enemy_spawn_position.y] = 3
 	debug = new_debug
-	scale = tile_map.tile_set.tile_size.x
+	scale = s.tile_map.tile_set.tile_size.x
 	room_borders.position = Vector2.ZERO
-	room_borders.size = Vector2(tile_map.get_used_rect().size)
+	room_borders.size = Vector2(s.tile_map.get_used_rect().size)
 	maze = maze_original
+	reload_map_data(s)
 	initialize_sail_routes()
 
 
@@ -72,15 +73,28 @@ func get_tile_center(position:Vector2):
 	return get_global_position(get_standard_position(position))
 	
 func reload_map_data(s:Object):
+	# 清除所有舰船地图信息
 	for i in ROW:
 		for j in COL:
 			if maze[i-1][j-1] == 8:
 				maze[i-1][j-1] = 0
-	for i in s.get_node("EnemyLayer").get_children():
-		if i.is_in_group("Enemy"):
-			var temp = get_standard_position(i.global_position)
+	# 清洗地图数据和重新整理地图要素
+	for map_object in s.tile_map.get_children():
+		if map_object.is_in_group("Ship"):
+			var temp = get_standard_position(map_object.global_position)
 			maze[temp.x][temp.y] = 8
-			
+			map_object.start_location = get_tile_center(map_object.global_position)
+			map_object.reparent(s.get_node("ShipLayer"))
+		if map_object.is_in_group("Building"):
+			var temp = get_standard_position(map_object.global_position)
+			maze[temp.x][temp.y] += 6
+			map_object.start_location = get_tile_center(map_object.global_position)
+			map_object.reparent(s.get_node("BuildingLayer"))
+	# 重新加载所有舰船地图信息
+	for ship in s.get_node("ShipLayer").get_children():
+		if ship.is_in_group("Ship"):
+			var temp = get_standard_position(ship.global_position)
+			maze[temp.x][temp.y] = 8
 		
 #输入起点和终点，获得一条路径，路径的坐标为全局坐标，可以直接拿来用		
 func find_path(start, end):
