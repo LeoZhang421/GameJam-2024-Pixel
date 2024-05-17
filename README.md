@@ -37,6 +37,7 @@ get_sail_routes() -> Array of Array of Vector2: 获取所有航线的路径，�
 get_tile_center(position) -> Vector2: 返回输入坐标所在地块的中心坐标，用来放置建筑物和船的</br>
 
 ## 笔记</br>
+HUD场景下有一个测试用的定时器TestTimer，如果阻碍到开发了可以直接删除，回合结束用HUD.complete_turn()可以自动进下一轮，功能都已经调通</br>
 个人属性：包括血量、金币、每回合可造船数 **现在全部做成全局变量Character上了**</br>
 建筑物需要新增一个方法demolish，用以自我销毁和返还金币</br>
 全局变量：目前有2个，个人属性Character和关卡进度Level</br>

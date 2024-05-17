@@ -1,10 +1,12 @@
-res://Scenes/Buildings/TurrentExample.tscn::425eabaa1452e8784cb51dbcf1a3fe00::1715873614::res://.godot/exported/133200997/export-3a751fd19a7a1361d2d4eec63cfb1189-TurrentExample.scn
+res://Scenes/Buildings/TurrentExample.tscn::60cb0ccc817bd3a50938d71f60ccfbcf::1715958641::res://.godot/exported/133200997/export-3a751fd19a7a1361d2d4eec63cfb1189-TurrentExample.scn
 res://Scenes/Debug_Node/debug_node.tscn::94a6e7febf6ae2e6678b379599e10432::1715694276::res://.godot/exported/133200997/export-5ebec715b3e4627f5dcf324fe7fda752-debug_node.scn
-res://Scenes/Enemies/EnemyExample.tscn::3d79690786171d500bc94b8ea6733a8b::1715873614::res://.godot/exported/133200997/export-7b54d030ed4b3b90a01cf26ac352529f-EnemyExample.scn
-res://Scenes/UI/HUD.tscn::f183f49e86bb65b24d434301c1d4217d::1715874093::res://.godot/exported/133200997/export-ec117413731bb4f9ca63cac906dfc2c9-HUD.scn
+res://Scenes/Enemies/EnemyExample.tscn::dc2ce35c53ae0618fa0f7b275aa17132::1715958641::res://.godot/exported/133200997/export-7b54d030ed4b3b90a01cf26ac352529f-EnemyExample.scn
+res://Scenes/UI/HUD.tscn::f1d8baddb92621a955a0efb33c57ffa2::1715958641::res://.godot/exported/133200997/export-ec117413731bb4f9ca63cac906dfc2c9-HUD.scn
 res://Scenes/VFX/Combat_Effect.tscn::ef083807ca994e6eaab9da3d97e4e803::1715780312::res://.godot/exported/133200997/export-fe6c6ccce3ac44ac3341db9b30da5f32-Combat_Effect.scn
 res://Scenes/VFX/Hit_Effect.tscn::02c1afc8bc4c333d49b11af48c2b7b3b::1715694276::res://.godot/exported/133200997/export-a64e3b9a4bdd6cb8de63c81b185fcee0-Hit_Effect.scn
 res://Scenes/Cursor.tscn::2fdb4e6d4ae66982516860f22906e303::1715791321::res://.godot/exported/133200997/export-67d93a76f3d2c47d3edc46aa0046c914-Cursor.scn
-res://Scenes/Main.tscn::8ac7d5911976bccb952e0e9348e3638b::1715873614::res://.godot/exported/133200997/export-a8e1520d83f25710dd4e3da8c6f32601-Main.scn
-res://Scenes/Buildings/Shipyard.tscn::a7356d73bdc71090d153fb67881f617f::1715873614::res://.godot/exported/133200997/export-57fd31d3cba9fcb3cb976df49e2f94ad-Shipyard.scn
+res://Scenes/Main.tscn::16a9e9a7072cf0cc2d7d20e4ff2ca2d8::1715958641::res://.godot/exported/133200997/export-a8e1520d83f25710dd4e3da8c6f32601-Main.scn
 res://Scenes/Start.tscn::d17dcb97e4d32d99180e1c1c08108584::1715867684::res://.godot/exported/133200997/export-174de7497efee8b86e81f74c0b97cb2b-Start.scn
+res://Scenes/Buildings/ShipyardExample.tscn::78eafe9ea48ef8659475cf52abceccae::1715958641::res://.godot/exported/133200997/export-d55f88d8dda17933037d70546582c113-ShipyardExample.scn
+res://Scenes/Ships/Merchant.tscn::9a9776d9c66067705edc9af30c56278c::1715951292::res://.godot/exported/133200997/export-20630101e3cbc68bb260ec57c7485f59-Merchant.scn
+res://Scenes/Ships/ShipExample.tscn::088812792caf72b35e264f45556c7879::1715958641::res://.godot/exported/133200997/export-c7fe808ad4c96f9685dc1b8c93c93cf7-ShipExample.scn

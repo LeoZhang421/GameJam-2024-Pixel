@@ -302,6 +302,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="BuildingList" type="HBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
+visible = false
 layout_mode = 2
 
 [node name="TurrentContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList"]
@@ -338,6 +339,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="ShipList" type="HBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
+visible = false
 layout_mode = 2
 
 [node name="ShipContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList"]
