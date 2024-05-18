@@ -26,5 +26,6 @@ func _process(delta):
 	pass
 
 func demolish():
+	Character.add_gold(self.cost/2)
 	Character.max_buildable_ships -= 1
 	self.queue_free()

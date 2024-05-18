@@ -8,6 +8,7 @@ class_name Mercenary extends Area2D
 @export_range(0, 600, 60) var attack_range: int = 4 * 60 # 60像素的倍数
 @export var start_location: Vector2 = Vector2(500,500)
 @export var end_location: Vector2 = Vector2(1000,500)
+@export var cost : int = 10
 
 # inner variables
 var hp: int = 0

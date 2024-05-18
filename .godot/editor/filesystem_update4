@@ -8,3 +8,7 @@ res://Scenes/Buildings/ShipyardExample.tscn
 res://Scripts/Character.gd
 res://Scripts/HUD.gd
 res://Scenes/Buildings/ShipyardExample.gd
+res://Scenes/Ships/ShipExample.tscn
+res://Scenes/Buildings/TurrentExample.tscn
+res://Scenes/Ships/ShipExample.gd
+res://Scenes/Buildings/TurrentExample.gd

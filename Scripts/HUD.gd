@@ -216,11 +216,12 @@ func build(building_scene:Object, position:Vector2):
 	if not can_build:
 		pass
 	else:
-		var building = building_scene
-		building.start_location = main.pathfinder.get_tile_center(position)
-		main.get_node("BuildingLayer").add_child(building)
-		main.pathfinder.maze_add_building(position)
-		stop_prebuilding()
+		if Character.loss_gold(building_scene.cost):
+			var building = building_scene
+			building.start_location = main.pathfinder.get_tile_center(position)
+			main.get_node("BuildingLayer").add_child(building)
+			main.pathfinder.maze_add_building(position)
+			stop_prebuilding()
 		
 func expand(position:Vector2):
 	if not main.pathfinder.is_shallow_water(position):
@@ -249,19 +250,21 @@ func buildship(ship_scene:Object, position:Vector2):
 		if Character.current_built_ships >= Character.max_buildable_ships:
 			pass
 		else:
-			var ship = ship_scene
-			ship.start_location = main.pathfinder.get_tile_center(position)
-			main.get_node("ShipLayer").add_child(ship)
-			main.pathfinder.maze_add_ship(position)
-			stop_prebuildingship()
-			Character.current_built_ships += 1
+			if Character.loss_gold(ship_scene.cost):
+				var ship = ship_scene
+				ship.start_location = main.pathfinder.get_tile_center(position)
+				main.get_node("ShipLayer").add_child(ship)
+				main.pathfinder.maze_add_ship(position)
+				stop_prebuildingship()
+				Character.current_built_ships += 1
 			
 func summonmercenary(mercenary_scene:Object, position:Vector2):
-	var mercenary = mercenary_scene
-	mercenary.start_location = main.pathfinder.get_tile_center(position)
-	main.get_node("ShipLayer").add_child(mercenary)
-	main.pathfinder.maze_add_ship(position)
-	stop_presummoningmercenary()
+	if Character.loss_gold(mercenary_scene.cost):
+		var mercenary = mercenary_scene
+		mercenary.start_location = main.pathfinder.get_tile_center(position)
+		main.get_node("ShipLayer").add_child(mercenary)
+		main.pathfinder.maze_add_ship(position)
+		stop_presummoningmercenary()
 
 
 func _on_build_turrent_pressed():

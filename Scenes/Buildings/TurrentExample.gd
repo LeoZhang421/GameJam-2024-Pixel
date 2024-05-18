@@ -75,7 +75,7 @@ func attack_event() -> void:
 
 func demolish():
 	self.queue_free()
-	Character.add_gold(cost)
+	Character.add_gold(cost/2)
 
 # funcion related to signal
 # when enemy Area2D entered attack area

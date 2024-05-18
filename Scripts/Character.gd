@@ -1,5 +1,5 @@
 extends Node
-@onready var gold:int = 0
+@onready var gold:int = 200
 @onready var future_gold:int = 0
 @onready var max_hp:int = 100
 @onready var current_hp:int = max_hp
@@ -8,7 +8,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 # behaviour functions
 func reset():
