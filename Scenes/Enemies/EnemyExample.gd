@@ -2,10 +2,10 @@ class_name Enemy extends Area2D
 
 # control variables
 @export_range(0,500,1) var move_speed: int = 50 # 每帧移动多少像素
-@export_range(1,20,1) var max_hp: int = 10
-@export_range(1,20,1) var attack: int = 2
-@export_range(0.0, 10.0) var attack_speed: float = 0.5 # 每秒攻击多少次，越高攻速越快
-@export_range(0, 600, 60) var attack_range: int = 4 * 60 # 60像素的倍数
+@export_range(1,20,1) var max_hp: int = 30
+@export_range(1,20,1) var attack: int = 3
+@export_range(0.0, 10.0) var attack_speed: float = 1.0 # 每秒攻击多少次，越高攻速越快
+@export_range(0, 600, 60) var attack_range: int = 3 * 60 # 60像素的倍数
 @export var start_location: Vector2 = Vector2(500,500)
 @export var end_location: Vector2 = Vector2(1000,500)
 

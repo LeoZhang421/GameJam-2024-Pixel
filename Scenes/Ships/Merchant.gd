@@ -95,6 +95,8 @@ func start_sail_dest():
 	moving = true
 	current_index = 0
 	animation.play("default")
+	hp = max_hp
+	_update_health()
 	show()
 
 # singal functions

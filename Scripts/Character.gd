@@ -1,8 +1,8 @@
 extends Node
-@onready var gold:int
-@onready var future_gold:int
+@onready var gold:int = 0
+@onready var future_gold:int = 0
 @onready var max_hp:int = 100
-@onready var current_hp:int
+@onready var current_hp:int = max_hp
 @onready var max_buildable_ships:int
 @onready var current_built_ships:int
 

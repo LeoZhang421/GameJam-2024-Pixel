@@ -262,6 +262,18 @@ layer_2/tile_data = PackedInt32Array(720904, 131072, 1, 655368, 131072, 1, 58983
 layer_3/tile_data = PackedInt32Array(458760, 131072, 13)
 layer_4/tile_data = PackedInt32Array(196637, 65536, 13)
 
+[node name="TurrentExample" parent="TileMap_Test1" instance=ExtResource("4_roy33")]
+position = Vector2(630, 450)
+attack_range = 360
+attack_speed = 2.0
+start_location = Vector2(630, 450)
+
+[node name="ShipExample" parent="TileMap_Test1" instance=ExtResource("5_kow21")]
+position = Vector2(400, 200)
+move_speed = 100
+start_location = Vector2(400, 200)
+end_location = Vector2(400, 700)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(780, 510)
 limit_left = -720
@@ -284,21 +296,15 @@ move_speed = 25
 start_location = Vector2(1000, 240)
 end_location = Vector2(400, 240)
 
+[node name="EnemyExample3" parent="EnemyLayer" instance=ExtResource("5_qx87c")]
+position = Vector2(900, 800)
+move_speed = 25
+start_location = Vector2(900, 950)
+end_location = Vector2(900, 800)
+
 [node name="BuildingLayer" type="Node" parent="."]
 
-[node name="TurrentExample" parent="BuildingLayer" instance=ExtResource("4_roy33")]
-position = Vector2(630, 450)
-attack_range = 360
-attack_speed = 2.0
-start_location = Vector2(630, 450)
-
 [node name="ShipLayer" type="Node" parent="."]
-
-[node name="ShipExample" parent="ShipLayer" instance=ExtResource("5_kow21")]
-position = Vector2(400, 200)
-move_speed = 100
-start_location = Vector2(400, 200)
-end_location = Vector2(400, 700)
 
 [node name="MerchantLayer" type="Node" parent="."]
 script = ExtResource("7_sh4x1")

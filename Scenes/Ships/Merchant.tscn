@@ -134,6 +134,7 @@ _data = {
 
 [sub_resource type="LabelSettings" id="LabelSettings_w1cv4"]
 font = ExtResource("3_kouct")
+font_color = Color(1, 1, 0, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
@@ -309,11 +310,10 @@ libraries = {
 autoplay = "default"
 
 [node name="TimerB" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 offset_left = -53.0
 offset_top = -11.5

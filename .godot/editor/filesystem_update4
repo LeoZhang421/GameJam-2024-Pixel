@@ -12,3 +12,4 @@ res://Scripts/MerchantLayer.gd
 res://Scripts/Main.gd
 res://Scenes/Ships/Merchant.gd
 res://Scenes/Ships/Merchant.tscn
+res://Scenes/Enemies/EnemyExample.gd
