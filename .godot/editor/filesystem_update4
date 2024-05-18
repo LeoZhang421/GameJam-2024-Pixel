@@ -1,15 +1,3 @@
 res://Scenes/Main.tscn
 res://Scenes/UI/HUD.tscn
-res://Scenes/Buildings/ShipyardExample.tscn
-res://Scenes/Ships/ShipExample.tscn
-res://Scenes/Enemies/EnemyExample.tscn
-res://Scenes/Buildings/TurrentExample.tscn
-res://Scenes/Ships/ShipExample.gd
-res://Scripts/HUD.gd
-res://Scripts/Character.gd
-res://Scenes/Buildings/TurrentExample.gd
-res://Scripts/MerchantLayer.gd
-res://Scripts/Main.gd
-res://Scenes/Ships/Merchant.gd
-res://Scenes/Ships/Merchant.tscn
-res://Scenes/Enemies/EnemyExample.gd
+res://Scripts/pathfinder.gd
