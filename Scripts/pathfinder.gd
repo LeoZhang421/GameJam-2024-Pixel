@@ -304,14 +304,14 @@ func initialize_sail_routes():
 	var sail_destination = []
 	for i in harbour_history:
 		sail_destination.append(Vector2(i.x, i.y))
-		if maze[i.x + 1][i.y] == 2:
-			sail_destination.append(Vector2(i.x + 1, i.y))
-		if maze[i.x][i.y + 1] == 2:
-			sail_destination.append(Vector2(i.x, i.y + 1))
-		if maze[i.x - 1][i.y] == 2:
-			sail_destination.append(Vector2(i.x - 1, i.y))
-		if maze[i.x][i.y - 1] == 2:
-			sail_destination.append(Vector2(i.x, i.y - 1))
+		#if maze[i.x + 1][i.y] == 2:
+			#sail_destination.append(Vector2(i.x + 1, i.y))
+		#if maze[i.x][i.y + 1] == 2:
+			#sail_destination.append(Vector2(i.x, i.y + 1))
+		#if maze[i.x - 1][i.y] == 2:
+			#sail_destination.append(Vector2(i.x - 1, i.y))
+		#if maze[i.x][i.y - 1] == 2:
+			#sail_destination.append(Vector2(i.x, i.y - 1))
 	for i in sail_destination:
 		var single_sail_route = []
 		get_next_route(single_sail_route, i)
