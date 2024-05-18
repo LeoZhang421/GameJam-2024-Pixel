@@ -1,8 +1,10 @@
+Sprite2D
+Node2D
+Node
+Label
 TileMap
 VideoStreamPlayer
-Label
 AudioStreamPlayer
-Sprite2D
 Timer
 AnimationPlayer
 Button
@@ -10,6 +12,3 @@ MarginContainer
 Control
 VBoxContainer
 HBoxContainer
-GridContainer
-Node
-Area2D

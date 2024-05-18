@@ -40,8 +40,6 @@ func complete_turn():
 
 func complete_level():
 	current_level += 1
-	if current_level > all_levels:
-		complete_game()
 	current_turn = 1
 	phase["preparation"] = 1
 	phase["action"] = 0

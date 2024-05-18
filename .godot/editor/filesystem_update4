@@ -13,3 +13,7 @@ res://Scenes/Buildings/TurrentExample.tscn
 res://Scenes/Ships/ShipExample.gd
 res://Scenes/Buildings/TurrentExample.gd
 res://Scenes/Utility/Monster_Generator.gd
+res://Scripts/Level_Manager.gd
+res://Scenes/VFX/Smoke_Effect.tscn
+res://Scenes/Utility/Warning.tscn
+res://Scripts/Warning.gd

@@ -24,6 +24,7 @@ class_name HUD
 @onready var skill_list = $Container/MarginContainer/Skill_List
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Level_Control/Turn_Display.label_settings.font_size = 100
 	life_value.text = str(Character.current_hp)
 	money_value.text = str(Character.gold)
 	level_info.text = "Level " + str(Level.get_current_level())
@@ -324,6 +325,11 @@ func complete_turn():
 	Level.complete_turn()
 	building_list.visible = false
 	if Level.get_current_level() > main.current_level:
+		if Level.get_current_level() > 3:
+			$Level_Control/Turn_Display.set_text("Thanks for playing Defense of the Aqua!")
+			$Level_Control/Turn_Display.label_settings.font_size = 48
+			$Level_Control/Turn_Display.visible = true
+			$Level_Control/Credits.visible = true
 		$Level_Control/Turn_Display.set_text("Victory!")
 		$Level_Control/Turn_Display.visible = true
 		$Level_Control/Next_Level_Button.visible = true

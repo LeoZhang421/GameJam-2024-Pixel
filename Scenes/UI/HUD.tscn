@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://comy3j8oaolau"]
+[gd_scene load_steps=21 format=3 uid="uid://comy3j8oaolau"]
 
 [ext_resource type="FontFile" uid="uid://yb7i6tqe1e6c" path="res://Assets/Fonts/joystix/joystix monospace.otf" id="1_4g8sv"]
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_wjan7"]
@@ -12,7 +12,12 @@ font_size = 36
 
 [sub_resource type="LabelSettings" id="LabelSettings_i1wn2"]
 font = ExtResource("1_4g8sv")
-font_size = 72
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_uyb6f"]
+line_spacing = 10.0
+font = ExtResource("1_4g8sv")
+font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_lufdm"]
 font = ExtResource("1_4g8sv")
@@ -67,8 +72,8 @@ layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -200.0
-offset_right = 200.0
+offset_left = -300.0
+offset_right = 300.0
 offset_bottom = 900.0
 grow_horizontal = 2
 
@@ -99,8 +104,30 @@ offset_right = 200.0
 offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Turn 1"
+text = "Thanks for playing Defense of the Aqua!"
 label_settings = SubResource("LabelSettings_i1wn2")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Credits" type="Label" parent="Level_Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -200.0
+offset_right = 120.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "developers:
+Pigeon Xiong
+Annilator
+Leo Zhang"
+label_settings = SubResource("LabelSettings_uyb6f")
 horizontal_alignment = 1
 
 [node name="Done_Button" type="Button" parent="Level_Control"]

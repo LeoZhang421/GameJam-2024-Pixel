@@ -1,0 +1,91 @@
+[gd_scene load_steps=14 format=3 uid="uid://biim7qwfgx38y"]
+
+[ext_resource type="Script" path="res://Scenes/VFX/Smoke_Effect.gd" id="1_3epve"]
+[ext_resource type="Texture2D" uid="uid://7vtn63dehixc" path="res://Assets/VFX/Smoke_Effect/Smoke_Particle_0002.png" id="2_xirco"]
+
+[sub_resource type="Gradient" id="Gradient_kruwv"]
+offsets = PackedFloat32Array(0.290576, 0.515707, 0.675393, 0.885246)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2v4lu"]
+gradient = SubResource("Gradient_kruwv")
+
+[sub_resource type="Curve" id="Curve_sq3vf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.518182), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kcq7t"]
+curve = SubResource("Curve_sq3vf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8m8s8"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 4.0
+spread = 80.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_kcq7t")
+color_ramp = SubResource("GradientTexture1D_2v4lu")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mkyvm"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_l55hf"]
+offsets = PackedFloat32Array(0, 0.113253, 0.195181, 0.708434, 0.773494, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.80233, 0.517185, 0.517184, 0.517184, 0.709804, 0.374139, 0.374139, 0.374139, 0.47451, 0, 0, 0, 0.223529, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bptir"]
+gradient = SubResource("Gradient_l55hf")
+
+[sub_resource type="Curve" id="Curve_dsj8v"]
+_data = [Vector2(0.00672645, 0.527273), 0.0, 0.0, 0, 0, Vector2(0.20852, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.454545), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_y3hqq"]
+curve = SubResource("Curve_dsj8v")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tud3s"]
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_y3hqq")
+color_ramp = SubResource("GradientTexture1D_bptir")
+anim_offset_max = 1.0
+
+[node name="Hit_effect" type="Node2D"]
+z_index = 1
+script = ExtResource("1_3epve")
+
+[node name="Hit_particle" type="GPUParticles2D" parent="."]
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_8m8s8")
+lifetime = 0.5
+explosiveness = 1.0
+
+[node name="Smoke_particle" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_mkyvm")
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_tud3s")
+texture = ExtResource("2_xirco")
+lifetime = 1.8
+explosiveness = 1.0
+
+[node name="Lifetime_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Lifetime_timer" to="." method="_on_lifetime_timer_timeout"]

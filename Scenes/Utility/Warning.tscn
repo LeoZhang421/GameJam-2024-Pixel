@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://c48d6gqtcvspt"]
+
+[node name="Warning" type="Sprite2D"]
