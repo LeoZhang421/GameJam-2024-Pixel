@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dhe13dl2lsh1"]
+[gd_scene load_steps=18 format=3 uid="uid://dhe13dl2lsh1"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_t4kyd"]
 [ext_resource type="Texture2D" uid="uid://ch52obihadyen" path="res://Assets/Water+.png" id="2_gwxmh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b3tgm76g3axnl" path="res://Scenes/Buildings/TurrentExample.tscn" id="4_roy33"]
 [ext_resource type="PackedScene" uid="uid://dkc1542lywa7" path="res://Scenes/Ships/ShipExample.tscn" id="5_kow21"]
 [ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemyExample.tscn" id="5_qx87c"]
+[ext_resource type="PackedScene" uid="uid://dp830xcs4unw6" path="res://Scenes/Utility/Monster_Generator.tscn" id="5_ylbvp"]
 [ext_resource type="PackedScene" uid="uid://cctmyju5of6qw" path="res://Scenes/Cursor.tscn" id="6_npyoo"]
 [ext_resource type="PackedScene" uid="uid://dvll5ir0xk07l" path="res://Scenes/Ships/Merchant.tscn" id="7_kaxjd"]
 [ext_resource type="Script" path="res://Scripts/MerchantLayer.gd" id="7_sh4x1"]
@@ -273,6 +274,9 @@ position = Vector2(400, 200)
 move_speed = 100
 start_location = Vector2(400, 200)
 end_location = Vector2(400, 700)
+
+[node name="Monster_Generator" parent="TileMap_Test1" instance=ExtResource("5_ylbvp")]
+position = Vector2(500, 500)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(780, 510)

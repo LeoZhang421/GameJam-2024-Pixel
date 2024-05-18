@@ -483,4 +483,3 @@ one_shot = true
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipContainer/Build_Ship" to="." method="_on_build_ship_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList/MercenaryContainer/Summon_Mercenary" to="." method="_on_summon_mercenary_pressed"]
 [connection signal="timeout" from="Turn_Count_Timer" to="." method="_on_turn_count_timer_timeout"]
-[connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]

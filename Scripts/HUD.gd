@@ -285,6 +285,8 @@ func _on_done_button_pressed():
 	$TestTimer.start()
 	main.get_node("MerchantLayer").reset(main.pathfinder.get_sail_routes())
 	main.get_node("MerchantLayer").start_action()
+	for i in main.monster_generator:
+		i.start_generating()
 
 func _on_build_ship_pressed():
 	if not is_prebuildingship:

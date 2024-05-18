@@ -1,6 +1,7 @@
-res://Scenes/Main.tscn
 res://Scenes/UI/HUD.tscn
-res://Scripts/pathfinder.gd
-res://Scripts/HUD.gd
-res://Scenes/Ships/ShipExample.gd
+res://Scripts/Main.gd
+res://Scenes/Main.tscn
 res://Scenes/Mercenary/MercenaryExample.tscn
+res://Scenes/Utility/Monster_Generator.tscn
+res://README.md
+res://Scenes/Utility/Monster_Generator.gd

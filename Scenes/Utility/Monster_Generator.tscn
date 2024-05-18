@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp830xcs4unw6"]
+
+[ext_resource type="Script" path="res://Scenes/Utility/Monster_Generator.gd" id="1_e1qdf"]
+[ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemyExample.tscn" id="2_uxdc3"]
+
+[node name="Monster_Generator" type="Node2D" groups=["Monster_Generator"]]
+script = ExtResource("1_e1qdf")
+monster_list_1 = Array[PackedScene]([ExtResource("2_uxdc3")])
+monster_count_1 = Array[int]([10])
+monster_waittime_1 = Array[float]([5.0])
+
+[node name="Small_Tick" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Big_Tick" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Small_Tick" to="." method="_on_small_tick_timeout"]
+[connection signal="timeout" from="Big_Tick" to="." method="_on_big_tick_timeout"]

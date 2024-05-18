@@ -41,3 +41,4 @@ HUD场景下有一个测试用的定时器TestTimer，如果阻碍到开发了�
 个人属性：包括血量、金币、每回合可造船数 **现在全部做成全局变量Character上了**</br>
 建筑物需要新增一个方法demolish，用以自我销毁和返还金币</br>
 全局变量：目前有2个，个人属性Character和关卡进度Level</br>
+EnemyShip，Building和Ship，Mercenary需要尽快先把开局的锁位置去掉，不然刷怪器没法正常刷怪，摆放的位置也不会生效，影响A人配关卡和测试</br>

@@ -1,6 +1,6 @@
+Timer
 AnimationPlayer
 Label
-Timer
 Button
 MarginContainer
 Control
@@ -12,4 +12,3 @@ Area2D
 AudioStreamPlayer
 TextureRect
 CanvasLayer
-AnimatedSprite2D
