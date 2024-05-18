@@ -1,8 +1,8 @@
+TileMap
 Sprite2D
 Node2D
 Node
 Label
-TileMap
 VideoStreamPlayer
 AudioStreamPlayer
 Timer
