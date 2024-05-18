@@ -60,7 +60,8 @@ func _on_big_tick_timeout():
 
 func _on_small_tick_timeout():
 	if monster_list.size() <= 0:
-		pass
+		get_tree().get_root().get_node("Main").set_process(true)
+		return
 	if monster_count[0] <= 0:
 		generate_next_wave()
 	else:

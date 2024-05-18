@@ -5,3 +5,4 @@ res://Scenes/Mercenary/MercenaryExample.tscn
 res://Scenes/Utility/Monster_Generator.tscn
 res://README.md
 res://Scenes/Utility/Monster_Generator.gd
+res://Scripts/HUD.gd

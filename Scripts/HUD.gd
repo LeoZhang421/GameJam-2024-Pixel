@@ -282,7 +282,6 @@ func _on_done_button_pressed():
 	main.get_node("Music").fade_out()
 	main.get_node("Pirate_Music").volume_db = 0
 	main.get_node("Pirate_Invasion_Timer").start()
-	$TestTimer.start()
 	main.get_node("MerchantLayer").reset(main.pathfinder.get_sail_routes())
 	main.get_node("MerchantLayer").start_action()
 	for i in main.monster_generator:

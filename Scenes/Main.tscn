@@ -300,12 +300,6 @@ move_speed = 25
 start_location = Vector2(1000, 240)
 end_location = Vector2(400, 240)
 
-[node name="EnemyExample3" parent="EnemyLayer" instance=ExtResource("5_qx87c")]
-position = Vector2(900, 800)
-move_speed = 25
-start_location = Vector2(900, 950)
-end_location = Vector2(900, 800)
-
 [node name="BuildingLayer" type="Node" parent="."]
 
 [node name="ShipLayer" type="Node" parent="."]

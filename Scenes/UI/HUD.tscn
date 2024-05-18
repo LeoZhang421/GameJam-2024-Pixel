@@ -467,10 +467,6 @@ horizontal_alignment = 1
 wait_time = 4.0
 one_shot = true
 
-[node name="TestTimer" type="Timer" parent="."]
-wait_time = 30.0
-one_shot = true
-
 [connection signal="pressed" from="Level_Control/Done_Button" to="." method="_on_done_button_pressed"]
 [connection signal="pressed" from="Level_Control/Next_Level_Button" to="." method="_on_next_level_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Expand_Button" to="." method="_on_expand_button_pressed"]

@@ -1,6 +1,7 @@
+Label
+Sprite2D
 Timer
 AnimationPlayer
-Label
 Button
 MarginContainer
 Control
@@ -11,4 +12,3 @@ Node
 Area2D
 AudioStreamPlayer
 TextureRect
-CanvasLayer
