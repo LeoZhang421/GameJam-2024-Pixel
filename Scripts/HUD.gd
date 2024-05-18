@@ -4,6 +4,7 @@ class_name HUD
 @onready var is_preexpanding := false
 @onready var is_predemolishing := false
 @onready var is_prebuildingship := false
+@onready var is_presummoningmercenary := false
 @onready var main
 @onready var pending_scene
 @onready var title = $Level_Control/Title
@@ -15,8 +16,10 @@ class_name HUD
 @onready var build_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Build_Button/Build_Text
 @onready var demolish_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button/Demolish_Text
 @onready var buildship_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Buildship_Button/Buildship_Text
+@onready var mercenary_button_text = $Container/VBoxContainer/MarginContainer2/VBoxContainer/Mercenary_Button/Mercenary_Text
 @onready var building_list = $Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList
 @onready var ship_list = $Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList
+@onready var mercenary_list = $Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList
 @onready var introduction = $Container/VBoxContainer/MarginContainer3/VBoxContainer/Introduction
 @onready var skill_list = $Container/MarginContainer/Skill_List
 # Called when the node enters the scene tree for the first time.
@@ -29,6 +32,7 @@ func _ready():
 	done.visible = (Level.get_current_phase() == "preparation")
 	$Level_Control/Turn_Display.set_text("Turn " + str(Level.get_current_turn()))
 	$Turn_Count_Timer.start()
+	mercenary_button_text.self_modulate = Color.RED
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -75,6 +79,15 @@ func _process(delta):
 		else:
 			print("cannot buildship!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
+	if is_presummoningmercenary:
+		if main.pathfinder.is_shallow_water(main.get_global_mouse_position()) || main.pathfinder.is_deep_water(main.get_global_mouse_position()):
+			print("can summon mercenary!")
+			main.get_node("Cursor/Sprite2D").self_modulate = Color(0,1,0,0.5)
+			if Input.is_action_just_pressed("click"):
+				summonmercenary(pending_scene, main.get_global_mouse_position())
+		else:
+			print("cannot summon mercenary!")
+			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
 
 func _on_expand_button_pressed():
 	if Level.get_current_phase() == "preparation":
@@ -107,6 +120,12 @@ func _on_buildship_button_pressed():
 		building_list.visible = false
 		if is_prebuildingship:
 			stop_prebuildingship()
+			
+func _on_mercenary_button_pressed():
+	if Level.get_current_phase() == "action":
+		mercenary_list.visible = !mercenary_list.visible
+		if is_presummoningmercenary:
+			stop_presummoningmercenary()
 
 func start_prebuilding(building_name:String):
 	stop_preexpanding()
@@ -172,6 +191,21 @@ func stop_prebuildingship():
 	main.get_node("Cursor/Sprite2D").texture = null
 	ship_list.visible = false
 	
+func start_presummoningmercenary(mercenary_name:String):
+	is_presummoningmercenary = true
+	mercenary_button_text.text = "Cancel!"
+	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList/" + mercenary_name + "Container/Summon_" + mercenary_name).icon
+	main.get_node("Cursor/Sprite2D").texture = cursor_texture
+	pending_scene = load("res://Scenes/Mercenary/" + mercenary_name + "Example.tscn").instantiate()
+
+func stop_presummoningmercenary():
+	is_presummoningmercenary = false
+	mercenary_button_text.text = "Mercenary!"
+	main.get_node("Cursor/Sprite2D").texture = null
+	mercenary_list.visible = false
+	
+	
+	
 	
 func build(building_scene:Object, position:Vector2):
 	var can_build:bool
@@ -218,17 +252,30 @@ func buildship(ship_scene:Object, position:Vector2):
 			main.pathfinder.maze_add_ship(position)
 			stop_prebuildingship()
 			Character.current_built_ships += 1
+			
+func summonmercenary(mercenary_scene:Object, position:Vector2):
+	var mercenary = mercenary_scene
+	mercenary.start_location = main.pathfinder.get_tile_center(position)
+	main.get_node("ShipLayer").add_child(mercenary)
+	main.pathfinder.maze_add_ship(position)
+	stop_presummoningmercenary()
 
 
 func _on_build_turrent_pressed():
 	start_prebuilding("Turrent")
+	introduction.text = "This is Turrent"
 
 
 func _on_done_button_pressed():
+	expand_button_text.self_modulate = Color.RED
+	build_button_text.self_modulate = Color.RED
+	demolish_button_text.self_modulate = Color.RED
+	buildship_button_text.self_modulate = Color.RED
+	mercenary_button_text.self_modulate = Color.WHITE
 	stop_prebuilding()
-	building_list.visible = false
 	stop_predemolishing()
 	stop_preexpanding()
+	stop_prebuildingship()
 	title.text = "action"
 	done.visible = false
 	Level.complete_phase()
@@ -240,20 +287,30 @@ func _on_done_button_pressed():
 	main.get_node("MerchantLayer").start_action()
 
 func _on_build_ship_pressed():
-	if not is_prebuilding:
+	if not is_prebuildingship:
 		start_prebuildingship("Ship")
+	introduction.text = "This is Ship"
 
-
-func _on_turn_count_timer_timeout():
-	$Level_Control/Turn_Display.visible = false
-	
-	
 func _on_build_shipyard_pressed():
 	start_prebuilding("Shipyard")
 	introduction.text = "This is Shipyard"
 
+func _on_summon_mercenary_pressed():
+	if not is_presummoningmercenary:
+		start_presummoningmercenary("Mercenary")
+	introduction.text = "This is Mercenary"
+
+func _on_turn_count_timer_timeout():
+	$Level_Control/Turn_Display.visible = false
+	
+
 
 func complete_turn():
+	expand_button_text.self_modulate = Color.WHITE
+	build_button_text.self_modulate = Color.WHITE
+	demolish_button_text.self_modulate = Color.WHITE
+	buildship_button_text.self_modulate = Color.WHITE
+	mercenary_button_text.self_modulate = Color.RED
 	Character.current_built_ships = 0
 	main.pathfinder.reload_map_data(main)
 	Level.complete_turn()
@@ -279,3 +336,5 @@ func _on_test_timer_timeout():
 
 func _on_next_level_button_pressed():
 	get_tree().reload_current_scene()
+
+

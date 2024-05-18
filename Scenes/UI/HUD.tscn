@@ -47,7 +47,8 @@ font = ExtResource("1_4g8sv")
 
 [sub_resource type="LabelSettings" id="LabelSettings_emr85"]
 font = ExtResource("1_4g8sv")
-font_size = 18
+font_size = 24
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_2jfs1"]
 font = ExtResource("1_4g8sv")
@@ -230,10 +231,11 @@ theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer2"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 10
 
 [node name="Expand_Button" type="Button" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
+text = " "
 
 [node name="Expand_Text" type="Label" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer/Expand_Button"]
 layout_mode = 1
@@ -248,6 +250,7 @@ horizontal_alignment = 1
 
 [node name="Build_Button" type="Button" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
+text = " "
 
 [node name="Build_Text" type="Label" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer/Build_Button"]
 layout_mode = 1
@@ -262,6 +265,7 @@ horizontal_alignment = 1
 
 [node name="Demolish_Button" type="Button" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
+text = " "
 
 [node name="Demolish_Text" type="Label" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button"]
 layout_mode = 1
@@ -276,6 +280,7 @@ horizontal_alignment = 1
 
 [node name="Buildship_Button" type="Button" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
+text = " "
 
 [node name="Buildship_Text" type="Label" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer/Buildship_Button"]
 layout_mode = 1
@@ -285,6 +290,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Buildship!"
+label_settings = SubResource("LabelSettings_xlshe")
+horizontal_alignment = 1
+
+[node name="Mercenary_Button" type="Button" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = " "
+
+[node name="Mercenary_Text" type="Label" parent="Container/VBoxContainer/MarginContainer2/VBoxContainer/Mercenary_Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Mercenary!"
 label_settings = SubResource("LabelSettings_xlshe")
 horizontal_alignment = 1
 
@@ -363,6 +383,31 @@ layout_mode = 2
 [node name="VBoxContainer3" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList"]
 layout_mode = 2
 
+[node name="MercenaryList" type="HBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MercenaryContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList"]
+layout_mode = 2
+
+[node name="Summon_Mercenary" type="Button" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList/MercenaryContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+icon = ExtResource("4_sa87j")
+expand_icon = true
+
+[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList/MercenaryContainer"]
+layout_mode = 2
+text = "Mercenary"
+label_settings = SubResource("LabelSettings_mvwwi")
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList"]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList"]
+layout_mode = 2
+
 [node name="Introduction" type="Label" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_emr85")
@@ -432,8 +477,10 @@ one_shot = true
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Build_Button" to="." method="_on_build_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Demolish_Button" to="." method="_on_demolish_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Buildship_Button" to="." method="_on_buildship_button_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Mercenary_Button" to="." method="_on_mercenary_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/TurrentContainer/Build_Turrent" to="." method="_on_build_turrent_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/ShipyardContainer/Build_Shipyard" to="." method="_on_build_shipyard_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipContainer/Build_Ship" to="." method="_on_build_ship_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList/MercenaryContainer/Summon_Mercenary" to="." method="_on_summon_mercenary_pressed"]
 [connection signal="timeout" from="Turn_Count_Timer" to="." method="_on_turn_count_timer_timeout"]
 [connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]

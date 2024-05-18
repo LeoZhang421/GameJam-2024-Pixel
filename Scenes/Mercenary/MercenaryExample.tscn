@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://fm7pglodv4q7"]
+
+[ext_resource type="Script" path="res://Scenes/Ships/ShipExample.gd" id="1_dgra7"]
+[ext_resource type="Texture2D" uid="uid://dnyp2v78p72j3" path="res://Assets/Ships/ship_1.png" id="2_blvf6"]
+[ext_resource type="Texture2D" uid="uid://cavlr3ropi11s" path="res://Assets/Ships/ship_1_up.png" id="3_kla48"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ecacv"]
+size = Vector2(56, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_skkqp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_blvf6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kla48")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33p0y"]
+bg_color = Color(0.227451, 0.227451, 0.227451, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ua6n"]
+bg_color = Color(0, 0.776471, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4shl"]
+radius = 180.0
+
+[node name="MercenaryExample" type="Area2D" groups=["Ship"]]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_dgra7")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ecacv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.563725, 0.622093)
+sprite_frames = SubResource("SpriteFrames_skkqp")
+frame_progress = 0.208513
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(80, 15)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = 30.0
+offset_right = 40.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_33p0y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2ua6n")
+step = 1.0
+value = 79.0
+show_percentage = false
+
+[node name="AreaAttack" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="AreaAttackShape" type="CollisionShape2D" parent="AreaAttack"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_p4shl")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
+[connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -1,3 +1,6 @@
 res://Scenes/Main.tscn
 res://Scenes/UI/HUD.tscn
 res://Scripts/pathfinder.gd
+res://Scripts/HUD.gd
+res://Scenes/Ships/ShipExample.gd
+res://Scenes/Mercenary/MercenaryExample.tscn
