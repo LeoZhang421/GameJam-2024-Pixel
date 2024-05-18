@@ -290,7 +290,7 @@ end_location = Vector2(400, 240)
 position = Vector2(630, 450)
 attack_range = 360
 attack_speed = 2.0
-start_location = Vector2(540, 420)
+start_location = Vector2(630, 450)
 
 [node name="ShipLayer" type="Node" parent="."]
 
@@ -303,6 +303,9 @@ end_location = Vector2(400, 700)
 [node name="MerchantLayer" type="Node" parent="."]
 script = ExtResource("7_sh4x1")
 merchant_scene = ExtResource("7_kaxjd")
+
+[node name="TimerA" type="Timer" parent="MerchantLayer"]
+wait_time = 4.0
 
 [node name="HUD" parent="." instance=ExtResource("2_utsvi")]
 
@@ -327,6 +330,7 @@ script = ExtResource("9_b8i5n")
 wait_time = 5.0
 one_shot = true
 
+[connection signal="timeout" from="MerchantLayer/TimerA" to="MerchantLayer" method="_on_timer_a_timeout"]
 [connection signal="finished" from="Music" to="." method="_on_music_finished"]
 [connection signal="finished" from="Sound_Effect" to="." method="_on_sound_effect_finished"]
 [connection signal="finished" from="Pirate_Music" to="." method="_on_pirate_music_finished"]

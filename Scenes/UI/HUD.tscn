@@ -423,7 +423,7 @@ wait_time = 4.0
 one_shot = true
 
 [node name="TestTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 30.0
 one_shot = true
 
 [connection signal="pressed" from="Level_Control/Done_Button" to="." method="_on_done_button_pressed"]

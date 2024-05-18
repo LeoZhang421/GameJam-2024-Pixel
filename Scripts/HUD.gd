@@ -21,8 +21,8 @@ class_name HUD
 @onready var skill_list = $Container/MarginContainer/Skill_List
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#life_value.text = str(main.current_life)
-	#money_value.text = str(main.current_money)
+	life_value.text = str(Character.current_hp)
+	money_value.text = str(Character.gold)
 	level_info.text = "Level " + str(Level.get_current_level())
 	ship_list.visible = false
 	title.text = Level.get_current_phase()
@@ -32,8 +32,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#life_value.text = str(main.current_life)
-	#money_value.text = str(main.current_money)
+	life_value.text = str(Character.current_hp)
+	money_value.text = str(Character.gold)
 	if is_prebuilding:
 		var can_build:bool
 		if pending_scene.is_on_land:
@@ -236,7 +236,8 @@ func _on_done_button_pressed():
 	main.get_node("Pirate_Music").volume_db = 0
 	main.get_node("Pirate_Invasion_Timer").start()
 	$TestTimer.start()
-
+	main.get_node("MerchantLayer").reset(main.pathfinder.get_sail_routes())
+	main.get_node("MerchantLayer").start_action()
 
 func _on_build_ship_pressed():
 	if not is_prebuilding:

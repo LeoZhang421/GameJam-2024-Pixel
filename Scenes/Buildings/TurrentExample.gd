@@ -1,10 +1,11 @@
 class_name Turrent extends Area2D
 
 # control variables
-@export_range(0, 600, 60) var attack_range: int = 4 * 60 # 60像素的倍数
-@export_range(0.0, 10.0) var attack_speed: float = 0.5 # 每秒攻击多少次，越高攻速越快
+@export_range(0, 600, 60) var attack_range: int = 3 * 60 # 60像素的倍数
+@export_range(0.0, 10.0) var attack_speed: float = 1.0 # 每秒攻击多少次，越高攻速越快
 #@export_range(1,20,1) var max_hp: int = 5
-@export_range(1,20,1) var attack: int = 1
+@export_range(1,20,1) var attack: int = 3
+@export var cost: int = 10
 @export var start_location: Vector2 = Vector2(500,500)
 
 # inner variables
@@ -74,6 +75,7 @@ func attack_event() -> void:
 
 func demolish():
 	self.queue_free()
+	Character.add_gold(cost)
 
 # funcion related to signal
 # when enemy Area2D entered attack area

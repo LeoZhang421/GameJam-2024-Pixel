@@ -16,12 +16,10 @@ func _ready():
 	$Camera2D.limit_bottom = (pathfinder.room_borders.size.y - 2) * pathfinder.scale - get_viewport().size.y/2
 	print("Test pathfind: ", pathfinder.find_path(Vector2(0,300), Vector2(1000,700)))
 	print("Sail Routes: ", pathfinder.get_sail_routes())
-	#$MerchantLayer.sail_routes = pathfinder.get_sail_routes()
-	#$MerchantLayer.generate_merchants()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 

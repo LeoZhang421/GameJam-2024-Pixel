@@ -1,10 +1,11 @@
-Button
+AnimationPlayer
 Label
+Timer
+Button
 MarginContainer
 Control
 VBoxContainer
 HBoxContainer
-Timer
 GridContainer
 Node
 Area2D
