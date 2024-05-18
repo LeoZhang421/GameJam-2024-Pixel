@@ -33,6 +33,7 @@ func _ready():
 	$Level_Control/Turn_Display.set_text("Turn " + str(Level.get_current_turn()))
 	$Turn_Count_Timer.start()
 	mercenary_button_text.self_modulate = Color.RED
+	Character.character_die.connect(_on_character_die)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -337,11 +338,17 @@ func complete_turn():
 		main.get_node("Music").play()
 
 
-func _on_test_timer_timeout():
-	complete_turn()
+func _on_character_die():
+	$Level_Control/Turn_Display.set_text("Level Failed!")
+	$Level_Control/Turn_Display.visible = true
+	$Level_Control/Start_Over_Button.visible = true
 
 
 func _on_next_level_button_pressed():
+	Character.reset()
 	get_tree().reload_current_scene()
 
 
+func _on_start_over_button_pressed():
+	Character.reset()
+	get_tree().reload_current_scene()

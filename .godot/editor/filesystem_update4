@@ -12,3 +12,4 @@ res://Scenes/Ships/ShipExample.tscn
 res://Scenes/Buildings/TurrentExample.tscn
 res://Scenes/Ships/ShipExample.gd
 res://Scenes/Buildings/TurrentExample.gd
+res://Scenes/Utility/Monster_Generator.gd

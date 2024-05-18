@@ -1,3 +1,4 @@
+TileMap
 VideoStreamPlayer
 Label
 AudioStreamPlayer
@@ -12,4 +13,3 @@ HBoxContainer
 GridContainer
 Node
 Area2D
-TextureRect

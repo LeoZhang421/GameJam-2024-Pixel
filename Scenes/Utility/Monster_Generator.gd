@@ -2,6 +2,7 @@ extends Node2D
 @onready var monster_list:Array[PackedScene]
 @onready var monster_count:Array[int]
 @onready var monster_waittime:Array[float]
+@export var small_tick:float
 @export var monster_list_1:Array[PackedScene]
 @export var monster_count_1:Array[int]
 @export var monster_waittime_1:Array[float]
@@ -15,6 +16,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(false)
+	$Small_Tick.wait_time = small_tick
 	load_generator()
 
 

@@ -5,6 +5,7 @@
 
 [node name="Monster_Generator" type="Node2D" groups=["Monster_Generator"]]
 script = ExtResource("1_e1qdf")
+small_tick = 1.0
 monster_list_1 = Array[PackedScene]([ExtResource("2_uxdc3")])
 monster_count_1 = Array[int]([10])
 monster_waittime_1 = Array[float]([5.0])
