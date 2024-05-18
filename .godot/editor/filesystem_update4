@@ -1,8 +1,10 @@
-res://Scenes/UI/HUD.tscn
-res://Scripts/Main.gd
 res://Scenes/Main.tscn
+res://Scenes/UI/HUD.tscn
 res://Scenes/Mercenary/MercenaryExample.tscn
 res://Scenes/Utility/Monster_Generator.tscn
-res://README.md
-res://Scenes/Utility/Monster_Generator.gd
+res://Scenes/Start.tscn
+res://Scripts/Start.gd
+res://Scenes/Buildings/ShipyardExample.tscn
+res://Scripts/Character.gd
 res://Scripts/HUD.gd
+res://Scenes/Buildings/ShipyardExample.gd

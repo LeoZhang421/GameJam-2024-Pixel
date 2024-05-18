@@ -1,4 +1,6 @@
+VideoStreamPlayer
 Label
+AudioStreamPlayer
 Sprite2D
 Timer
 AnimationPlayer
@@ -10,5 +12,4 @@ HBoxContainer
 GridContainer
 Node
 Area2D
-AudioStreamPlayer
 TextureRect

@@ -21,7 +21,9 @@ func add_gold(value:int):
 	gold += value
 
 func loss_gold(value:int):
+	var temp = gold
 	gold = max(0, gold-value)
+	return gold >= value
 
 func save_gold(value:int):
 	future_gold += value

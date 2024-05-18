@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GameJam-2024-Pixel"
+config/name="Defense of the AQUA"
 run/main_scene="res://Scenes/Start.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.ico"

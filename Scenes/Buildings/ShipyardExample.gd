@@ -3,6 +3,7 @@ class_name Shipyard extends Area2D
 # control variables
 @export_range(1,20,1) var max_hp: int = 5
 @export var start_location: Vector2 = Vector2(500,500)
+@export var cost:int=20
 
 # inner variables
 var hp: int = 0

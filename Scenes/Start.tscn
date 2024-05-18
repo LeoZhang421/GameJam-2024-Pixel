@@ -1,18 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://bv4jyvenhbrej"]
+[gd_scene load_steps=7 format=3 uid="uid://bv4jyvenhbrej"]
 
 [ext_resource type="Script" path="res://Scripts/Start.gd" id="1_w2tjq"]
 [ext_resource type="FontFile" uid="uid://yb7i6tqe1e6c" path="res://Assets/Fonts/joystix/joystix monospace.otf" id="2_t6ka2"]
+[ext_resource type="AudioStream" uid="uid://bu8rs58jbhf1r" path="res://Assets/Audio/Sound_Effects/开始界面水声（循环）/ocean-waves-112906.mp3" id="3_a4cxf"]
+[ext_resource type="VideoStream" path="res://Assets/Video/Video.ogv" id="4_bspal"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_y5awq"]
 font = ExtResource("2_t6ka2")
 font_size = 48
 
+[sub_resource type="LabelSettings" id="LabelSettings_mt3ro"]
+font = ExtResource("2_t6ka2")
+font_size = 80
+
 [node name="Start" type="Node2D"]
 script = ExtResource("1_w2tjq")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_right = 1920.0
+offset_bottom = 1024.0
+stream = ExtResource("4_bspal")
+autoplay = true
+loop = true
 
 [node name="Start_Button" type="Button" parent="."]
 anchors_preset = 8
@@ -38,4 +47,28 @@ text = "Start!"
 label_settings = SubResource("LabelSettings_y5awq")
 horizontal_alignment = 1
 
+[node name="Title" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -147.0
+offset_right = 264.0
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Defense
+of
+the AQUA"
+label_settings = SubResource("LabelSettings_mt3ro")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_a4cxf")
+volume_db = -25.0
+
 [connection signal="pressed" from="Start_Button" to="." method="_on_start_button_pressed"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

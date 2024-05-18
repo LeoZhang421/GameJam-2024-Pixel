@@ -226,10 +226,13 @@ func expand(position:Vector2):
 	if not main.pathfinder.is_shallow_water(position):
 		pass
 	else:
-		main.tile_map.erase_cell(0, main.pathfinder.get_standard_position(position))
-		main.tile_map.set_cells_terrain_connect(1, [main.pathfinder.get_standard_position(position)], 0, 0)
-		main.pathfinder.maze_update("ground", position)
-		stop_preexpanding()
+		if Character.loss_gold(20):
+			main.tile_map.erase_cell(0, main.pathfinder.get_standard_position(position))
+			main.tile_map.set_cells_terrain_connect(1, [main.pathfinder.get_standard_position(position)], 0, 0)
+			main.pathfinder.maze_update("ground", position)
+			stop_preexpanding()
+		else:
+			pass
 		
 func demolish(position:Vector2):
 	if not main.pathfinder.is_building(position):
