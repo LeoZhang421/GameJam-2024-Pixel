@@ -342,25 +342,17 @@ func get_next_route(result:Array, position:Vector2, parent_position:=Vector2(-1,
 # 判断当前位置是否是可扩展的近海地块，传入全局坐标
 func is_shallow_water(position:Vector2):
 	var temp = get_standard_position(position)
-	#if temp.x >= maze.size():
-		#temp.x -= 1
-	#if temp.y >= maze[0].size():
-		#temp.y -= 1
 	if maze[temp.x][temp.y] != 0:
 		return false
-	if temp.x == 0:
-		if temp.y == 0:
-			return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2 && not maze[temp.x][temp.y]
-		if temp.y == maze[0].size() - 1:
-			return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 && not maze[temp.x][temp.y]
-		return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 || maze[temp.x][temp.y + 1] % 2 && not maze[temp.x][temp.y]
-	if temp.x == maze.size() - 1:
-		if temp.y == 0:
-			return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2 && not maze[temp.x][temp.y]
-		if temp.y == maze[0].size() - 1:
-			return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 && not maze[temp.x][temp.y]
-		return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 || maze[temp.x][temp.y + 1] % 2 && not maze[temp.x][temp.y]
-	return maze[temp.x + 1][temp.y] % 2 || maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2 || maze[temp.x][temp.y - 1] % 2 && not maze[temp.x][temp.y]
+	var directions = DIRECTIONS_MANHATTAN.duplicate()
+	var result = false
+	for direction in directions:
+		var target = temp + direction
+		if is_valid(target.x, target.y):
+			result = result || maze[target.x][target.y] % 2
+		else:
+			continue
+	return result
 	
 # 判断当前位置是否是不可扩展的深海地块，传入全局坐标
 func is_deep_water(position:Vector2):
