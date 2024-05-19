@@ -126,7 +126,7 @@ func is_valid(row, col):
  
 # Check if a cell is unblocked
 func is_unblocked(grid, row, col):
-	return grid[row][col] != 1 && grid[row][col] != 3
+	return grid[row][col] == 0 || grid[row][col] == 2
  
 # Check if a cell is the destination
 func is_destination(row, col, dest):
@@ -164,6 +164,7 @@ func trace_path(cell_details, dest):
  
 # Implement the A* search algorithm
 func astar(grid, src, dest):
+	var test_start_time = Time.get_time_dict_from_system()
 	var steps = 0
 	# Check if the source and destination are valid
 	if not is_valid(src[0], src[1]) or not is_valid(dest[0], dest[1]):
@@ -238,6 +239,8 @@ func astar(grid, src, dest):
 					# Trace and print the path from source to destination
 					var result = trace_path(cell_details, dest)
 					found_dest = true
+					var test_end_time = Time.get_time_dict_from_system()
+					print("%02d:%02d" % [test_end_time.minute - test_start_time.minute, test_end_time.second - test_start_time.second])
 					return result
 				else:
 					# Calculate the new f, g, and h values

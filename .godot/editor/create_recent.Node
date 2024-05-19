@@ -1,7 +1,10 @@
 AudioStreamPlayer
+<<<<<<< Updated upstream
 AudioStreamPlayer2D
 AnimationTree
 AnimationPlayer
+=======
+>>>>>>> Stashed changes
 TileMap
 Sprite2D
 Node2D

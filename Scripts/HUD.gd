@@ -24,6 +24,7 @@ class_name HUD
 @onready var skill_list = $Container/MarginContainer/Skill_List
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Start_Sound.play()
 	$Level_Control/Turn_Display.label_settings.font_size = 100
 	life_value.text = str(Character.current_hp)
 	money_value.text = str(Character.gold)
@@ -97,6 +98,7 @@ func _on_expand_button_pressed():
 			start_preexpanding()
 		else:
 			stop_preexpanding()
+	introduction.text = "This is Expand"
 
 func _on_build_button_pressed():
 	if Level.get_current_phase() == "preparation":
@@ -113,6 +115,7 @@ func _on_demolish_button_pressed():
 			start_predemolishing()
 		else:
 			stop_predemolishing()
+	introduction.text = "This is Demolish"
 		
 func _on_buildship_button_pressed():
 	if Level.get_current_phase() == "preparation":
@@ -136,6 +139,7 @@ func start_prebuilding(building_name:String):
 	is_prebuilding = true
 	build_button_text.text = "Cancel!"
 	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/" + building_name + "Container/Build_" + building_name).icon
+	main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 	pending_scene = load("res://Scenes/Buildings/" + building_name + "Example.tscn").instantiate()
 
@@ -184,6 +188,7 @@ func start_prebuildingship(ship_name:String):
 	is_prebuildingship = true
 	buildship_button_text.text = "Cancel!"
 	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/" + ship_name + "Container/Build_" + ship_name).icon
+	main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 	pending_scene = load("res://Scenes/Ships/" + ship_name + "Example.tscn").instantiate()
 
@@ -197,6 +202,7 @@ func start_presummoningmercenary(mercenary_name:String):
 	is_presummoningmercenary = true
 	mercenary_button_text.text = "Cancel!"
 	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList/" + mercenary_name + "Container/Summon_" + mercenary_name).icon
+	main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 	pending_scene = load("res://Scenes/Mercenary/" + mercenary_name + "Example.tscn").instantiate()
 
@@ -224,6 +230,7 @@ func build(building_scene:Object, position:Vector2):
 			main.get_node("BuildingLayer").add_child(building)
 			main.pathfinder.maze_add_building(position)
 			stop_prebuilding()
+			$Build_Sound.play()
 		
 func expand(position:Vector2):
 	if not main.pathfinder.is_shallow_water(position):
@@ -247,6 +254,7 @@ func demolish(position:Vector2):
 				break
 		main.pathfinder.delete_building(position)
 		stop_predemolishing()
+		$Demolish_Sound.play()
 		
 func buildship(ship_scene:Object, position:Vector2):
 		if Character.current_built_ships >= Character.max_buildable_ships:
@@ -330,9 +338,11 @@ func complete_turn():
 			$Level_Control/Turn_Display.label_settings.font_size = 48
 			$Level_Control/Turn_Display.visible = true
 			$Level_Control/Credits.visible = true
-		$Level_Control/Turn_Display.set_text("Victory!")
-		$Level_Control/Turn_Display.visible = true
-		$Level_Control/Next_Level_Button.visible = true
+		else:
+			$Level_Control/Turn_Display.set_text("Victory!")
+			$Level_Control/Turn_Display.visible = true
+			$Level_Control/Next_Level_Button.visible = true
+		$Victory_Sound.play()
 	else:
 		title.text = Level.get_current_phase()
 		done.visible = (Level.get_current_phase() == "preparation")
@@ -348,6 +358,7 @@ func _on_character_die():
 	$Level_Control/Turn_Display.set_text("Level Failed!")
 	$Level_Control/Turn_Display.visible = true
 	$Level_Control/Start_Over_Button.visible = true
+	$Fail_Sound.play()
 
 
 func _on_next_level_button_pressed():
