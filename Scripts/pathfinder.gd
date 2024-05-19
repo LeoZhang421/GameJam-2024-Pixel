@@ -16,6 +16,8 @@ var sail_history:Array
 var sail_routes:Array
 var harbour_history:Array
 var enemy_spawn_history:Array
+var closed_list = []
+var cell_details = []
 
 # 地块表征参数：
 # 0：未占用水域
@@ -58,6 +60,12 @@ func _init(s:Object, new_debug := false):
 	maze = maze_original
 	reload_map_data(s)
 	initialize_sail_routes()
+	for i in ROW:
+		closed_list.append([])
+		cell_details.append([])
+		for j in COL:
+			closed_list[i].append(false)
+			cell_details[i].append(Pathfinding_Node.new())
 
 
 # 等效于tilemap的map_to_local方法
@@ -144,10 +152,10 @@ func trace_path(cell_details, dest):
 	var col = dest[1]
  
 	# Trace the path from destination to source using parent cells
-	while not (cell_details[row][col].parent.x == row and cell_details[row][col].parent.y == col):
+	while not (cell_details[row][col].parent_x == row and cell_details[row][col].parent_y == col):
 		path.append(Vector2(row, col))
-		var temp_row = cell_details[row][col].parent.x
-		var temp_col = cell_details[row][col].parent.y
+		var temp_row = cell_details[row][col].parent_x
+		var temp_col = cell_details[row][col].parent_y
 		row = temp_row
 		col = temp_col
  
@@ -183,23 +191,24 @@ func astar(grid, src, dest):
  
 	# Initialize the closed list (visited cells)
 	# Initialize the details of each cell
-	var closed_list = []
-	var cell_details = []
-	for i in ROW:
-		closed_list.append([])
-		cell_details.append([])
-		for j in COL:
-			closed_list[i].append(false)
-			cell_details[i].append(Pathfinding_Node.new())
- 
+	#var closed_list = []
+	#var cell_details = []
+	#for i in ROW:
+		#closed_list.append([])
+		#cell_details.append([])
+		#for j in COL:
+			#closed_list[i].append(false)
+			#cell_details[i].append(Pathfinding_Node.new())
+	var test_end_time = Time.get_time_dict_from_system()
+	print("%02d:%02d" % [test_end_time.minute - test_start_time.minute, test_end_time.second - test_start_time.second])
 	# Initialize the start cell details
 	var i = src[0]
 	var j = src[1]
 	cell_details[i][j].f = 0
 	cell_details[i][j].g = 0
 	cell_details[i][j].h = 0
-	cell_details[i][j].parent.x = i
-	cell_details[i][j].parent.y = j
+	cell_details[i][j].parent_x = i
+	cell_details[i][j].parent_y = j
  
 	# Initialize the open list (cells to be visited) with the start cell
 	var open_list = []
@@ -233,14 +242,12 @@ func astar(grid, src, dest):
 				# If the successor is the destination
 				if is_destination(new_i, new_j, dest):
 					# Set the parent of the destination cell
-					cell_details[new_i][new_j].parent.x = i
-					cell_details[new_i][new_j].parent.y = j
+					cell_details[new_i][new_j].parent_x = i
+					cell_details[new_i][new_j].parent_y = j
 					print("The destination cell is found")
 					# Trace and print the path from source to destination
 					var result = trace_path(cell_details, dest)
 					found_dest = true
-					var test_end_time = Time.get_time_dict_from_system()
-					print("%02d:%02d" % [test_end_time.minute - test_start_time.minute, test_end_time.second - test_start_time.second])
 					return result
 				else:
 					# Calculate the new f, g, and h values
@@ -258,8 +265,8 @@ func astar(grid, src, dest):
 						cell_details[new_i][new_j].f = f_new
 						cell_details[new_i][new_j].g = g_new
 						cell_details[new_i][new_j].h = h_new
-						cell_details[new_i][new_j].parent.x = i
-						cell_details[new_i][new_j].parent.y = j
+						cell_details[new_i][new_j].parent_x = i
+						cell_details[new_i][new_j].parent_y = j
  
 	# If the destination is not found after visiting all cells
 	if not found_dest:

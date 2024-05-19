@@ -13,3 +13,5 @@ res://Scenes/Map/level_02.tscn
 res://Scenes/Map/level_03.tscn
 res://Scripts/HUD.gd
 res://Scripts/pathfinder.gd
+res://Scenes/Mercenary/MercenaryExample.gd
+res://Scripts/pathfinding_node.gd
