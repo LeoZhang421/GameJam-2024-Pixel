@@ -23,21 +23,6 @@ animations = [{
 "speed": 3.0
 }]
 
-[sub_resource type="Animation" id="Animation_vq00y"]
-resource_name = "sink"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.5, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_513e5"]
 length = 0.001
 tracks/0/type = "value"
@@ -51,6 +36,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vq00y"]
+resource_name = "sink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nm1qa"]
@@ -113,6 +113,8 @@ shape = SubResource("CircleShape2D_t0llh")
 
 [node name="AttackTimer" type="Timer" parent="."]
 
+[node name="RerouteTimer" type="Timer" parent="."]
+
 [node name="ExplodeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7bvhr")
 
@@ -122,3 +124,4 @@ stream = ExtResource("5_csdv5")
 [connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
 [connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="RerouteTimer" to="." method="_on_reroute_timer_timeout"]

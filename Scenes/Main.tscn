@@ -303,7 +303,6 @@ max_hp = 60
 attack = 1
 attack_range = 360
 start_location = Vector2(200, 500)
-end_location = Vector2(700, 500)
 
 [node name="EnemyExample2" parent="EnemyLayer" instance=ExtResource("5_qx87c")]
 position = Vector2(400, 500)
@@ -311,7 +310,6 @@ move_speed = 25
 max_hp = 60
 attack = 1
 start_location = Vector2(1000, 500)
-end_location = Vector2(400, 500)
 
 [node name="BuildingLayer" type="Node" parent="."]
 
