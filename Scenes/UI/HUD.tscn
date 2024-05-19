@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://comy3j8oaolau"]
+[gd_scene load_steps=30 format=3 uid="uid://comy3j8oaolau"]
 
 [ext_resource type="FontFile" uid="uid://yb7i6tqe1e6c" path="res://Assets/Fonts/joystix/joystix monospace.otf" id="1_4g8sv"]
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_wjan7"]
@@ -10,6 +10,10 @@
 [ext_resource type="AudioStream" uid="uid://ds01s3geygkoq" path="res://Assets/Audio/Sound_Effects/关卡开始/pleasant-violin-notification-1-186535.mp3" id="8_p51vf"]
 [ext_resource type="AudioStream" uid="uid://nkvpgc6y5727" path="res://Assets/Audio/Sound_Effects/关卡胜利/tada-military-3-183975.mp3" id="9_mvq76"]
 [ext_resource type="AudioStream" uid="uid://eduu1etdumbp" path="res://Assets/Audio/Sound_Effects/关卡失败/spooky-movement-violin-5-186909.mp3" id="10_tqpbt"]
+[ext_resource type="AudioStream" uid="uid://bdy3w6u1ykdww" path="res://Assets/Audio/Sound_Effects/战斗开始/percussive-drum-hit-3-189790.mp3" id="11_ynki5"]
+[ext_resource type="AudioStream" uid="uid://b485rkx2p6pwp" path="res://Assets/Audio/Sound_Effects/战斗胜利/tada-military-1-183974.mp3" id="12_3s5et"]
+[ext_resource type="AudioStream" uid="uid://dar1eqge3jggq" path="res://Assets/Audio/Sound_Effects/船只建造、船只快速传送/underwater-movement-whoosh-3-186900.mp3" id="13_n8h23"]
+[ext_resource type="AudioStream" uid="uid://7qxw1ak78kuv" path="res://Assets/Audio/Sound_Effects/非法操作/error-5-199276.mp3" id="14_elbbm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rf5nv"]
 font = ExtResource("1_4g8sv")
@@ -550,6 +554,20 @@ volume_db = -5.0
 [node name="Fail_Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_tqpbt")
 volume_db = -10.0
+
+[node name="Combat_Start_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_ynki5")
+
+[node name="Combat_Victory_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_3s5et")
+volume_db = -5.0
+
+[node name="Buildship_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_n8h23")
+volume_db = 5.0
+
+[node name="Error_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_elbbm")
 
 [connection signal="pressed" from="Level_Control/Done_Button" to="." method="_on_done_button_pressed"]
 [connection signal="pressed" from="Level_Control/Next_Level_Button" to="." method="_on_next_level_button_pressed"]

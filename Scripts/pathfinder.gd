@@ -16,8 +16,8 @@ var sail_history:Array
 var sail_routes:Array
 var harbour_history:Array
 var enemy_spawn_history:Array
-var closed_list = []
-var cell_details = []
+var closed_list_original = []
+var cell_details_original = []
 
 # 地块表征参数：
 # 0：未占用水域
@@ -61,11 +61,11 @@ func _init(s:Object, new_debug := false):
 	reload_map_data(s)
 	initialize_sail_routes()
 	for i in ROW:
-		closed_list.append([])
-		cell_details.append([])
+		closed_list_original.append([])
+		cell_details_original.append([])
 		for j in COL:
-			closed_list[i].append(false)
-			cell_details[i].append(Pathfinding_Node.new())
+			closed_list_original[i].append(false)
+			cell_details_original[i].append(Pathfinding_Node.new())
 
 
 # 等效于tilemap的map_to_local方法
@@ -204,6 +204,8 @@ func astar(grid, src, dest):
 	# Initialize the start cell details
 	var i = src[0]
 	var j = src[1]
+	var cell_details = cell_details_original.duplicate(true)
+	var closed_list = closed_list_original.duplicate(true)
 	cell_details[i][j].f = 0
 	cell_details[i][j].g = 0
 	cell_details[i][j].h = 0
@@ -259,7 +261,6 @@ func astar(grid, src, dest):
 					if cell_details[new_i][new_j].f == float('inf') or cell_details[new_i][new_j].f > f_new:
 						# Add the cell to the open list
 						steps += 1
-						print(steps)
 						open_list.append([f_new, new_i, new_j])
 						# Update the cell details
 						cell_details[new_i][new_j].f = f_new

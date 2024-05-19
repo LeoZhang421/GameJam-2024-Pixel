@@ -41,6 +41,7 @@ func _ready():
 func _process(delta):
 	life_value.text = str(Character.current_hp)
 	money_value.text = str(Character.gold)
+	
 	if is_prebuilding:
 		var can_build:bool
 		if pending_scene.is_on_land:
@@ -48,49 +49,53 @@ func _process(delta):
 		else:
 			can_build = main.pathfinder.is_shallow_water(main.get_global_mouse_position())
 		if can_build:
-			print("can build!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(0,1,0,0.5)
 			if Input.is_action_just_pressed("click"):
 				build(pending_scene, main.get_global_mouse_position())
 		else:
-			print("cannot build!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
+			if Input.is_action_just_pressed("click"):
+				build(pending_scene, main.get_global_mouse_position())
+			
 	if is_preexpanding:
 		if main.pathfinder.is_shallow_water(main.get_global_mouse_position()):
-			print("can expand!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(0,1,0,0.5)
 			if Input.is_action_just_pressed("click"):
 				expand(main.get_global_mouse_position())
 		else:
-			print("cannot expand!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
+			if Input.is_action_just_pressed("click"):
+				build(pending_scene, main.get_global_mouse_position())
+			
 	if is_predemolishing:
 		if main.pathfinder.is_building(main.get_global_mouse_position()):
-			print("can demolish!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(0,1,0,0.5)
 			if Input.is_action_just_pressed("click"):
 				demolish(main.get_global_mouse_position())
 		else:
-			print("cannot demolish!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
+			if Input.is_action_just_pressed("click"):
+				build(pending_scene, main.get_global_mouse_position())
+			
 	if is_prebuildingship:
 		if main.pathfinder.is_shallow_water(main.get_global_mouse_position()) || main.pathfinder.is_deep_water(main.get_global_mouse_position()):
-			print("can buildship!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(0,1,0,0.5)
 			if Input.is_action_just_pressed("click"):
 				buildship(pending_scene, main.get_global_mouse_position())
 		else:
-			print("cannot buildship!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
+			if Input.is_action_just_pressed("click"):
+				build(pending_scene, main.get_global_mouse_position())
+			
 	if is_presummoningmercenary:
 		if main.pathfinder.is_shallow_water(main.get_global_mouse_position()) || main.pathfinder.is_deep_water(main.get_global_mouse_position()):
-			print("can summon mercenary!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(0,1,0,0.5)
 			if Input.is_action_just_pressed("click"):
 				summonmercenary(pending_scene, main.get_global_mouse_position())
 		else:
-			print("cannot summon mercenary!")
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
+			if Input.is_action_just_pressed("click"):
+				build(pending_scene, main.get_global_mouse_position())
 
 func _on_expand_button_pressed():
 	if Level.get_current_phase() == "preparation":
@@ -119,6 +124,7 @@ func _on_demolish_button_pressed():
 		
 func _on_buildship_button_pressed():
 	if Level.get_current_phase() == "preparation":
+		stop_prebuilding()
 		stop_preexpanding()
 		stop_predemolishing()
 		ship_list.visible = !ship_list.visible
@@ -222,7 +228,7 @@ func build(building_scene:Object, position:Vector2):
 	else:
 		can_build = main.pathfinder.is_shallow_water(position)
 	if not can_build:
-		pass
+		$Error_Sound.play()
 	else:
 		if Character.loss_gold(building_scene.cost):
 			var building = building_scene
@@ -231,10 +237,12 @@ func build(building_scene:Object, position:Vector2):
 			main.pathfinder.maze_add_building(position)
 			stop_prebuilding()
 			$Build_Sound.play()
+		else:
+			$Error_Sound.play()
 		
 func expand(position:Vector2):
 	if not main.pathfinder.is_shallow_water(position):
-		pass
+		$Error_Sound.play()
 	else:
 		if Character.loss_gold(20):
 			main.tile_map.erase_cell(0, main.pathfinder.get_standard_position(position))
@@ -242,11 +250,11 @@ func expand(position:Vector2):
 			main.pathfinder.maze_update("ground", position)
 			stop_preexpanding()
 		else:
-			pass
+			$Error_Sound.play()
 		
 func demolish(position:Vector2):
 	if not main.pathfinder.is_building(position):
-		pass
+		$Error_Sound.play()
 	else:
 		for i in main.get_node("BuildingLayer").get_children():
 			if i.global_position  == main.pathfinder.get_tile_center(position):
@@ -258,7 +266,7 @@ func demolish(position:Vector2):
 		
 func buildship(ship_scene:Object, position:Vector2):
 		if Character.current_built_ships >= Character.max_buildable_ships:
-			pass
+			$Error_Sound.play()
 		else:
 			if Character.loss_gold(ship_scene.cost):
 				var ship = ship_scene
@@ -267,14 +275,22 @@ func buildship(ship_scene:Object, position:Vector2):
 				main.pathfinder.maze_add_ship(position)
 				stop_prebuildingship()
 				Character.current_built_ships += 1
+				$Buildship_Sound.play()
+			else:
+				$Error_Sound.play()
 			
 func summonmercenary(mercenary_scene:Object, position:Vector2):
-	if Character.loss_gold(mercenary_scene.cost):
-		var mercenary = mercenary_scene
-		mercenary.start_location = main.pathfinder.get_tile_center(position)
-		main.get_node("ShipLayer").add_child(mercenary)
-		main.pathfinder.maze_add_ship(position)
-		stop_presummoningmercenary()
+	if main.pathfinder.is_shallow_water(main.get_global_mouse_position()) || main.pathfinder.is_deep_water(main.get_global_mouse_position()):
+		if Character.loss_gold(mercenary_scene.cost):
+			var mercenary = mercenary_scene
+			mercenary.start_location = main.pathfinder.get_tile_center(position)
+			main.get_node("ShipLayer").add_child(mercenary)
+			main.pathfinder.maze_add_ship(position)
+			stop_presummoningmercenary()
+		else:
+			$Error_Sound.play()
+	else:
+		$Error_Sound.play()
 
 
 func _on_build_turrent_pressed():
@@ -300,8 +316,12 @@ func _on_done_button_pressed():
 	main.get_node("Pirate_Invasion_Timer").start()
 	main.get_node("MerchantLayer").reset(main.pathfinder.get_sail_routes())
 	main.get_node("MerchantLayer").start_action()
+	for i in main.get_children():
+		if i.is_in_group("UI"):
+			i.visible = false
 	for i in main.monster_generator:
 		i.start_generating()
+	$Combat_Start_Sound.play()
 
 func _on_build_ship_pressed():
 	if not is_prebuildingship:
@@ -352,6 +372,10 @@ func complete_turn():
 		main.get_node("Pirate_Music").fade_out()
 		main.get_node("Music").volume_db = -10
 		main.get_node("Music").play()
+		for i in main.get_children():
+			if i.is_in_group("UI"):
+				i.visible = true
+		$Combat_Victory_Sound.play()
 
 
 func _on_character_die():

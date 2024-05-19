@@ -15,3 +15,6 @@ res://Scripts/HUD.gd
 res://Scripts/pathfinder.gd
 res://Scenes/Mercenary/MercenaryExample.gd
 res://Scripts/pathfinding_node.gd
+res://Scenes/Cursor.tscn
+res://Scenes/Utility/dialogue.tscn
+res://Scenes/Ships/ShipExample.gd

@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpybl8el4dv7p"]
+
+[ext_resource type="Script" path="res://Scenes/Utility/dialogue.gd" id="1_304di"]
+[ext_resource type="Texture2D" uid="uid://dge0h0cki1w2p" path="res://Scenes/Utility/dialogue_sample.png" id="2_tnly5"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_304di")
+dialogue_path = "res://Dialogue/"
+portrait_path = "res://Assets/View/Dialogue/"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 2
+
+[node name="Player" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_tnly5")
+
+[node name="NPC" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_tnly5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -120.0
+offset_right = 300.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.105882, 0.105882, 0.105882, 0.458824)
+
+[node name="Name" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 2
+offset_left = 5.0
+offset_right = 595.0
+offset_bottom = 20.0
+scroll_active = false
+
+[node name="Text" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = 20.0
+offset_right = 595.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="ColorRect/Text"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -188.0
+offset_top = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Press \"E\" to continue......"
+
+[node name="Timer" type="Timer" parent="."]
