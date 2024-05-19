@@ -8,9 +8,9 @@ var monster_generator = []
 func _ready():
 	set_process(false)
 	current_level = Level.current_level
-	tile_map = get_node("TileMap_Test1")
-	#var map_scene = load("res://Scenes/Map/level_0" + str(current_level) + ".tscn")
-	#tile_map = map_scene.instantiate()
+	#tile_map = get_node("TileMap_Test1")
+	var map_scene = load("res://Scenes/Map/level_0" + str(current_level) + ".tscn")
+	tile_map = map_scene.instantiate()
 	add_child(tile_map)
 	for i in tile_map.get_children():
 		if i.is_in_group("Monster_Generator"):
