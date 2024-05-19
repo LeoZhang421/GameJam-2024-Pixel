@@ -51,23 +51,32 @@ func _ready():
 
 func _process(delta):
 	if Level.get_current_phase() == "action":
-		if not mouse_await and mouse_inside and Input.is_action_just_pressed("click"):
+		if not Character.moving_ship and mouse_inside and Input.is_action_just_pressed("click"):
+			print("moving", self)
 			main = get_tree().get_root().get_node("Main")
 			mouse_await = true
+			Character.moving_ship = true
 			moving = false
 			var cursor_texture = load("res://Assets/Utility/Select_Cursor_0001.png")
 			main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
 			main.get_node("Cursor/Sprite2D").texture = cursor_texture
-		if mouse_await and not mouse_inside and Input.is_action_just_pressed("click"):
+		if Character.moving_ship and mouse_await and not mouse_inside and Input.is_action_just_pressed("click"):
+			print("moving2", self)
 			main = get_tree().get_root().get_node("Main")
-			mouse_await = false
 			moving = true
 			var move_location = get_global_mouse_position()
-			move_array = main.pathfinder.find_path(position, move_location)
+			print(position, move_location)
 			movement = 0
 			current_index = 0
 			main.get_node("Cursor/Sprite2D").texture = null
 			main.get_node("Cursor/Sprite2D").scale = Vector2(1, 1)
+			mouse_await = false
+			Character.moving_ship = false
+			var temp = main.pathfinder.find_path(position, move_location)
+			if temp:
+				move_array = temp
+			else:
+				move_array = []
 		if moving and move_array:
 			if current_index >= move_array.size()-1:
 				moving = false
