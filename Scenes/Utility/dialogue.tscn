@@ -1,33 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpybl8el4dv7p"]
+[gd_scene load_steps=2 format=3 uid="uid://cpybl8el4dv7p"]
 
 [ext_resource type="Script" path="res://Scenes/Utility/dialogue.gd" id="1_304di"]
-[ext_resource type="Texture2D" uid="uid://dge0h0cki1w2p" path="res://Scenes/Utility/dialogue_sample.png" id="2_tnly5"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_304di")
 dialogue_path = "res://Dialogue/"
 portrait_path = "res://Assets/View/Dialogue/"
-
-[node name="GridContainer" type="GridContainer" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -300.0
-offset_top = -200.0
-offset_right = 300.0
-grow_horizontal = 2
-grow_vertical = 0
-columns = 2
-
-[node name="Player" type="TextureRect" parent="GridContainer"]
-layout_mode = 2
-texture = ExtResource("2_tnly5")
-
-[node name="NPC" type="TextureRect" parent="GridContainer"]
-layout_mode = 2
-texture = ExtResource("2_tnly5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 7

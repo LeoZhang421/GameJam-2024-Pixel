@@ -33,8 +33,9 @@ var cell_details_original = []
 # 直接传入tile_map，debug模式默认关闭
 func _init(s:Object, new_debug := false):
 	# 初始化maze
-	ROW = s.tile_map.get_viewport().size.x
-	COL = s.tile_map.get_viewport().size.y
+	scale = s.tile_map.tile_set.tile_size.x
+	ROW = s.tile_map.get_used_rect().size.x
+	COL = s.tile_map.get_used_rect().size.y
 	for x in ROW:
 		var maze_column : Array = []
 		maze_column.resize(COL)
@@ -54,18 +55,11 @@ func _init(s:Object, new_debug := false):
 	for enemy_spawn_position in enemy_spawn_history:
 		maze_original[enemy_spawn_position.x][enemy_spawn_position.y] = 4
 	debug = new_debug
-	scale = s.tile_map.tile_set.tile_size.x
 	room_borders.position = Vector2.ZERO
 	room_borders.size = Vector2(s.tile_map.get_used_rect().size)
 	maze = maze_original
 	reload_map_data(s)
 	initialize_sail_routes()
-	for i in ROW:
-		closed_list_original.append([])
-		cell_details_original.append([])
-		for j in COL:
-			closed_list_original[i].append(false)
-			cell_details_original[i].append(Pathfinding_Node.new())
 
 
 # 等效于tilemap的map_to_local方法
@@ -134,7 +128,7 @@ func is_valid(row, col):
  
 # Check if a cell is unblocked
 func is_unblocked(grid, row, col):
-	return grid[row][col] == 0 || grid[row][col] == 2 || grid[row][col] == 8
+	return grid[row][col] == 0 || grid[row][col] == 2 || grid[row][col] == 8 || grid[row][col] == 3
  
 # Check if a cell is the destination
 func is_destination(row, col, dest):
@@ -191,21 +185,17 @@ func astar(grid, src, dest):
  
 	# Initialize the closed list (visited cells)
 	# Initialize the details of each cell
-	#var closed_list = []
-	#var cell_details = []
-	#for i in ROW:
-		#closed_list.append([])
-		#cell_details.append([])
-		#for j in COL:
-			#closed_list[i].append(false)
-			#cell_details[i].append(Pathfinding_Node.new())
-	var test_end_time = Time.get_time_dict_from_system()
-	print("%02d:%02d" % [test_end_time.minute - test_start_time.minute, test_end_time.second - test_start_time.second])
+	var closed_list = []
+	var cell_details = []
+	for i in ROW:
+		closed_list.append([])
+		cell_details.append([])
+		for j in COL:
+			closed_list[i].append(false)
+			cell_details[i].append(Pathfinding_Node.new())
 	# Initialize the start cell details
 	var i = src[0]
 	var j = src[1]
-	var cell_details = cell_details_original.duplicate(true)
-	var closed_list = closed_list_original.duplicate(true)
 	cell_details[i][j].f = 0
 	cell_details[i][j].g = 0
 	cell_details[i][j].h = 0

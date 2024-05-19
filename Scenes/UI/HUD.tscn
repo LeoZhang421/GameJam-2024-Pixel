@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://comy3j8oaolau"]
+[gd_scene load_steps=31 format=3 uid="uid://comy3j8oaolau"]
 
 [ext_resource type="FontFile" uid="uid://yb7i6tqe1e6c" path="res://Assets/Fonts/joystix/joystix monospace.otf" id="1_4g8sv"]
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_wjan7"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://b485rkx2p6pwp" path="res://Assets/Audio/Sound_Effects/战斗胜利/tada-military-1-183974.mp3" id="12_3s5et"]
 [ext_resource type="AudioStream" uid="uid://dar1eqge3jggq" path="res://Assets/Audio/Sound_Effects/船只建造、船只快速传送/underwater-movement-whoosh-3-186900.mp3" id="13_n8h23"]
 [ext_resource type="AudioStream" uid="uid://7qxw1ak78kuv" path="res://Assets/Audio/Sound_Effects/非法操作/error-5-199276.mp3" id="14_elbbm"]
+[ext_resource type="AudioStream" uid="uid://dqyjy86jar345" path="res://Assets/Audio/Sound_Effects/雇佣兵招募/liquid-whoosh-3-185332.mp3" id="15_ui7k8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rf5nv"]
 font = ExtResource("1_4g8sv")
@@ -568,6 +569,10 @@ volume_db = 5.0
 
 [node name="Error_Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_elbbm")
+
+[node name="Summon_Mercenary_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_ui7k8")
+volume_db = -10.0
 
 [connection signal="pressed" from="Level_Control/Done_Button" to="." method="_on_done_button_pressed"]
 [connection signal="pressed" from="Level_Control/Next_Level_Button" to="." method="_on_next_level_button_pressed"]

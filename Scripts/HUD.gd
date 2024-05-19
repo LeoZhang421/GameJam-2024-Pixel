@@ -287,6 +287,7 @@ func summonmercenary(mercenary_scene:Object, position:Vector2):
 			main.get_node("ShipLayer").add_child(mercenary)
 			main.pathfinder.maze_add_ship(position)
 			stop_presummoningmercenary()
+			$Summon_Mercenary_Sound.play()
 		else:
 			$Error_Sound.play()
 	else:

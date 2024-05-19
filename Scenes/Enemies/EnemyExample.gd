@@ -7,7 +7,7 @@ class_name Enemy extends Area2D
 @export_range(0.0, 10.0) var attack_speed: float = 1.0 # 每秒攻击多少次，越高攻速越快
 @export_range(0, 600, 60) var attack_range: int = 3 * 60 # 60像素的倍数
 @export_range(0.0, 0.5, 1.0) var collide_damage: float = 0.5 #撞击时造成多少倍当前hp的伤害
-@export var start_location: Vector2 = Vector2(500,500)
+@export var start_location: Vector2 = Vector2(1000,500)
 
 # inner variables
 var hp: int = 0

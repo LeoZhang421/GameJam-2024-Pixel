@@ -113,13 +113,13 @@ shape = SubResource("CircleShape2D_t0llh")
 
 [node name="AttackTimer" type="Timer" parent="."]
 
-[node name="RerouteTimer" type="Timer" parent="."]
-
 [node name="ExplodeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7bvhr")
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_csdv5")
+
+[node name="RerouteTimer" type="Timer" parent="."]
 
 [connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
 [connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]

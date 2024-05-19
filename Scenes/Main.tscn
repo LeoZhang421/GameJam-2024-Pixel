@@ -267,7 +267,7 @@ layer_4/tile_data = PackedInt32Array(196637, 65536, 13)
 position = Vector2(630, 450)
 attack_range = 360
 attack_speed = 2.0
-attack = 10
+attack = 1
 start_location = Vector2(630, 450)
 
 [node name="ShipExample" parent="TileMap_Test1" instance=ExtResource("5_kow21")]
@@ -285,7 +285,7 @@ attack = 1
 start_location = Vector2(500, 200)
 
 [node name="Monster_Generator" parent="TileMap_Test1" instance=ExtResource("5_ylbvp")]
-position = Vector2(500, 500)
+position = Vector2(1000, 500)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(780, 510)
@@ -309,7 +309,6 @@ position = Vector2(400, 500)
 move_speed = 25
 max_hp = 60
 attack = 1
-start_location = Vector2(1000, 500)
 
 [node name="BuildingLayer" type="Node" parent="."]
 
