@@ -342,6 +342,10 @@ func get_next_route(result:Array, position:Vector2, parent_position:=Vector2(-1,
 # 判断当前位置是否是可扩展的近海地块，传入全局坐标
 func is_shallow_water(position:Vector2):
 	var temp = get_standard_position(position)
+	#if temp.x >= maze.size():
+		#temp.x -= 1
+	#if temp.y >= maze[0].size():
+		#temp.y -= 1
 	if maze[temp.x][temp.y] != 0:
 		return false
 	if temp.x == 0:
