@@ -32,7 +32,7 @@ signal died
 
 # basic functions
 func _ready():
-	scale *= float(max_hp)/30.0
+	scale = Vector2(Level.tile_size)/($AnimatedSprite2D.sprite_frames.get_frame_texture("default", 0).get_size())
 	hp = max_hp
 	$AnimatedSprite2D.play()
 	$HealthBar.max_value = max_hp

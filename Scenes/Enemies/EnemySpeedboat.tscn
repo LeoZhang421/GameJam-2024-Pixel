@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://bahbbbh2aftlk"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/EnemyExample.gd" id="1_mwprd"]
-[ext_resource type="Texture2D" uid="uid://cyfdf83daleuq" path="res://Assets/Enemies/pirates_1_up.png" id="2_llclc"]
-[ext_resource type="Texture2D" uid="uid://ihshq6umw7ov" path="res://Assets/Enemies/pirate_1.png" id="3_it5mc"]
+[ext_resource type="Texture2D" uid="uid://bofixpawcyjkr" path="res://Assets/Enemies/pirate_2.png" id="2_qq7eg"]
+[ext_resource type="Texture2D" uid="uid://cypug7ughojj1" path="res://Assets/Enemies/pirate_2_up.png" id="3_7jp6d"]
 [ext_resource type="AudioStream" uid="uid://o4h74aij540q" path="res://Assets/Audio/Sound_Effects/船只被摧毁/punch-a-rock-161647.mp3" id="4_3bupl"]
 [ext_resource type="AudioStream" uid="uid://cpgxreqc3nygu" path="res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3" id="5_8u5nh"]
 
@@ -12,11 +12,11 @@ size = Vector2(56, 56)
 [sub_resource type="SpriteFrames" id="SpriteFrames_c84q6"]
 animations = [{
 "frames": [{
-"duration": 2.0,
-"texture": ExtResource("2_llclc")
+"duration": 1.0,
+"texture": ExtResource("2_qq7eg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_it5mc")
+"texture": ExtResource("3_7jp6d")
 }],
 "loop": true,
 "name": &"default",
@@ -82,9 +82,12 @@ metadata/_edit_lock_ = true
 shape = SubResource("RectangleShape2D_mtkw7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.627451, 0.450704)
+position = Vector2(0.127452, 9.53674e-07)
+scale = Vector2(0.568828, 0.622222)
 sprite_frames = SubResource("SpriteFrames_c84q6")
-frame_progress = 0.842161
+frame = 1
+frame_progress = 0.0893492
+flip_h = true
 
 [node name="SinkAnimation" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {

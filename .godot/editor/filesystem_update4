@@ -1,5 +1,4 @@
 res://Scenes/Main.tscn
-res://Scripts/Main.gd
 res://Scenes/UI/HUD.tscn
 res://Scenes/Utility/Monster_Generator.tscn
 res://Scenes/Start.tscn
@@ -10,3 +9,7 @@ res://Scenes/Utility/dialogue.tscn
 res://Scenes/Mercenary/MercenaryExample.tscn
 res://Scenes/Ships/ShipExample.tscn
 res://Scenes/Ships/Merchant.tscn
+res://Scenes/Enemies/EnemySpeedboat.tscn
+res://Scenes/Ships/ShipExample.gd
+res://Scenes/Enemies/EnemyExample.gd
+res://Scenes/Enemies/EnemyFlagship.tscn

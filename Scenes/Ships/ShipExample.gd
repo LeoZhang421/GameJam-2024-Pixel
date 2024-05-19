@@ -1,7 +1,7 @@
 class_name Ship extends Area2D
 
 # control variables
-@export_range(0,500,1) var move_speed: int = 50 # 每帧移动多少像素
+@export_range(0,500,1) var move_speed: int = 50 # 每秒移动多少像素
 @export_range(1,100,1) var max_hp: int = 10
 @export_range(1,40,1) var attack: int = 2
 @export_range(0.0, 10.0) var attack_speed: float = 0.5 # 每秒攻击多少次，越高攻速越快
