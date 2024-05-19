@@ -19,6 +19,8 @@ var target: Area2D = null
 var target_backup: Array[Area2D] = []
 var attacking: bool = false
 var colliding: bool = false
+var colliding_enemies = []
+var colliding_damage = 0
 var moving: bool = false
 var mouse_await: bool = false
 var mouse_inside: bool = false
@@ -28,6 +30,7 @@ var current_index: int
 # onready node variables
 @onready var area_attack_shape = %AreaAttackShape
 @onready var sink_animation = $AnimatedSprite2D/SinkAnimation
+@onready var main = get_node("root/Main")
 
 # signals
 signal died
@@ -47,30 +50,37 @@ func _ready():
 	area_attack_shape.shape.radius = attack_range
 
 func _process(delta):
-	print(position)
-	if not mouse_await and mouse_inside and Input.is_action_just_pressed("click"):
-		mouse_await = true
-		moving = false
-	if mouse_await and not mouse_inside and Input.is_action_just_pressed("click"):
-		mouse_await = false
-		moving = true
-		var move_location = get_global_mouse_position()
-		move_array = get_node("/root/Main").pathfinder.find_path(position, move_location)
-		movement = 0
-		current_index = 0
-	if moving and move_array:
-		if current_index >= move_array.size()-1:
+	if Level.get_current_phase() == "action":
+		if not mouse_await and mouse_inside and Input.is_action_just_pressed("click"):
+			main = get_tree().get_root().get_node("Main")
+			mouse_await = true
 			moving = false
-			move_array = []
-		else:
-			movement += delta * move_speed
-			var distance = move_array[current_index].distance_to(move_array[current_index+1])
-			if movement < distance:
-				position = move_array[current_index] * (1-movement/distance) + move_array[current_index+1] * (movement/distance)
+			var cursor_texture = load("res://Assets/Utility/Select_Cursor_0001.png")
+			main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
+			main.get_node("Cursor/Sprite2D").texture = cursor_texture
+		if mouse_await and not mouse_inside and Input.is_action_just_pressed("click"):
+			main = get_tree().get_root().get_node("Main")
+			mouse_await = false
+			moving = true
+			var move_location = get_global_mouse_position()
+			move_array = main.pathfinder.find_path(position, move_location)
+			movement = 0
+			current_index = 0
+			main.get_node("Cursor/Sprite2D").texture = null
+			main.get_node("Cursor/Sprite2D").scale = Vector2(1, 1)
+		if moving and move_array:
+			if current_index >= move_array.size()-1:
+				moving = false
+				move_array = []
 			else:
-				movement = 0
-				current_index = current_index + 1
-				position = move_array[current_index]
+				movement += delta * move_speed
+				var distance = move_array[current_index].distance_to(move_array[current_index+1])
+				if movement < distance:
+					position = move_array[current_index] * (1-movement/distance) + move_array[current_index+1] * (movement/distance)
+				else:
+					movement = 0
+					current_index = current_index + 1
+					position = move_array[current_index]
 
 
 # inner functions
@@ -130,23 +140,16 @@ func attack_event() -> void:
 	target.take_damage(self, attack)
 
 func collide_event(enemy) -> void:
-	var receive_dmg = enemy.hp * enemy.collide_damage
-	var giving_dmg = hp * collide_damage
 	moving = false
 	enemy.moving = false
+	colliding_enemies.append(enemy)
 	if not colliding:
 		colliding = true
 		var fighting_effect = load("res://Scenes/VFX/Combat_Effect.tscn").instantiate()
 		add_child(fighting_effect)
 		$CollideSound.play()
 		fighting_effect.global_position = (enemy.position + position)/2
-		await fighting_effect.finished
-		colliding = false
-	moving = true
-	enemy.moving = true
-	
-	enemy.take_damage(self, giving_dmg)
-	take_damage(enemy, receive_dmg)
+		fighting_effect.finished.connect(_on_collision_finished)
 
 # funcion related to signal
 func _on_area_attack_area_entered(enemy):
@@ -188,9 +191,21 @@ func _on_area_entered(enemy):
 
 
 func _on_mouse_entered():
-	if Level.get_current_phase() == "action":
-		mouse_inside = true
+	mouse_inside = true
 	
 
 func _on_mouse_exited():
 	mouse_inside = false
+
+func _on_collision_finished():
+	colliding = false
+	var giving_dmg = hp * collide_damage
+	var receive_dmg = 0
+	for enemy in colliding_enemies:
+		if is_instance_valid(enemy):
+			receive_dmg += enemy.hp * enemy.collide_damage
+			enemy.take_damage(self, giving_dmg)
+			enemy.moving = true
+	moving = true
+	take_damage(null, receive_dmg)
+	colliding_enemies = []

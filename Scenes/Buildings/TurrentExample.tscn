@@ -47,6 +47,7 @@ shape = SubResource("CircleShape2D_w4igf")
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_a8wpm")
+volume_db = -10.0
 
 [connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
 [connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]
