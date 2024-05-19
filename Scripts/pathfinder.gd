@@ -134,7 +134,7 @@ func is_valid(row, col):
  
 # Check if a cell is unblocked
 func is_unblocked(grid, row, col):
-	return grid[row][col] == 0 || grid[row][col] == 2
+	return grid[row][col] == 0 || grid[row][col] == 2 || grid[row][col] == 8
  
 # Check if a cell is the destination
 func is_destination(row, col, dest):
