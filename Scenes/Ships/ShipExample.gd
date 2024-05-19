@@ -18,6 +18,7 @@ var distance: float = 0.0
 var target: Area2D = null
 var target_backup: Array[Area2D] = []
 var attacking: bool = false
+var colliding: bool = false
 var moving: bool = false
 var mouse_await: bool = false
 var mouse_inside: bool = false
@@ -35,6 +36,7 @@ signal died
 func _ready():
 	hp = max_hp
 	$AnimatedSprite2D.play()
+	position = start_location
 	$HealthBar.max_value = max_hp
 	_update_health()
 	
@@ -45,17 +47,17 @@ func _ready():
 	area_attack_shape.shape.radius = attack_range
 
 func _process(delta):
+	print(position)
 	if not mouse_await and mouse_inside and Input.is_action_just_pressed("click"):
-		print(1)
 		mouse_await = true
 		moving = false
 	if mouse_await and not mouse_inside and Input.is_action_just_pressed("click"):
-		print(2)
 		mouse_await = false
 		moving = true
 		var move_location = get_global_mouse_position()
 		move_array = get_node("/root/Main").pathfinder.find_path(position, move_location)
 		movement = 0
+		current_index = 0
 	if moving and move_array:
 		if current_index >= move_array.size()-1:
 			moving = false
@@ -132,11 +134,14 @@ func collide_event(enemy) -> void:
 	var giving_dmg = hp * collide_damage
 	moving = false
 	enemy.moving = false
-	var fighting_effect = load("res://Scenes/VFX/Combat_Effect.tscn").instantiate()
-	add_child(fighting_effect)
-	$CollideSound.play()
-	fighting_effect.global_position = (enemy.position + position)/2
-	await fighting_effect.finished
+	if not colliding:
+		colliding = true
+		var fighting_effect = load("res://Scenes/VFX/Combat_Effect.tscn").instantiate()
+		add_child(fighting_effect)
+		$CollideSound.play()
+		fighting_effect.global_position = (enemy.position + position)/2
+		await fighting_effect.finished
+		colliding = false
 	moving = true
 	enemy.moving = true
 	

@@ -70,6 +70,7 @@ bg_color = Color(0, 0.776471, 0, 1)
 radius = 180.0
 
 [node name="ShipExample" type="Area2D" groups=["Ship"]]
+z_index = 2
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_6oncr")
@@ -87,6 +88,7 @@ frame_progress = 0.208513
 libraries = {
 "": SubResource("AnimationLibrary_nm1qa")
 }
+autoplay = "RESET"
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 custom_minimum_size = Vector2(80, 15)
