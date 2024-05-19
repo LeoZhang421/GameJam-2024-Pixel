@@ -6,7 +6,7 @@ var monster_generator = []
 
 # 测试寻路的代码
 func _ready():
-	#set_process(false)
+	set_process(false)
 	current_level = Level.current_level
 	tile_map = get_node("TileMap_Test1")
 	#var map_scene = load("res://Scenes/Map/level_0" + str(current_level) + ".tscn")
@@ -28,10 +28,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	#if $EnemyLayer.get_child_count() <= 0:
-		#$HUD.complete_turn()
-		#set_process(false)
-	print("Test pathfind: ", pathfinder.find_path(Vector2(0,300), Vector2(1000,700)))
+	if $EnemyLayer.get_child_count() <= 0:
+		$HUD.complete_turn()
+		set_process(false)
 
 
 func _on_music_finished():
