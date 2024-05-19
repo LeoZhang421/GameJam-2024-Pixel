@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dp830xcs4unw6"]
 
 [ext_resource type="Script" path="res://Scenes/Utility/Monster_Generator.gd" id="1_e1qdf"]
-[ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemyExample.tscn" id="2_uxdc3"]
+[ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemySpeedboat.tscn" id="2_uxdc3"]
 
 [node name="Monster_Generator" type="Node2D" groups=["Monster_Generator"]]
 script = ExtResource("1_e1qdf")

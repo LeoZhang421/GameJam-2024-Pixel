@@ -16,6 +16,7 @@ var is_on_land := false
 
 # basic functions
 func _ready():
+	scale = Vector2(Level.tile_size)/($AnimatedSprite2D.sprite_frames.get_frame_texture("default", 0).get_size())
 	Character.max_buildable_ships += 1
 	position = start_location
 	hp = max_hp

@@ -16,6 +16,7 @@ func _ready():
 	dialogue = get_dialogue()
 	assert(dialogue, "dialogue not found")
 	next_phrase()
+	$ColorRect/Text.push_font(load("res://Assets/Fonts/joystix/joystix monospace.otf"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -37,6 +38,7 @@ func get_dialogue():
 func next_phrase():
 	if phrase_number >= len(dialogue):
 		emit_signal("is_end")
+		Character.is_new = false
 		queue_free()
 		return
 	is_finished = false

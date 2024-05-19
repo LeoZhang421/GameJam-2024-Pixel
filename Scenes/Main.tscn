@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dhe13dl2lsh1"]
+[gd_scene load_steps=19 format=3 uid="uid://dhe13dl2lsh1"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_t4kyd"]
 [ext_resource type="Texture2D" uid="uid://ch52obihadyen" path="res://Assets/Water+.png" id="2_gwxmh"]
@@ -6,11 +6,12 @@
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="3_l3cjw"]
 [ext_resource type="PackedScene" uid="uid://b3tgm76g3axnl" path="res://Scenes/Buildings/TurrentExample.tscn" id="4_roy33"]
 [ext_resource type="PackedScene" uid="uid://dkc1542lywa7" path="res://Scenes/Ships/ShipExample.tscn" id="5_kow21"]
-[ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemyExample.tscn" id="5_qx87c"]
 [ext_resource type="PackedScene" uid="uid://dp830xcs4unw6" path="res://Scenes/Utility/Monster_Generator.tscn" id="5_ylbvp"]
 [ext_resource type="PackedScene" uid="uid://cctmyju5of6qw" path="res://Scenes/Cursor.tscn" id="6_npyoo"]
 [ext_resource type="PackedScene" uid="uid://dvll5ir0xk07l" path="res://Scenes/Ships/Merchant.tscn" id="7_kaxjd"]
+[ext_resource type="PackedScene" uid="uid://b84h84ik4tm2o" path="res://Scenes/Enemies/EnemyFlagship.tscn" id="7_qgode"]
 [ext_resource type="Script" path="res://Scripts/MerchantLayer.gd" id="7_sh4x1"]
+[ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemySpeedboat.tscn" id="8_h8ixh"]
 [ext_resource type="AudioStream" uid="uid://vm2k5vryu7d6" path="res://Assets/Audio/music_0003.mp3" id="8_u6pfl"]
 [ext_resource type="Script" path="res://Scripts/Music.gd" id="9_b8i5n"]
 [ext_resource type="AudioStream" uid="uid://dv7ocusihfkpj" path="res://Assets/Audio/background-0003.mp3" id="9_vqwgq"]
@@ -286,6 +287,9 @@ start_location = Vector2(500, 200)
 
 [node name="Monster_Generator" parent="TileMap_Test1" instance=ExtResource("5_ylbvp")]
 position = Vector2(500, 1000)
+monster_list_1 = Array[PackedScene]([ExtResource("8_h8ixh"), ExtResource("7_qgode")])
+monster_count_1 = Array[int]([10, 2])
+monster_waittime_1 = Array[float]([5.0, 5.0])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(780, 510)
@@ -297,14 +301,14 @@ script = ExtResource("3_l3cjw")
 
 [node name="EnemyLayer" type="Node" parent="."]
 
-[node name="EnemyExample" parent="EnemyLayer" instance=ExtResource("5_qx87c")]
+[node name="EnemyExample" parent="EnemyLayer" instance=ExtResource("8_h8ixh")]
 position = Vector2(700, 500)
 max_hp = 60
 attack = 1
 attack_range = 360
 start_location = Vector2(200, 500)
 
-[node name="EnemyExample2" parent="EnemyLayer" instance=ExtResource("5_qx87c")]
+[node name="EnemyExample2" parent="EnemyLayer" instance=ExtResource("8_h8ixh")]
 position = Vector2(400, 500)
 move_speed = 25
 max_hp = 60
@@ -337,7 +341,7 @@ autoplay = true
 
 [node name="Pirate_Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_m3u06")
-volume_db = -10.0
+volume_db = -15.0
 script = ExtResource("9_b8i5n")
 
 [node name="Pirate_Invasion_Timer" type="Timer" parent="."]

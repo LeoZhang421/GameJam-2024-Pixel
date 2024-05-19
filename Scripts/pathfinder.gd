@@ -350,7 +350,7 @@ func is_shallow_water(position:Vector2):
 		if temp.y == maze[0].size() - 1:
 			return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 && not maze[temp.x][temp.y]
 		return maze[temp.x + 1][temp.y] % 2 || maze[temp.x][temp.y - 1] % 2 || maze[temp.x][temp.y + 1] % 2 && not maze[temp.x][temp.y]
-	if temp.x == maze[0].size() - 1:
+	if temp.x == maze.size() - 1:
 		if temp.y == 0:
 			return maze[temp.x - 1][temp.y] % 2 || maze[temp.x][temp.y + 1] % 2 && not maze[temp.x][temp.y]
 		if temp.y == maze[0].size() - 1:

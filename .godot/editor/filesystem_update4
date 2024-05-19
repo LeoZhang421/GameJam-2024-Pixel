@@ -15,3 +15,17 @@ res://Scripts/Main.gd
 res://Scenes/Utility/Monster_Generator.gd
 res://Scenes/Mercenary/MercenaryExample.tscn
 res://Scenes/Mercenary/MercenaryExample.gd
+res://Scripts/HUD.gd
+res://Scenes/Buildings/ShipyardExample.gd
+res://Scenes/Ships/ShipExample.gd
+res://Scenes/Buildings/TurrentExample.gd
+res://Scripts/Level_Manager.gd
+res://Scenes/Temp/EnemyExample.tscn
+res://Scenes/Temp/EnemySmall.tscn
+res://Scenes/Enemies/EnemyFlagship.tscn
+res://Scenes/Enemies/EnemySpeedboat.tscn
+res://Scenes/Ships/ShipFullrigged.tscn
+res://Scenes/Ships/ShipIronClag.tscn
+res://Scenes/Ships/Merchant.tscn
+res://Scenes/Ships/Merchant.gd
+res://Scripts/Character.gd

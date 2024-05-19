@@ -31,6 +31,7 @@ func _ready():
 	_update_health()
 	animation.play("default")
 	label.hide()
+	move_speed *= Level.tile_size.x / 15
 	#start_sail([Vector2(510, 570), Vector2(510, 630), Vector2(510, 690), Vector2(570, 690), Vector2(630, 690), Vector2(690, 690)])
 
 func _process(delta):

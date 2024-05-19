@@ -5,7 +5,7 @@ class_name Enemy extends Area2D
 @export_range(1,100,1) var max_hp: int = 30
 @export_range(1,40,1) var attack: int = 3
 @export_range(0.0, 10.0) var attack_speed: float = 1.0 # 每秒攻击多少次，越高攻速越快
-@export_range(0, 600, 60) var attack_range: int = 3 * 60 # 60像素的倍数
+@export_range(0, 600, 1) var attack_range: int = 3 * Level.tile_size.x # 60像素的倍数
 @export_range(0.0, 0.5, 1.0) var collide_damage: float = 0.5 #撞击时造成多少倍当前hp的伤害
 @export var start_location: Vector2 = Vector2(1000,500)
 
@@ -32,6 +32,7 @@ signal died
 
 # basic functions
 func _ready():
+	scale *= float(max_hp)/30.0
 	hp = max_hp
 	$AnimatedSprite2D.play()
 	$HealthBar.max_value = max_hp
@@ -44,6 +45,7 @@ func _ready():
 	$AttackTimer.start()
 	$RerouteTimer.start()
 	area_attack_shape.shape.radius = attack_range
+	move_speed *= Level.tile_size.x / 15
 
 func _process(delta):
 	#if moving and move_array:

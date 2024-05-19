@@ -5,6 +5,7 @@ extends Node
 @onready var current_hp:int = max_hp
 @onready var max_buildable_ships:int
 @onready var current_built_ships:int
+@onready var is_new:bool = true
 signal character_die
 
 var moving_ship:bool = false

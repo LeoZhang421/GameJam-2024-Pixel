@@ -5,6 +5,7 @@ var current_level = 0
 var all_turns = 3
 var current_turn = 0
 var phase = {"preparation":0, "action":0}
+var tile_size = Vector2(60, 60)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

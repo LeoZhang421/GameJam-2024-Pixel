@@ -31,7 +31,6 @@ shape = SubResource("RectangleShape2D_lg42b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.8147e-06, 0)
-scale = Vector2(0.451613, 0.54902)
 sprite_frames = SubResource("SpriteFrames_55nld")
 frame_progress = 0.928218
 
@@ -47,7 +46,7 @@ shape = SubResource("CircleShape2D_w4igf")
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_a8wpm")
-volume_db = -10.0
+volume_db = -5.0
 
 [connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
 [connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]

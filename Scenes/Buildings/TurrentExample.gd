@@ -1,7 +1,7 @@
 class_name Turrent extends Area2D
 
 # control variables
-@export_range(0, 600, 60) var attack_range: int = 3 * 60 # 60像素的倍数
+@export_range(0, 600, 1) var attack_range: int = 3 * Level.tile_size.x # 60像素的倍数
 @export_range(0.0, 10.0) var attack_speed: float = 1.0 # 每秒攻击多少次，越高攻速越快
 #@export_range(1,20,1) var max_hp: int = 5
 @export_range(1,20,1) var attack: int = 3
@@ -25,6 +25,7 @@ var is_on_land := true
 # basic functions
 func _ready():
 	position = start_location
+	scale = Vector2(Level.tile_size)/($AnimatedSprite2D.sprite_frames.get_frame_texture("default", 0).get_size())
 	#hp = max_hp
 	target = null
 	attacking = false

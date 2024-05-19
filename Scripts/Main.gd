@@ -26,6 +26,9 @@ func _ready():
 	print("Sail Routes: ", pathfinder.get_sail_routes())
 	print(pathfinder.maze)
 	add_warning()
+	if Character.is_new:
+		var dialogue_scene = load("res://Scenes/Utility/dialogue.tscn").instantiate()
+		add_child(dialogue_scene)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

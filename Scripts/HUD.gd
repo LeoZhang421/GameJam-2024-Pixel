@@ -65,7 +65,7 @@ func _process(delta):
 		else:
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
 			if Input.is_action_just_pressed("click"):
-				build(pending_scene, main.get_global_mouse_position())
+				expand(main.get_global_mouse_position())
 			
 	if is_predemolishing:
 		if main.pathfinder.is_building(main.get_global_mouse_position()):
@@ -75,7 +75,7 @@ func _process(delta):
 		else:
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
 			if Input.is_action_just_pressed("click"):
-				build(pending_scene, main.get_global_mouse_position())
+				demolish(main.get_global_mouse_position())
 			
 	if is_prebuildingship:
 		if main.pathfinder.is_shallow_water(main.get_global_mouse_position()) || main.pathfinder.is_deep_water(main.get_global_mouse_position()):
@@ -85,7 +85,7 @@ func _process(delta):
 		else:
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
 			if Input.is_action_just_pressed("click"):
-				build(pending_scene, main.get_global_mouse_position())
+				buildship(pending_scene, main.get_global_mouse_position())
 			
 	if is_presummoningmercenary:
 		if main.pathfinder.is_shallow_water(main.get_global_mouse_position()) || main.pathfinder.is_deep_water(main.get_global_mouse_position()):
@@ -95,7 +95,7 @@ func _process(delta):
 		else:
 			main.get_node("Cursor/Sprite2D").self_modulate = Color(1,0,0,0.5)
 			if Input.is_action_just_pressed("click"):
-				build(pending_scene, main.get_global_mouse_position())
+				summonmercenary(pending_scene, main.get_global_mouse_position())
 
 func _on_expand_button_pressed():
 	if Level.get_current_phase() == "preparation":
@@ -103,7 +103,7 @@ func _on_expand_button_pressed():
 			start_preexpanding()
 		else:
 			stop_preexpanding()
-	introduction.text = "This is Expand"
+	introduction.text = "Cost:20\nAllows you to turn 1 shallow water into land."
 
 func _on_build_button_pressed():
 	if Level.get_current_phase() == "preparation":
@@ -120,7 +120,7 @@ func _on_demolish_button_pressed():
 			start_predemolishing()
 		else:
 			stop_predemolishing()
-	introduction.text = "This is Demolish"
+	introduction.text = "Cost: 0\nSelect a building and demolish, return half its cost as gold."
 		
 func _on_buildship_button_pressed():
 	if Level.get_current_phase() == "preparation":
@@ -196,7 +196,7 @@ func start_prebuildingship(ship_name:String):
 	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/" + ship_name + "Container/Build_" + ship_name).icon
 	main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
-	pending_scene = load("res://Scenes/Ships/" + ship_name + "Example.tscn").instantiate()
+	pending_scene = load("res://Scenes/Ships/" + ship_name + ".tscn").instantiate()
 
 func stop_prebuildingship():
 	is_prebuildingship = false
@@ -296,7 +296,7 @@ func summonmercenary(mercenary_scene:Object, position:Vector2):
 
 func _on_build_turrent_pressed():
 	start_prebuilding("Turrent")
-	introduction.text = "This is Turrent"
+	introduction.text = "cost:10\nBasic defence building, with elegant range and moderate fire power."
 
 
 func _on_done_button_pressed():
@@ -326,17 +326,27 @@ func _on_done_button_pressed():
 
 func _on_build_ship_pressed():
 	if not is_prebuildingship:
-		start_prebuildingship("Ship")
-	introduction.text = "This is Ship"
+		start_prebuildingship("ShipExample")
+	introduction.text = "Cost: 10\nBasic battle ship, with moderate armor and firepower.\n#requires a shipyard."
+	
+func _on_build_full_rigged_pressed():
+	if not is_prebuildingship:
+		start_prebuildingship("ShipFullrigged")
+	introduction.text = "Cost: 20\nequipped with better sail, moves faster and hits harder.\n#requires a shipyard."
+
+func _on_build_ship_iron_clag_pressed():
+	if not is_prebuildingship:
+		start_prebuildingship("ShipIronClag")
+	introduction.text = "Cost: 30\nSteampower warship built with iron, tough and pwoerful.\n#requires a shipyard."
 
 func _on_build_shipyard_pressed():
 	start_prebuilding("Shipyard")
-	introduction.text = "This is Shipyard"
+	introduction.text = "Cost: 20\nA special building that can only placed on shallow water.\nEach shipyard allows you to build 1 ship per turn."
 
 func _on_summon_mercenary_pressed():
 	if not is_presummoningmercenary:
 		start_presummoningmercenary("Mercenary")
-	introduction.text = "This is Mercenary"
+	introduction.text = "Cost: 40\ncheapest of all kinds, but still quite expensive."
 
 func _on_turn_count_timer_timeout():
 	$Level_Control/Turn_Display.visible = false

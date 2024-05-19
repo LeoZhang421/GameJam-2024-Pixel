@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://comy3j8oaolau"]
+[gd_scene load_steps=29 format=3 uid="uid://comy3j8oaolau"]
 
 [ext_resource type="FontFile" uid="uid://yb7i6tqe1e6c" path="res://Assets/Fonts/joystix/joystix monospace.otf" id="1_4g8sv"]
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_wjan7"]
@@ -66,12 +66,6 @@ font_size = 24
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_2jfs1"]
-font = ExtResource("1_4g8sv")
-
-[sub_resource type="LabelSettings" id="LabelSettings_0v76k"]
-font = ExtResource("1_4g8sv")
-
-[sub_resource type="LabelSettings" id="LabelSettings_coa8c"]
 font = ExtResource("1_4g8sv")
 
 [node name="HUD" type="CanvasLayer"]
@@ -430,27 +424,53 @@ layout_mode = 2
 [node name="ShipList" type="HBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
 visible = false
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="ShipContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList"]
+[node name="ShipExampleContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList"]
 layout_mode = 2
 
-[node name="Build_Ship" type="Button" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipContainer"]
+[node name="Build_ShipExample" type="Button" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipExampleContainer"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("4_sa87j")
 expand_icon = true
 
-[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipContainer"]
+[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipExampleContainer"]
 layout_mode = 2
-text = "Ship"
+text = "Ketch"
 label_settings = SubResource("LabelSettings_mvwwi")
 horizontal_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList"]
+[node name="ShipFullriggedContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList"]
 layout_mode = 2
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList"]
+[node name="Build_ShipFullrigged" type="Button" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipFullriggedContainer"]
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+icon = ExtResource("4_sa87j")
+expand_icon = true
+
+[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipFullriggedContainer"]
+layout_mode = 2
+text = "Fullrig"
+label_settings = SubResource("LabelSettings_mvwwi")
+horizontal_alignment = 1
+
+[node name="ShipIronClagContainer" type="VBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList"]
+layout_mode = 2
+
+[node name="Build_ShipIronClag" type="Button" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipIronClagContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+icon = ExtResource("4_sa87j")
+expand_icon = true
+
+[node name="Name" type="Label" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipIronClagContainer"]
+layout_mode = 2
+text = "ironclag
+"
+label_settings = SubResource("LabelSettings_mvwwi")
+horizontal_alignment = 1
 
 [node name="MercenaryList" type="HBoxContainer" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
 visible = false
@@ -480,8 +500,8 @@ layout_mode = 2
 [node name="Introduction" type="Label" parent="Container/VBoxContainer/MarginContainer3/VBoxContainer"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_emr85")
-horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Container"]
 layout_mode = 0
@@ -494,6 +514,7 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
 [node name="Skill_List" type="HBoxContainer" parent="Container/MarginContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Skill_1" type="VBoxContainer" parent="Container/MarginContainer/Skill_List"]
@@ -501,35 +522,12 @@ layout_mode = 2
 
 [node name="Button" type="Button" parent="Container/MarginContainer/Skill_List/Skill_1"]
 layout_mode = 2
+text = " "
 
 [node name="Name" type="Label" parent="Container/MarginContainer/Skill_List/Skill_1"]
 layout_mode = 2
 text = "Skill1"
 label_settings = SubResource("LabelSettings_2jfs1")
-horizontal_alignment = 1
-
-[node name="Skill_2" type="VBoxContainer" parent="Container/MarginContainer/Skill_List"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="Container/MarginContainer/Skill_List/Skill_2"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="Container/MarginContainer/Skill_List/Skill_2"]
-layout_mode = 2
-text = "Skill2"
-label_settings = SubResource("LabelSettings_0v76k")
-horizontal_alignment = 1
-
-[node name="Skill_3" type="VBoxContainer" parent="Container/MarginContainer/Skill_List"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="Container/MarginContainer/Skill_List/Skill_3"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="Container/MarginContainer/Skill_List/Skill_3"]
-layout_mode = 2
-text = "Skill3"
-label_settings = SubResource("LabelSettings_coa8c")
 horizontal_alignment = 1
 
 [node name="Turn_Count_Timer" type="Timer" parent="."]
@@ -584,6 +582,8 @@ volume_db = -10.0
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer2/VBoxContainer/Mercenary_Button" to="." method="_on_mercenary_button_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/TurrentContainer/Build_Turrent" to="." method="_on_build_turrent_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/ShipyardContainer/Build_Shipyard" to="." method="_on_build_shipyard_pressed"]
-[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipContainer/Build_Ship" to="." method="_on_build_ship_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipExampleContainer/Build_ShipExample" to="." method="_on_build_ship_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipFullriggedContainer/Build_ShipFullrigged" to="." method="_on_build_full_rigged_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/ShipIronClagContainer/Build_ShipIronClag" to="." method="_on_build_ship_iron_clag_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList/MercenaryContainer/Summon_Mercenary" to="." method="_on_summon_mercenary_pressed"]
 [connection signal="timeout" from="Turn_Count_Timer" to="." method="_on_turn_count_timer_timeout"]
