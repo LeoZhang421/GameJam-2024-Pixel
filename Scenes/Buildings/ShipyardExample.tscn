@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c7uuakh61mm3n" path="res://Assets/Buildings/shipyard.png" id="2_mclig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lg42b"]
-size = Vector2(128, 128)
+size = Vector2(64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_55nld"]
 animations = [{

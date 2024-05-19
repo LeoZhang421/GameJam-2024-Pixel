@@ -1,4 +1,4 @@
-class_name Ship extends Area2D
+class_name Mercenary extends Area2D
 
 # control variables
 @export_range(0,500,1) var move_speed: int = 50 # 每帧移动多少像素

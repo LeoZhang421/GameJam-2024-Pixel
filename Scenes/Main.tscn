@@ -267,13 +267,22 @@ layer_4/tile_data = PackedInt32Array(196637, 65536, 13)
 position = Vector2(630, 450)
 attack_range = 360
 attack_speed = 2.0
+attack = 10
 start_location = Vector2(630, 450)
 
 [node name="ShipExample" parent="TileMap_Test1" instance=ExtResource("5_kow21")]
-position = Vector2(400, 200)
+position = Vector2(800, 200)
 move_speed = 100
+max_hp = 60
+attack = 1
 start_location = Vector2(400, 200)
-end_location = Vector2(400, 700)
+
+[node name="ShipExample2" parent="TileMap_Test1" instance=ExtResource("5_kow21")]
+position = Vector2(500, 200)
+move_speed = 100
+max_hp = 60
+attack = 1
+start_location = Vector2(500, 200)
 
 [node name="Monster_Generator" parent="TileMap_Test1" instance=ExtResource("5_ylbvp")]
 position = Vector2(500, 500)
@@ -290,15 +299,19 @@ script = ExtResource("3_l3cjw")
 
 [node name="EnemyExample" parent="EnemyLayer" instance=ExtResource("5_qx87c")]
 position = Vector2(700, 500)
+max_hp = 60
+attack = 1
 attack_range = 360
 start_location = Vector2(200, 500)
 end_location = Vector2(700, 500)
 
 [node name="EnemyExample2" parent="EnemyLayer" instance=ExtResource("5_qx87c")]
-position = Vector2(400, 240)
+position = Vector2(400, 500)
 move_speed = 25
-start_location = Vector2(1000, 240)
-end_location = Vector2(400, 240)
+max_hp = 60
+attack = 1
+start_location = Vector2(1000, 500)
+end_location = Vector2(400, 500)
 
 [node name="BuildingLayer" type="Node" parent="."]
 

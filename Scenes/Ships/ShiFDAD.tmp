@@ -73,6 +73,14 @@ radius = 180.0
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_6oncr")
+move_speed = null
+max_hp = null
+attack = null
+attack_speed = null
+attack_range = null
+collide_damage = null
+start_location = null
+cost = null
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -124,8 +132,7 @@ stream = ExtResource("5_4tlmu")
 stream = ExtResource("4_i40ip")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
 [connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

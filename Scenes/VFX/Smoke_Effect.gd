@@ -1,5 +1,6 @@
 extends Node2D
 
+signal finished
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,4 +17,5 @@ func _process(delta):
 
 
 func _on_lifetime_timer_timeout():
+	finished.emit()
 	queue_free()

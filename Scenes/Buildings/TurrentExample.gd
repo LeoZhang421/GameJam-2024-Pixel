@@ -71,6 +71,7 @@ func find_closest() -> Area2D:
 	return min_enemy
 
 func attack_event() -> void:
+	$AttackSound.play()
 	target.take_damage(self, attack)
 
 func demolish():

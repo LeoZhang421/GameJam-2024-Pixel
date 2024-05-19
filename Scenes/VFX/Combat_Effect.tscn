@@ -97,6 +97,7 @@ color = Color(5, 5, 5, 1)
 color_ramp = SubResource("GradientTexture1D_36qpf")
 
 [node name="CombatEffect" type="Node2D"]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_trynb")
 
 [node name="Spark" type="AnimatedSprite2D" parent="."]

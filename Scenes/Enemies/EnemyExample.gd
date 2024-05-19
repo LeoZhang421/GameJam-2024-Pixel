@@ -2,10 +2,11 @@ class_name Enemy extends Area2D
 
 # control variables
 @export_range(0,500,1) var move_speed: int = 50 # 每帧移动多少像素
-@export_range(1,20,1) var max_hp: int = 30
-@export_range(1,20,1) var attack: int = 3
+@export_range(1,100,1) var max_hp: int = 30
+@export_range(1,40,1) var attack: int = 3
 @export_range(0.0, 10.0) var attack_speed: float = 1.0 # 每秒攻击多少次，越高攻速越快
 @export_range(0, 600, 60) var attack_range: int = 3 * 60 # 60像素的倍数
+@export_range(0.0, 0.5, 1.0) var collide_damage: float = 0.5 #撞击时造成多少倍当前hp的伤害
 @export var start_location: Vector2 = Vector2(500,500)
 @export var end_location: Vector2 = Vector2(1000,500)
 
@@ -17,10 +18,11 @@ var distance: float = 0.0
 var target: Area2D = null
 var target_backup: Array[Area2D] = []
 var attacking: bool = false
+var moving: bool = true
 
 # onready node variables
 @onready var area_attack_shape = %AreaAttackShape
-
+@onready var sink_animation = $AnimatedSprite2D/SinkAnimation
 
 # signals
 signal died
@@ -40,15 +42,16 @@ func _ready():
 	area_attack_shape.shape.radius = attack_range
 
 func _process(delta):
-	if direction:
-		movement += delta * move_speed
-		if movement >= distance:
-			direction = false
-	else:
-		movement -= delta * move_speed
-		if movement <= 0:
-			direction = true
-	position = start_location * (movement/distance) + end_location * (1-movement/distance)
+	if moving:
+		if direction:
+			movement += delta * move_speed
+			if movement >= distance:
+				direction = false
+		else:
+			movement -= delta * move_speed
+			if movement <= 0:
+				direction = true
+		position = start_location * (movement/distance) + end_location * (1-movement/distance)
 
 
 # inner functions
@@ -62,6 +65,12 @@ func take_damage(source, damage:int):
 	_update_health()
 	if hp <= 0:
 		died.emit(self)
+		moving = false
+		var smoke_effect = load("res://Scenes/VFX/Smoke_Effect.tscn").instantiate()
+		add_child(smoke_effect)
+		$ExplodeSound.play()
+		sink_animation.play("sink")
+		await smoke_effect.finished
 		get_parent().remove_child(self)
 		queue_free()
 
@@ -98,6 +107,7 @@ func find_closest() -> Area2D:
 	return min_enemy
 
 func attack_event() -> void:
+	$AttackSound.play()
 	target.take_damage(self, attack)
 
 

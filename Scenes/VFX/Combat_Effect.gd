@@ -1,6 +1,8 @@
 extends Node2D
 @onready var lifetime_timer = $LifeTime
 
+signal finished
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	lifetime_timer.wait_time = max($Dust.lifetime, $Debris.lifetime)
@@ -16,5 +18,6 @@ func _process(delta):
 
 
 func _on_life_time_timeout():
+	finished.emit()
 	queue_free()
 

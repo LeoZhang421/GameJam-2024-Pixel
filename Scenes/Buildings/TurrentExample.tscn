@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3tgm76g3axnl"]
+[gd_scene load_steps=7 format=3 uid="uid://b3tgm76g3axnl"]
 
 [ext_resource type="Script" path="res://Scenes/Buildings/TurrentExample.gd" id="1_nwr8v"]
 [ext_resource type="Texture2D" uid="uid://rsgrhpp26vr4" path="res://Assets/Buildings/turrents_1_left.png" id="2_eey7j"]
+[ext_resource type="AudioStream" uid="uid://cpgxreqc3nygu" path="res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3" id="3_a8wpm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lg42b"]
 size = Vector2(56, 56)
@@ -43,6 +44,9 @@ unique_name_in_owner = true
 shape = SubResource("CircleShape2D_w4igf")
 
 [node name="AttackTimer" type="Timer" parent="."]
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_a8wpm")
 
 [connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
 [connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]

@@ -32,7 +32,7 @@ radius = 180.0
 
 [node name="MercenaryExample" type="Area2D" groups=["Ship"]]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 12
 script = ExtResource("1_dgra7")
 metadata/_edit_lock_ = true
 
