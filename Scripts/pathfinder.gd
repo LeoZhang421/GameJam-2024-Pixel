@@ -50,9 +50,9 @@ func _init(s:Object, new_debug := false):
 	harbour_history = s.tile_map.get_used_cells(3)
 	for harbour_position in harbour_history:
 		maze_original[harbour_position.x][harbour_position.y] = 3
-	enemy_spawn_history = s.tile_map.get_used_cells(3)
+	enemy_spawn_history = s.tile_map.get_used_cells(4)
 	for enemy_spawn_position in enemy_spawn_history:
-		maze_original[enemy_spawn_position.x][enemy_spawn_position.y] = 3
+		maze_original[enemy_spawn_position.x][enemy_spawn_position.y] = 4
 	debug = new_debug
 	scale = s.tile_map.tile_set.tile_size.x
 	room_borders.position = Vector2.ZERO
@@ -405,7 +405,7 @@ func get_harbour_position():
 	return temp
 	
 # 获取敌人出生点的全局坐标
-func get_enemy_spawn_position():
+func get_monster_generator_position():
 	var temp = []
 	for i in enemy_spawn_history:
 		temp.append(get_global_position(i))

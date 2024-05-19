@@ -24,13 +24,22 @@ func _ready():
 	$Camera2D.limit_bottom = (pathfinder.room_borders.size.y - 2) * pathfinder.scale - get_viewport().size.y/2
 	print("Test pathfind: ", pathfinder.find_path(Vector2(0,300), Vector2(1000,700)))
 	print("Sail Routes: ", pathfinder.get_sail_routes())
-
+	add_warning()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if $EnemyLayer.get_child_count() <= 0:
 		$HUD.complete_turn()
 		set_process(false)
+		
+func add_warning():
+	var temp = pathfinder.get_monster_generator_position()
+	for location in temp:
+		var warning_scene = load("res://Scenes/Utility/Warning.tscn")
+		var warning = warning_scene.instantiate()
+		warning.position = location
+		add_child(warning)
 
 
 func _on_music_finished():

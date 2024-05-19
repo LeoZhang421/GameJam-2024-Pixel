@@ -90,7 +90,7 @@ ship_0.png::CompressedTexture2D::4269442027554339440::1715951292::1715951292::1:
 ship_0_wing.png::CompressedTexture2D::9196103110337275333::1715951292::1715951292::1::::<><>::
 ship_1.png::CompressedTexture2D::8122222209742885578::1715951292::1715951292::1::::<><>::
 ship_1_up.png::CompressedTexture2D::4816893043210237214::1715951292::1715951292::1::::<><>::
-::res://Assets/TileMap/::1716083981
+::res://Assets/TileMap/::1716083994
 punyworld-overworld-tileset.png::CompressedTexture2D::6101275248498351405::1716079857::1716083994::1::::<><>::
 ::res://Assets/Utility/::1716044936
 Select_Cursor_0001.png::CompressedTexture2D::1635383990355325725::1715867684::1715867684::1::::<><>::
@@ -112,15 +112,15 @@ Hit_Spark_0004.png::CompressedTexture2D::7818230307277083139::1715694276::171569
 Smoke_Particle_0002.png::CompressedTexture2D::2290573439055932936::1712926648::1716045302::1::::<><>::
 ::res://Assets/Video/::1716038349
 Video.ogv::VideoStreamTheora::-1::1716038337::0::1::::<><>::
-::res://Scenes/::1716083943
+::res://Scenes/::1716086494
 Cursor.tscn::PackedScene::4953214199944561658::1715791321::0::1::::<><>::res://Scripts/Cursor.gd
-Main.tscn::PackedScene::225307949629650168::1716083805::0::1::::<><>::res://Scripts/Main.gd<>uid://ch52obihadyen::::res://Assets/Water+.png<>uid://comy3j8oaolau::::res://Scenes/UI/HUD.tscn<>res://Scripts/Camera2D.gd<>uid://b3tgm76g3axnl::::res://Scenes/Buildings/TurrentExample.tscn<>uid://dkc1542lywa7::::res://Scenes/Ships/ShipExample.tscn<>uid://bahbbbh2aftlk::::res://Scenes/Enemies/EnemyExample.tscn<>uid://dp830xcs4unw6::::res://Scenes/Utility/Monster_Generator.tscn<>uid://cctmyju5of6qw::::res://Scenes/Cursor.tscn<>uid://dvll5ir0xk07l::::res://Scenes/Ships/Merchant.tscn<>res://Scripts/MerchantLayer.gd<>uid://vm2k5vryu7d6::::res://Assets/Audio/music_0003.mp3<>res://Scripts/Music.gd<>uid://dv7ocusihfkpj::::res://Assets/Audio/background-0003.mp3<>uid://brukou3f6q8q3::::res://Assets/Audio/pirate_0001.mp3
-Start.tscn::PackedScene::3920843776717774957::1716083805::0::1::::<><>::res://Scripts/Start.gd<>uid://yb7i6tqe1e6c::::res://Assets/Fonts/joystix/joystix monospace.otf<>uid://bu8rs58jbhf1r::::res://Assets/Audio/Sound_Effects/开始界面水声（循环）/ocean-waves-112906.mp3<>res://Assets/Video/Video.ogv
-::res://Scenes/Buildings/::1716083943
+Main.tscn::PackedScene::225307949629650168::1716086494::0::1::::<><>::res://Scripts/Main.gd<>uid://ch52obihadyen::::res://Assets/Water+.png<>uid://comy3j8oaolau::::res://Scenes/UI/HUD.tscn<>res://Scripts/Camera2D.gd<>uid://b3tgm76g3axnl::::res://Scenes/Buildings/TurrentExample.tscn<>uid://dkc1542lywa7::::res://Scenes/Ships/ShipExample.tscn<>uid://bahbbbh2aftlk::::res://Scenes/Enemies/EnemyExample.tscn<>uid://dp830xcs4unw6::::res://Scenes/Utility/Monster_Generator.tscn<>uid://cctmyju5of6qw::::res://Scenes/Cursor.tscn<>uid://dvll5ir0xk07l::::res://Scenes/Ships/Merchant.tscn<>res://Scripts/MerchantLayer.gd<>uid://vm2k5vryu7d6::::res://Assets/Audio/music_0003.mp3<>res://Scripts/Music.gd<>uid://dv7ocusihfkpj::::res://Assets/Audio/background-0003.mp3<>uid://brukou3f6q8q3::::res://Assets/Audio/pirate_0001.mp3
+Start.tscn::PackedScene::3920843776717774957::1716086494::0::1::::<><>::res://Scripts/Start.gd<>uid://yb7i6tqe1e6c::::res://Assets/Fonts/joystix/joystix monospace.otf<>uid://bu8rs58jbhf1r::::res://Assets/Audio/Sound_Effects/开始界面水声（循环）/ocean-waves-112906.mp3<>res://Assets/Video/Video.ogv
+::res://Scenes/Buildings/::1716086494
 ShipyardExample.gd::GDScript::-1::1716039652::0::1::::Shipyard<>Area2D<>::
-ShipyardExample.tscn::PackedScene::3578130529256234220::1716083805::0::1::::<><>::res://Scenes/Buildings/ShipyardExample.gd<>uid://c7uuakh61mm3n::::res://Assets/Buildings/shipyard.png
+ShipyardExample.tscn::PackedScene::3578130529256234220::1716086494::0::1::::<><>::res://Scenes/Buildings/ShipyardExample.gd<>uid://c7uuakh61mm3n::::res://Assets/Buildings/shipyard.png
 TurrentExample.gd::GDScript::-1::1716083943::0::1::::Turrent<>Area2D<>::
-TurrentExample.tscn::PackedScene::4391318943314799585::1716083943::0::1::::<><>::res://Scenes/Buildings/TurrentExample.gd<>uid://rsgrhpp26vr4::::res://Assets/Buildings/turrents_1_left.png
+TurrentExample.tscn::PackedScene::4391318943314799585::1716086494::0::1::::<><>::res://Scenes/Buildings/TurrentExample.gd<>uid://rsgrhpp26vr4::::res://Assets/Buildings/turrents_1_left.png<>uid://cpgxreqc3nygu::::res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3
 ::res://Scenes/Debug_Node/::1715694276
 debug_node.tscn::PackedScene::1292427797048550242::1715694276::0::1::::<><>::
 ::res://Scenes/Enemies/::1716083943
@@ -130,20 +130,20 @@ EnemyExample.tscn::PackedScene::2400933895322147220::1716083943::0::1::::<><>::r
 level_01.tscn::PackedScene::5508222958538093399::1716080188::0::1::::<><>::
 level_02.tscn::PackedScene::456160359520996699::1716080074::0::1::::<><>::
 level_03.tscn::PackedScene::4918870545402006862::1716080074::0::1::::<><>::
-::res://Scenes/Mercenary/::1716083943
-MercenaryExample.gd::GDScript::-1::1716083943::0::1::::Ship<>Area2D<>::
-MercenaryExample.tscn::PackedScene::377686814689893388::1716083805::0::1::::<><>::res://Scenes/Ships/ShipExample.gd<>uid://dnyp2v78p72j3::::res://Assets/Ships/ship_1.png<>uid://cavlr3ropi11s::::res://Assets/Ships/ship_1_up.png
-::res://Scenes/Ships/::1716083943
+::res://Scenes/Mercenary/::1716086494
+MercenaryExample.gd::GDScript::-1::1716084421::0::1::::Mercenary<>Area2D<>::
+MercenaryExample.tscn::PackedScene::377686814689893388::1716086494::0::1::::<><>::res://Scenes/Ships/ShipExample.gd<>uid://dnyp2v78p72j3::::res://Assets/Ships/ship_1.png<>uid://cavlr3ropi11s::::res://Assets/Ships/ship_1_up.png
+::res://Scenes/Ships/::1716085660
 Merchant.gd::GDScript::-1::1716035940::0::1::::Merchant<>Area2D<>::
 Merchant.tscn::PackedScene::8656657831125739343::1716035940::0::1::::<><>::uid://b13fc65w4tl57::::res://Assets/Ships/ship_0.png<>res://Scenes/Ships/Merchant.gd<>uid://yb7i6tqe1e6c::::res://Assets/Fonts/joystix/joystix monospace.otf
 ShipExample.gd::GDScript::-1::1716083943::0::1::::Mercenary<>Area2D<>::
-ShipExample.tscn::PackedScene::231379794824012424::1716083943::0::1::::<><>::res://Scenes/Ships/ShipExample.gd<>uid://dnyp2v78p72j3::::res://Assets/Ships/ship_1.png<>uid://cavlr3ropi11s::::res://Assets/Ships/ship_1_up.png
-::res://Scenes/UI/::1716083981
-HUD.tscn::PackedScene::5781765445748460976::1716083981::0::1::::<><>::uid://yb7i6tqe1e6c::::res://Assets/Fonts/joystix/joystix monospace.otf<>res://Scripts/HUD.gd<>uid://rsgrhpp26vr4::::res://Assets/Buildings/turrents_1_left.png<>uid://c7uuakh61mm3n::::res://Assets/Buildings/shipyard.png<>uid://dnyp2v78p72j3::::res://Assets/Ships/ship_1.png<>uid://cgl1hd4d6lv1u::::res://Assets/Audio/Sound_Effects/建筑建造/grenade-explosion-14-190266.mp3<>uid://d1sxv0t2mtica::::res://Assets/Audio/Sound_Effects/建筑拆除/wood-smash-3-170418.mp3<>uid://ds01s3geygkoq::::res://Assets/Audio/Sound_Effects/关卡开始/pleasant-violin-notification-1-186535.mp3<>uid://nkvpgc6y5727::::res://Assets/Audio/Sound_Effects/关卡胜利/tada-military-3-183975.mp3<>uid://eduu1etdumbp::::res://Assets/Audio/Sound_Effects/关卡失败/spooky-movement-violin-5-186909.mp3
-::res://Scenes/Utility/::1716083940
+ShipExample.tscn::PackedScene::231379794824012424::1716085660::0::1::::<><>::res://Scenes/Ships/ShipExample.gd<>uid://dnyp2v78p72j3::::res://Assets/Ships/ship_1.png<>uid://cavlr3ropi11s::::res://Assets/Ships/ship_1_up.png<>uid://dyi5jm7802vi1::::res://Assets/Audio/Sound_Effects/攻击_船只碰撞/wooden-ship-break-85277.mp3<>uid://o4h74aij540q::::res://Assets/Audio/Sound_Effects/船只被摧毁/punch-a-rock-161647.mp3<>uid://cpgxreqc3nygu::::res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3
+::res://Scenes/UI/::1716086494
+HUD.tscn::PackedScene::5781765445748460976::1716086494::0::1::::<><>::uid://yb7i6tqe1e6c::::res://Assets/Fonts/joystix/joystix monospace.otf<>res://Scripts/HUD.gd<>uid://rsgrhpp26vr4::::res://Assets/Buildings/turrents_1_left.png<>uid://c7uuakh61mm3n::::res://Assets/Buildings/shipyard.png<>uid://dnyp2v78p72j3::::res://Assets/Ships/ship_1.png<>uid://cgl1hd4d6lv1u::::res://Assets/Audio/Sound_Effects/建筑建造/grenade-explosion-14-190266.mp3<>uid://d1sxv0t2mtica::::res://Assets/Audio/Sound_Effects/建筑拆除/wood-smash-3-170418.mp3<>uid://ds01s3geygkoq::::res://Assets/Audio/Sound_Effects/关卡开始/pleasant-violin-notification-1-186535.mp3<>uid://nkvpgc6y5727::::res://Assets/Audio/Sound_Effects/关卡胜利/tada-military-3-183975.mp3<>uid://eduu1etdumbp::::res://Assets/Audio/Sound_Effects/关卡失败/spooky-movement-violin-5-186909.mp3
+::res://Scenes/Utility/::1716086494
 Monster_Generator.gd::GDScript::-1::1716042682::0::1::::<>Node2D<>::
-Monster_Generator.tscn::PackedScene::8281965104162900335::1716083805::0::1::::<><>::res://Scenes/Utility/Monster_Generator.gd<>uid://bahbbbh2aftlk::::res://Scenes/Enemies/EnemyExample.tscn
-Warning.tscn::PackedScene::6876680150086228993::1716083805::0::1::::<><>::
+Monster_Generator.tscn::PackedScene::8281965104162900335::1716086494::0::1::::<><>::res://Scenes/Utility/Monster_Generator.gd<>uid://bahbbbh2aftlk::::res://Scenes/Enemies/EnemyExample.tscn
+Warning.tscn::PackedScene::6876680150086228993::1716087030::0::1::::<><>::res://Scripts/Warning.gd
 ::res://Scenes/VFX/::1716083943
 Combat_Effect.gd::GDScript::-1::1716083943::0::1::::<>Node2D<>::
 Combat_Effect.tscn::PackedScene::9207952995706845015::1715780312::0::1::::<><>::res://Scenes/VFX/Combat_Effect.gd<>uid://dwtr4uo15j7dc::::res://Assets/VFX/Combat_Effect/Combat_Spark_0001.png<>uid://ct5wgcgr2bhlq::::res://Assets/VFX/Combat_Effect/Combat_Spark_0002.png<>uid://dhq0eyfmvo8tn::::res://Assets/VFX/Combat_Effect/Combat_Spark_0003.png<>uid://dudu45qx54tje::::res://Assets/VFX/Combat_Effect/Combat_Spark_0004.png<>uid://ct4mwv1y0b1qx::::res://Assets/VFX/Combat_Effect/Combat_Spark_0005.png<>uid://60dnq14dr11t::::res://Assets/VFX/Combat_Effect/Combat_Dust_0001.png
@@ -151,16 +151,16 @@ Explosion.gd::GDScript::-1::1715694276::0::1::::<>Node2D<>::
 Hit_Effect.tscn::PackedScene::8317632745595905240::1715694276::0::1::::<><>::res://Scenes/VFX/Explosion.gd<>uid://r1wdxeo2t2bl::::res://Assets/VFX/Hit_Effect/Hit_Spark_0001.png<>uid://banyvg2skx45w::::res://Assets/VFX/Hit_Effect/Hit_Spark_0002.png<>uid://bfyip035eoxow::::res://Assets/VFX/Hit_Effect/Hit_Spark_0003.png<>uid://djnhd1g623svb::::res://Assets/VFX/Hit_Effect/Hit_Spark_0004.png
 Smoke_Effect.gd::GDScript::-1::1716083943::0::1::::<>Node2D<>::
 Smoke_Effect.tscn::PackedScene::2965233078743424674::1716045356::0::1::::<><>::res://Scenes/VFX/Smoke_Effect.gd<>uid://7vtn63dehixc::::res://Assets/VFX/Smoke_Effect/Smoke_Particle_0002.png
-::res://Scripts/::1716083981
+::res://Scripts/::1716085928
 Camera2D.gd::GDScript::-1::1715867684::0::1::::<>Camera2D<>::
 Character.gd::GDScript::-1::1716042344::0::1::::<>Node<>::
 Cursor.gd::GDScript::-1::1715782522::0::1::::<>Node2D<>::
 HUD.gd::GDScript::-1::1716083981::0::1::::HUD<>CanvasLayer<>::
 Level_Manager.gd::GDScript::-1::1716043169::0::1::::Level_Manager<>Node<>::
-Main.gd::GDScript::-1::1716083981::0::1::::<>Node2D<>::
+Main.gd::GDScript::-1::1716087030::0::1::::<>Node2D<>::
 MerchantLayer.gd::GDScript::-1::1716035940::0::1::::<>Node<>::
 Music.gd::GDScript::-1::1715955760::0::1::::<>AudioStreamPlayer<>::
-pathfinder.gd::GDScript::-1::1716083981::0::1::::Pathfinder<>Node<>::
-pathfinding_node.gd::GDScript::-1::1715004514::0::1::::Pathfinding_Node<>Node<>::
+pathfinder.gd::GDScript::-1::1716087030::0::1::::Pathfinder<>Node<>::
+pathfinding_node.gd::GDScript::-1::1716085082::0::1::::Pathfinding_Node<>RefCounted<>::
 Start.gd::GDScript::-1::1716038466::0::1::::<>Node2D<>::
 Warning.gd::GDScript::-1::1716046029::0::1::::<>Node2D<>::
