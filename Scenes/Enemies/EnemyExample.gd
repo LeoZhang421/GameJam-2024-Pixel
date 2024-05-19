@@ -12,7 +12,8 @@ class_name Enemy extends Area2D
 # inner variables
 var hp: int = 0
 var movement: float = 0.0
-var direction: bool = true # true表示从起点到终点，false表示从终点到起点
+# var direction: bool = true true表示从起点到终点，false表示从终点到起点
+var direction: Vector2 #表示船的行进方向
 var distance: float = 0.0
 var target: Area2D = null
 var target_backup: Array[Area2D] = []
@@ -24,6 +25,7 @@ var current_index: int
 # onready node variables
 @onready var area_attack_shape = %AreaAttackShape
 @onready var sink_animation = $AnimatedSprite2D/SinkAnimation
+@onready var main = get_node("/root/Main")
 
 # signals
 signal died
@@ -44,19 +46,28 @@ func _ready():
 	area_attack_shape.shape.radius = attack_range
 
 func _process(delta):
+	#if moving and move_array:
+		#if current_index >= move_array.size()-1:
+			#moving = false
+			#move_array = []
+		#else:
+			#movement += delta * move_speed
+			#var distance = move_array[current_index].distance_to(move_array[current_index+1])
+			#if movement < distance:
+				#position = move_array[current_index] * (1-movement/distance) + move_array[current_index+1] * (movement/distance)
+			#else:
+				#movement = 0
+				#current_index = current_index + 1
+				#position = move_array[current_index]
 	if moving and move_array:
-		if current_index >= move_array.size()-1:
-			moving = false
-			move_array = []
-		else:
-			movement += delta * move_speed
-			var distance = move_array[current_index].distance_to(move_array[current_index+1])
-			if movement < distance:
-				position = move_array[current_index] * (1-movement/distance) + move_array[current_index+1] * (movement/distance)
-			else:
-				movement = 0
-				current_index = current_index + 1
-				position = move_array[current_index]
+		var target_position = move_array[0]
+		direction = (target_position - global_position).normalized()
+		position += direction * move_speed * delta
+		if target_position.distance_to(global_position) <= main.pathfinder.scale/4:
+			move_array.pop_front()
+			if move_array == [] and main.pathfinder.get_harbour_position().has(main.pathfinder.get_tile_center(global_position)):
+				Character.loss_hp(hp)
+				take_damage(self, hp)
 
 
 # inner functions
@@ -149,15 +160,21 @@ func _on_attack_timer_timeout():
 
 
 func _on_reroute_timer_timeout():
-	var main = get_node("/root/Main")
 	if main.get_node("MerchantLayer").get_child_count() >= 2:
 		var merchant_list = main.get_node("MerchantLayer").get_children()
 		var close = find_closest(merchant_list.slice(1))
 		print("Finding way to merchants: from ", position, " to ", close.position)
 		var temp = main.pathfinder.find_path(position, close.position)
 		if temp:
-			move_array = temp
 			moving = true
+			# 目标不同才更新寻路，否则不更新
+			if move_array == []:
+				move_array = temp
+				return
+			if temp[-1] != move_array[-1]:
+				temp.pop_front()
+				move_array = temp
+				return
 	else:
 		var harbour_list = main.pathfinder.get_harbour_position()
 		var min_harbour:Vector2 = harbour_list[0]
@@ -169,5 +186,12 @@ func _on_reroute_timer_timeout():
 		print("Finding way to harbour: from ", position, " to ", min_harbour)
 		var temp = main.pathfinder.find_path(position, min_harbour)
 		if temp:
-			move_array = temp
 			moving = true
+			# 目标不同才更新寻路，否则不更新
+			if move_array == []:
+				move_array = temp
+				return
+			if temp[-1] != move_array[-1]:
+				temp.pop_front()
+				move_array = temp
+				return

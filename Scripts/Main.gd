@@ -30,7 +30,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if $EnemyLayer.get_child_count() <= 0:
+	if $EnemyLayer.get_child_count() <= 0 && Character.current_hp > 0:
 		$HUD.complete_turn()
 		set_process(false)
 		

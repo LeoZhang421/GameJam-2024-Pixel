@@ -115,6 +115,7 @@ shape = SubResource("CircleShape2D_t0llh")
 
 [node name="ExplodeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7bvhr")
+volume_db = -15.0
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_csdv5")

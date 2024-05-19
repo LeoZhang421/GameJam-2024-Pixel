@@ -68,7 +68,7 @@ func _on_small_tick_timeout():
 		generate_next_wave()
 	else:
 		var monster = monster_list[0].instantiate()
-		monster.position = self.global_position
+		monster.start_location = self.global_position
 		get_tree().get_root().get_node("Main/EnemyLayer").add_child(monster)
 		monster_count[0] -= 1
 		$Small_Tick.start()

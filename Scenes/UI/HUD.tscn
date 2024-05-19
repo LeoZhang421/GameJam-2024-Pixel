@@ -554,7 +554,7 @@ volume_db = -5.0
 
 [node name="Fail_Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_tqpbt")
-volume_db = -10.0
+volume_db = -5.0
 
 [node name="Combat_Start_Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_ynki5")

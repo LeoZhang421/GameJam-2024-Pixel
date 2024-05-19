@@ -12,3 +12,6 @@ res://Scenes/Enemies/EnemyExample.tscn
 res://Scenes/Enemies/EnemyExample.gd
 res://Scripts/pathfinder.gd
 res://Scripts/Main.gd
+res://Scenes/Utility/Monster_Generator.gd
+res://Scenes/Mercenary/MercenaryExample.tscn
+res://Scenes/Mercenary/MercenaryExample.gd
