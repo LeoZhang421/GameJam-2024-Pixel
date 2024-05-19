@@ -245,8 +245,8 @@ func expand(position:Vector2):
 		$Error_Sound.play()
 	else:
 		if Character.loss_gold(20):
-			main.tile_map.erase_cell(0, main.pathfinder.get_standard_position(position))
-			main.tile_map.set_cells_terrain_connect(1, [main.pathfinder.get_standard_position(position)], 0, 0)
+			main.tile_map.set_cells_terrain_connect(0, [main.pathfinder.get_standard_position(position)], 0, -1)
+			main.tile_map.set_cells_terrain_connect(1, [main.pathfinder.get_standard_position(position)], 0, 1)
 			main.pathfinder.maze_update("ground", position)
 			stop_preexpanding()
 		else:
