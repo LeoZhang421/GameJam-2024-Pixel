@@ -145,7 +145,7 @@ func start_prebuilding(building_name:String):
 	is_prebuilding = true
 	build_button_text.text = "Cancel!"
 	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/BuildingList/" + building_name + "Container/Build_" + building_name).icon
-	main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
+	main.get_node("Cursor/Sprite2D").scale = Vector2(Level.tile_size)/cursor_texture.get_size()
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 	pending_scene = load("res://Scenes/Buildings/" + building_name + "Example.tscn").instantiate()
 
@@ -162,7 +162,7 @@ func start_preexpanding():
 	is_preexpanding = true
 	expand_button_text.text = "Cancel!"
 	var cursor_texture = load("res://Assets/Utility/Select_Cursor_0001.png")
-	main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
+	main.get_node("Cursor/Sprite2D").scale = Vector2(Level.tile_size)/cursor_texture.get_size()
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 
 func stop_preexpanding():
@@ -178,7 +178,7 @@ func start_predemolishing():
 	is_predemolishing = true
 	demolish_button_text.text = "Cancel!"
 	var cursor_texture = load("res://Assets/Utility/Select_Cursor_0001.png")
-	main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
+	main.get_node("Cursor/Sprite2D").scale = Vector2(Level.tile_size)/cursor_texture.get_size()
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 
 func stop_predemolishing():
@@ -194,7 +194,7 @@ func start_prebuildingship(ship_name:String):
 	is_prebuildingship = true
 	buildship_button_text.text = "Cancel!"
 	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/ShipList/" + ship_name + "Container/Build_" + ship_name).icon
-	main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
+	main.get_node("Cursor/Sprite2D").scale = Vector2(Level.tile_size)/cursor_texture.get_size()
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 	pending_scene = load("res://Scenes/Ships/" + ship_name + ".tscn").instantiate()
 
@@ -208,7 +208,7 @@ func start_presummoningmercenary(mercenary_name:String):
 	is_presummoningmercenary = true
 	mercenary_button_text.text = "Cancel!"
 	var cursor_texture = get_node("Container/VBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/MercenaryList/" + mercenary_name + "Container/Summon_" + mercenary_name).icon
-	main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
+	main.get_node("Cursor/Sprite2D").scale = Vector2(Level.tile_size)/cursor_texture.get_size()
 	main.get_node("Cursor/Sprite2D").texture = cursor_texture
 	pending_scene = load("res://Scenes/Mercenary/" + mercenary_name + "Example.tscn").instantiate()
 

@@ -33,7 +33,7 @@ var cell_details_original = []
 # 直接传入tile_map，debug模式默认关闭
 func _init(s:Object, new_debug := false):
 	# 初始化maze
-	scale = s.tile_map.tile_set.tile_size.x
+	scale = Level.tile_size.x
 	ROW = s.tile_map.get_used_rect().size.x
 	COL = s.tile_map.get_used_rect().size.y
 	for x in ROW:

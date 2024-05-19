@@ -9,20 +9,20 @@ func _ready():
 	set_process(false)
 	current_level = Level.current_level
 	#tile_map = get_node("TileMap_Test1")
-	remove_child($TileMap_Test1)
 	var map_scene = load("res://Scenes/Map/level_0" + str(current_level) + ".tscn")
 	tile_map = map_scene.instantiate()
-	add_child(tile_map)
+	$TileMap_Test1.add_sibling(tile_map)
+	remove_child($TileMap_Test1)
 	for i in tile_map.get_children():
 		if i.is_in_group("Monster_Generator"):
 			monster_generator.append(i)
 	pathfinder = Pathfinder.new(self)
 	$HUD.main = self
-	$Camera2D.offset = tile_map.tile_set.tile_size + get_viewport().size/2
-	$Camera2D.limit_left = - get_viewport().size.x/2
-	$Camera2D.limit_top = - get_viewport().size.y/2
-	$Camera2D.limit_right = (pathfinder.room_borders.size.x - 2) * pathfinder.scale - get_viewport().size.x/2
-	$Camera2D.limit_bottom = (pathfinder.room_borders.size.y - 2) * pathfinder.scale - get_viewport().size.y/2
+	#$Camera2D.offset = tile_map.tile_set.tile_size + get_viewport().size/2
+	#$Camera2D.limit_left = - get_viewport().size.x/2
+	#$Camera2D.limit_top = - get_viewport().size.y/2
+	#$Camera2D.limit_right = (pathfinder.room_borders.size.x - 2) * pathfinder.scale - get_viewport().size.x/2
+	#$Camera2D.limit_bottom = (pathfinder.room_borders.size.y - 2) * pathfinder.scale - get_viewport().size.y/2
 	print("Test pathfind: ", pathfinder.find_path(Vector2(0,300), Vector2(1000,700)))
 	print("Sail Routes: ", pathfinder.get_sail_routes())
 	print(pathfinder.maze)

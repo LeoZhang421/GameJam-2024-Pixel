@@ -301,19 +301,6 @@ script = ExtResource("3_l3cjw")
 
 [node name="EnemyLayer" type="Node" parent="."]
 
-[node name="EnemyExample" parent="EnemyLayer" instance=ExtResource("8_h8ixh")]
-position = Vector2(700, 500)
-max_hp = 60
-attack = 1
-attack_range = 360
-start_location = Vector2(200, 500)
-
-[node name="EnemyExample2" parent="EnemyLayer" instance=ExtResource("8_h8ixh")]
-position = Vector2(400, 500)
-move_speed = 25
-max_hp = 60
-attack = 1
-
 [node name="BuildingLayer" type="Node" parent="."]
 
 [node name="ShipLayer" type="Node" parent="."]
