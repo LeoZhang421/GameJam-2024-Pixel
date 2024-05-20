@@ -95,6 +95,7 @@ func take_damage(source, damage:int):
 		$ExplodeSound.play()
 		sink_animation.play("sink")
 		moving = false
+		$RerouteTimer.paused = true
 		await smoke_effect.finished
 		get_parent().remove_child(self)
 		queue_free()
@@ -135,13 +136,10 @@ func attack_event() -> void:
 	target.take_damage(self, attack)
 
 func kill_merchant(merchant) -> void:
-	print(1)
-	merchant.take_damage(self, 99)
-	if merchant_kill_self:
-		take_damage(self, 99)
-		return
-	else:
-		return
+	if hp>0:
+		merchant.take_damage(self, 99)
+		if merchant_kill_self:
+			take_damage(self, 99)
 
 # funcion related to signal
 func _on_area_attack_area_entered(enemy:Node):

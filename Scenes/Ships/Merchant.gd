@@ -85,6 +85,13 @@ func take_damage(source, damage:int):
 	_update_health()
 	if hp <= 0:
 		died.emit(self)
+		moving = false
+		var smoke_effect = load("res://Scenes/VFX/Smoke_Effect.tscn").instantiate()
+		add_child(smoke_effect)
+		$ExplodeSound.play()
+		moving = false
+		animation.play("pop")
+		await smoke_effect.finished
 		get_parent().remove_child(self)
 		queue_free()
 

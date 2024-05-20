@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dvll5ir0xk07l"]
+[gd_scene load_steps=16 format=3 uid="uid://dvll5ir0xk07l"]
 
 [ext_resource type="Texture2D" uid="uid://b13fc65w4tl57" path="res://Assets/Ships/ship_0.png" id="1_3v3tp"]
 [ext_resource type="Script" path="res://Scenes/Ships/Merchant.gd" id="1_ttb7b"]
 [ext_resource type="FontFile" uid="uid://yb7i6tqe1e6c" path="res://Assets/Fonts/joystix/joystix monospace.otf" id="3_kouct"]
+[ext_resource type="AudioStream" uid="uid://o4h74aij540q" path="res://Assets/Audio/Sound_Effects/船只被摧毁/punch-a-rock-161647.mp3" id="4_x01eg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42tva"]
 size = Vector2(56, 56)
@@ -335,5 +336,9 @@ metadata/_edit_use_anchors_ = true
 libraries = {
 "": SubResource("AnimationLibrary_hygbd")
 }
+
+[node name="ExplodeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_x01eg")
+volume_db = -15.0
 
 [connection signal="timeout" from="TimerB" to="." method="_on_timer_b_timeout"]

@@ -1,10 +1,10 @@
+AnimationPlayer
 Timer
 AudioStreamPlayer
 Sprite2D
 Node2D
 AudioStreamPlayer2D
 AnimationTree
-AnimationPlayer
 TileMap
 Node
 Label
