@@ -10,20 +10,18 @@ font = ExtResource("2_le1kg")
 script = ExtResource("1_304di")
 portrait_path = "res://Assets/View/Dialogue/"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -300.0
-offset_top = -120.0
-offset_right = 300.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 600.0
+offset_bottom = 600.0
+scale = Vector2(2.03, 2.03)
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
 color = Color(0.105882, 0.105882, 0.105882, 0.458824)
 
-[node name="Name" type="RichTextLabel" parent="ColorRect"]
+[node name="Name" type="RichTextLabel" parent="Control/ColorRect"]
 layout_mode = 2
 offset_left = 5.0
 offset_right = 595.0
@@ -31,7 +29,7 @@ offset_bottom = 20.0
 bbcode_enabled = true
 scroll_active = false
 
-[node name="Text" type="RichTextLabel" parent="ColorRect"]
+[node name="Text" type="RichTextLabel" parent="Control/ColorRect"]
 layout_mode = 2
 offset_left = 5.0
 offset_top = 20.0
@@ -41,7 +39,7 @@ grow_horizontal = 2
 grow_vertical = 0
 bbcode_enabled = true
 
-[node name="Label" type="Label" parent="ColorRect/Text"]
+[node name="Label" type="Label" parent="Control/ColorRect/Text"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

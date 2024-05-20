@@ -8,3 +8,10 @@ res://Scripts/pathfinder.gd
 res://Scenes/Utility/Monster_Generator.gd
 res://Scenes/Buildings/ShipyardExample.gd
 res://Scenes/Ships/ShipExample.gd
+res://Scripts/HUD.gd
+res://Scenes/Map/level_02.tscn
+res://Scenes/Map/level_03.tscn
+res://Scenes/Utility/dialogue.tscn
+res://Scenes/Utility/dialogue.gd
+res://Scenes/Ships/ShipExample.tscn
+res://Scenes/Buildings/TurrentExample.tscn

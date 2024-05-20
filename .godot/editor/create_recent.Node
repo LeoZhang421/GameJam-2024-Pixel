@@ -1,3 +1,4 @@
+Control
 AnimationPlayer
 Timer
 AudioStreamPlayer
@@ -11,4 +12,3 @@ Label
 VideoStreamPlayer
 Button
 MarginContainer
-Control

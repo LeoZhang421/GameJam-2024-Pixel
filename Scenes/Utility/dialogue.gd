@@ -16,7 +16,7 @@ func _ready():
 	dialogue = get_dialogue()
 	assert(dialogue, "dialogue not found")
 	next_phrase()
-	$ColorRect/Text.push_font(load("res://Assets/Fonts/joystix/joystix monospace.otf"))
+	$Control/ColorRect/Text.push_font(load("res://Assets/Fonts/joystix/joystix monospace.otf"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -24,7 +24,7 @@ func _process(delta):
 		if is_finished:
 			next_phrase()
 		else:
-			$ColorRect/Text.visible_characters = len($ColorRect/Text.text)
+			$Control/ColorRect/Text.visible_characters = len($Control/ColorRect/Text.text)
 	
 func get_dialogue():
 	var f = FileAccess.open(dialogue_path, FileAccess.READ)
@@ -42,12 +42,12 @@ func next_phrase():
 		queue_free()
 		return
 	is_finished = false
-	$ColorRect/Name.text = dialogue[phrase_number]["Name"]
-	$ColorRect/Text.text = dialogue[phrase_number]["Text"]
-	$ColorRect/Text.visible_characters = 0
+	$Control/ColorRect/Name.text = dialogue[phrase_number]["Name"]
+	$Control/ColorRect/Text.text = dialogue[phrase_number]["Text"]
+	$Control/ColorRect/Text.visible_characters = 0
 	
-	while $ColorRect/Text.visible_characters < len($ColorRect/Text.text):
-		$ColorRect/Text.visible_characters += 1
+	while $Control/ColorRect/Text.visible_characters < len($Control/ColorRect/Text.text):
+		$Control/ColorRect/Text.visible_characters += 1
 		$Timer.start()
 		await $Timer.timeout
 	is_finished = true

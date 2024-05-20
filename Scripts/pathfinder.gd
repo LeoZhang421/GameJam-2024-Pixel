@@ -88,12 +88,14 @@ func reload_map_data(s:Object):
 			print(temp)
 			maze[temp.x][temp.y] = 8
 			map_object.start_location = get_tile_center(map_object.global_position)
+			map_object.scale = map_object.scale/3.75
 			map_object.reparent(s.get_node("ShipLayer"))
 		if map_object.is_in_group("Building"):
 			var temp = get_standard_position(map_object.global_position)
 			print(temp)
 			maze[temp.x][temp.y] += 6
-			map_object.start_location = get_tile_center(map_object.global_position)
+			map_object.start_location = get_tile_center(map_object.global_position) + Vector2(30, 30)
+			map_object.scale = map_object.scale/3.75
 			map_object.reparent(s.get_node("BuildingLayer"))
 	# 重新加载所有舰船地图信息
 	for ship in s.get_node("ShipLayer").get_children():
@@ -345,7 +347,7 @@ func get_next_route(result:Array, position:Vector2, parent_position:=Vector2(-1,
 # 判断当前位置是否是可扩展的近海地块，传入全局坐标
 func is_shallow_water(position:Vector2):
 	var temp = get_standard_position(position)
-	if maze[temp.x][temp.y] != 0:
+	if not is_valid(temp.x, temp.y) || maze[temp.x][temp.y] != 0:
 		return false
 	var directions = DIRECTIONS_MANHATTAN.duplicate()
 	var result = false
