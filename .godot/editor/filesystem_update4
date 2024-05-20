@@ -15,3 +15,4 @@ res://Scenes/Utility/dialogue.tscn
 res://Scenes/Utility/dialogue.gd
 res://Scenes/Ships/ShipExample.tscn
 res://Scenes/Buildings/TurrentExample.tscn
+res://Scripts/Main.gd

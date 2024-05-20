@@ -25,7 +25,6 @@ func _ready():
 	#$Camera2D.limit_bottom = (pathfinder.room_borders.size.y - 2) * pathfinder.scale - get_viewport().size.y/2
 	print("Test pathfind: ", pathfinder.find_path(Vector2(0,300), Vector2(1000,700)))
 	print("Sail Routes: ", pathfinder.get_sail_routes())
-	print(pathfinder.maze)
 	add_warning()
 	if Character.is_new:
 		var dialogue_scene = load("res://Scenes/Utility/dialogue.tscn").instantiate()

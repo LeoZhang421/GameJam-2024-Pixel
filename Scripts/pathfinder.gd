@@ -58,7 +58,6 @@ func _init(s:Object, new_debug := false):
 	room_borders.position = Vector2.ZERO
 	room_borders.size = Vector2(s.tile_map.get_used_rect().size)
 	maze = maze_original
-	print(maze)
 	reload_map_data(s)
 	initialize_sail_routes()
 
@@ -87,14 +86,14 @@ func reload_map_data(s:Object):
 			var temp = get_standard_position(map_object.global_position)
 			print(temp)
 			maze[temp.x][temp.y] = 8
-			map_object.start_location = get_tile_center(map_object.global_position)
+			map_object.global_position = get_tile_center(map_object.global_position)
 			map_object.scale = map_object.scale/3.75
 			map_object.reparent(s.get_node("ShipLayer"))
 		if map_object.is_in_group("Building"):
 			var temp = get_standard_position(map_object.global_position)
 			print(temp)
 			maze[temp.x][temp.y] += 6
-			map_object.start_location = get_tile_center(map_object.global_position) + Vector2(30, 30)
+			map_object.global_position = get_tile_center(map_object.global_position)
 			map_object.scale = map_object.scale/3.75
 			map_object.reparent(s.get_node("BuildingLayer"))
 	# 重新加载所有舰船地图信息
