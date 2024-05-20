@@ -1,4 +1,6 @@
+Button
 Control
+CanvasLayer
 AnimationPlayer
 Timer
 AudioStreamPlayer
@@ -10,5 +12,3 @@ TileMap
 Node
 Label
 VideoStreamPlayer
-Button
-MarginContainer

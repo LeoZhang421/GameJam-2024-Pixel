@@ -54,6 +54,7 @@ func _ready():
 	move_speed *= Level.tile_size.x / 15
 
 func _process(delta):
+	print(hp * collide_damage)
 	if Level.get_current_phase() == "action":
 		if not Character.moving_ship and mouse_inside and Input.is_action_just_pressed("click"):
 			print("moving", self)

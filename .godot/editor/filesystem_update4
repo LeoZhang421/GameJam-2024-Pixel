@@ -4,3 +4,17 @@ res://Scenes/Map/level_03.tscn
 res://Scenes/Map/level_02.tscn
 res://Scenes/Map/level_01.tscn
 res://Scripts/HUD.gd
+res://Scenes/Main.tscn
+res://Scenes/Ships/ShipExample.gd
+res://Scenes/Ships/Merchant.tscn
+res://Scenes/Enemies/EnemySpeedboat.tscn
+res://Scenes/Utility/dialogue.tscn
+res://Scenes/Ships/ShipExample.tscn
+res://Scenes/Buildings/TurrentExample.tscn
+res://Scenes/Ships/ShipIronClag.tscn
+res://Scenes/Ships/ShipFullrigged.tscn
+res://Scenes/Utility/Monster_Generator.gd
+res://Scenes/Debug_Node/Debug.gd
+res://Scenes/Debug_Node/Debug.tscn
+res://Scenes/Enemies/EnemyFlagship.tscn
+res://Scenes/Enemies/EnemyExample.tscn

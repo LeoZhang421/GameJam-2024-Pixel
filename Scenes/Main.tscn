@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dhe13dl2lsh1"]
+[gd_scene load_steps=32 format=3 uid="uid://dhe13dl2lsh1"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_t4kyd"]
 [ext_resource type="Texture2D" uid="uid://ch52obihadyen" path="res://Assets/Water+.png" id="2_gwxmh"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://dv7ocusihfkpj" path="res://Assets/Audio/background-0003.mp3" id="9_vqwgq"]
 [ext_resource type="AudioStream" uid="uid://brukou3f6q8q3" path="res://Assets/Audio/pirate_0001.mp3" id="10_m3u06"]
 [ext_resource type="AudioStream" uid="uid://cpgxreqc3nygu" path="res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3" id="10_vvjed"]
+[ext_resource type="PackedScene" uid="uid://wh2d5ohhyghx" path="res://Scenes/Debug_Node/Debug.tscn" id="20_xlo56"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eohcr"]
 texture = ExtResource("2_gwxmh")
@@ -411,6 +412,8 @@ script = ExtResource("9_b8i5n")
 [node name="Pirate_Invasion_Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="Debug" parent="." instance=ExtResource("20_xlo56")]
 
 [connection signal="timeout" from="MerchantLayer/TimerA" to="MerchantLayer" method="_on_timer_a_timeout"]
 [connection signal="finished" from="Music" to="." method="_on_music_finished"]

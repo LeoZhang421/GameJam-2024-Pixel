@@ -2,6 +2,7 @@ extends Node2D
 @onready var monster_list:Array[PackedScene]
 @onready var monster_count:Array[int]
 @onready var monster_waittime:Array[float]
+@onready var is_cleared : bool = false
 @export var small_tick:float
 @export var monster_list_1:Array[PackedScene]
 @export var monster_count_1:Array[int]
@@ -42,18 +43,36 @@ func load_generator():
 
 func start_generating():
 	load_generator()
-	$Small_Tick.start()
+	if monster_list.size() <= 0:
+		is_cleared = true
+		var full_cleared = is_cleared
+		for sibling in get_parent().get_children():
+			if sibling.is_in_group("Monster_Generator"):
+				full_cleared = full_cleared and sibling.is_cleared
+		if full_cleared:
+			get_tree().get_root().get_node("Main").set_process(true)
+		return
+	$Big_Tick.wait_time = monster_waittime[0]
+	$Big_Tick.start()
 
 func generate_next_wave():
 	monster_list.pop_front()
 	monster_count.pop_front()
 	monster_waittime.pop_front()
-	if monster_list.size() > 0:
+	if monster_list.size() <= 0:
+		is_cleared = true
+		var full_cleared = is_cleared
+		for sibling in get_parent().get_children():
+			if sibling.is_in_group("Monster_Generator"):
+				full_cleared = full_cleared and sibling.is_cleared
+		if full_cleared:
+			get_tree().get_root().get_node("Main").set_process(true)
+	else:
 		$Big_Tick.wait_time = monster_waittime[0]
 		$Big_Tick.start()
-		get_tree().get_root().get_node("Main").set_process(false)
-	else:
-		get_tree().get_root().get_node("Main").set_process(true)
+		#get_tree().get_root().get_node("Main").set_process(false)
+	#else:
+		#get_tree().get_root().get_node("Main").set_process(true)
 
 
 func _on_big_tick_timeout():
@@ -62,7 +81,13 @@ func _on_big_tick_timeout():
 
 func _on_small_tick_timeout():
 	if monster_list.size() <= 0:
-		get_tree().get_root().get_node("Main").set_process(true)
+		is_cleared = true
+		var full_cleared = is_cleared
+		for sibling in get_parent().get_children():
+			if sibling.is_in_group("Monster_Generator"):
+				full_cleared = full_cleared and sibling.is_cleared
+		if full_cleared:
+			get_tree().get_root().get_node("Main").set_process(true)
 		return
 	if monster_count[0] <= 0:
 		generate_next_wave()

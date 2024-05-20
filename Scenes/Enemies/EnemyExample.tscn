@@ -73,6 +73,8 @@ collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_0j008")
 move_speed = 10
+max_hp = 20
+attack = 2
 attack_range = 180
 metadata/_edit_lock_ = true
 

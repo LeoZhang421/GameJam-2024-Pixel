@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://wh2d5ohhyghx"]
+
+[ext_resource type="Script" path="res://Scenes/Debug_Node/Debug.gd" id="1_p764e"]
+
+[node name="Debug" type="CanvasLayer"]
+script = ExtResource("1_p764e")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.525
+offset_right = 41.525
+offset_bottom = 40.0
+scale = Vector2(2.855, 2.855)
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 69.5184
+offset_top = 42.0315
+offset_right = 154.518
+offset_bottom = 73.0315
+text = "Skip Level"
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
