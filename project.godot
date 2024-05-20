@@ -23,7 +23,7 @@ Character="*res://Scripts/Character.gd"
 
 [display]
 
-window/size/viewport_width=1440
+window/size/viewport_width=1680
 window/size/viewport_height=900
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"

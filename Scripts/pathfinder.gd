@@ -58,6 +58,7 @@ func _init(s:Object, new_debug := false):
 	room_borders.position = Vector2.ZERO
 	room_borders.size = Vector2(s.tile_map.get_used_rect().size)
 	maze = maze_original
+	print(maze)
 	reload_map_data(s)
 	initialize_sail_routes()
 
@@ -84,13 +85,15 @@ func reload_map_data(s:Object):
 	for map_object in s.tile_map.get_children():
 		if map_object.is_in_group("Ship"):
 			var temp = get_standard_position(map_object.global_position)
+			print(temp)
 			maze[temp.x][temp.y] = 8
-			map_object.position = get_tile_center(map_object.global_position)
+			map_object.start_location = get_tile_center(map_object.global_position)
 			map_object.reparent(s.get_node("ShipLayer"))
 		if map_object.is_in_group("Building"):
 			var temp = get_standard_position(map_object.global_position)
+			print(temp)
 			maze[temp.x][temp.y] += 6
-			map_object.position = get_tile_center(map_object.global_position)
+			map_object.start_location = get_tile_center(map_object.global_position)
 			map_object.reparent(s.get_node("BuildingLayer"))
 	# 重新加载所有舰船地图信息
 	for ship in s.get_node("ShipLayer").get_children():
@@ -128,7 +131,7 @@ func is_valid(row, col):
  
 # Check if a cell is unblocked
 func is_unblocked(grid, row, col):
-	return grid[row][col] == 0 || grid[row][col] == 2 || grid[row][col] == 8 || grid[row][col] == 3
+	return grid[row][col] == 0 || grid[row][col] == 2 || grid[row][col] == 8 || grid[row][col] == 3 || grid[row][col] == 4
  
 # Check if a cell is the destination
 func is_destination(row, col, dest):

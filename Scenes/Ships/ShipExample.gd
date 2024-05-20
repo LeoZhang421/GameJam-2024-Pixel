@@ -7,7 +7,7 @@ class_name Ship extends Area2D
 @export_range(0.0, 10.0) var attack_speed: float = 0.5 # 每秒攻击多少次，越高攻速越快
 @export_range(0, 600, 60) var attack_range: int = 3 * Level.tile_size.x # 60像素的倍数
 @export_range(0.0, 1.0, 0.5) var collide_damage: float = 0.5 #撞击时造成多少倍当前hp的伤害
-@export var start_location: Vector2 = Vector2(500,500)
+@export var start_location: Vector2
 @export var cost : int = 10
 
 # inner variables
@@ -41,7 +41,8 @@ func _ready():
 	#scale = Vector2(Level.tile_size) / Vector2(102,86)
 	hp = max_hp
 	$AnimatedSprite2D.play()
-	position = start_location
+	if start_location != Vector2.ZERO:
+		position = start_location
 	$HealthBar.max_value = max_hp
 	_update_health()
 	

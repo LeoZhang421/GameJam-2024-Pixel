@@ -2,7 +2,7 @@ class_name Shipyard extends Area2D
 
 # control variables
 @export_range(1,20,1) var max_hp: int = 5
-@export var start_location: Vector2 = Vector2(500,500)
+@export var start_location: Vector2
 @export var cost:int=20
 
 # inner variables
@@ -18,7 +18,8 @@ var is_on_land := false
 func _ready():
 	scale = Vector2(Level.tile_size)/($AnimatedSprite2D.sprite_frames.get_frame_texture("default", 0).get_size())
 	Character.max_buildable_ships += 1
-	position = start_location
+	if start_location != Vector2.ZERO:
+		position = start_location
 	hp = max_hp
 	#resting = true
 	$AnimatedSprite2D.play()
