@@ -1,0 +1,139 @@
+[gd_scene load_steps=14 format=3 uid="uid://8js0qy2k5no2"]
+
+[ext_resource type="Script" path="res://Scenes/Ships/ShipExample.gd" id="1_15c37"]
+[ext_resource type="Texture2D" uid="uid://c2vun0n6b0euo" path="res://Assets/Ships/player_ship_3.png" id="2_r25wx"]
+[ext_resource type="AudioStream" uid="uid://o4h74aij540q" path="res://Assets/Audio/Sound_Effects/船只被摧毁/punch-a-rock-161647.mp3" id="3_8wkv2"]
+[ext_resource type="AudioStream" uid="uid://cpgxreqc3nygu" path="res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3" id="4_o25db"]
+[ext_resource type="AudioStream" uid="uid://dyi5jm7802vi1" path="res://Assets/Audio/Sound_Effects/攻击_船只碰撞/wooden-ship-break-85277.mp3" id="5_c016f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ecacv"]
+size = Vector2(56, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_skkqp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r25wx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="Animation" id="Animation_513e5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vq00y"]
+resource_name = "sink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nm1qa"]
+_data = {
+"RESET": SubResource("Animation_513e5"),
+"sink": SubResource("Animation_vq00y")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33p0y"]
+bg_color = Color(0.227451, 0.227451, 0.227451, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ua6n"]
+bg_color = Color(0, 0.776471, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4shl"]
+radius = 180.0
+
+[node name="ShipExample" type="Area2D" groups=["Ship"]]
+z_index = 2
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_15c37")
+move_speed = 20
+max_hp = 60
+attack = 10
+attack_range = 240
+collide_damage = 1.0
+cost = 80
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ecacv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.500003, -9.09456)
+scale = Vector2(0.298361, 0.310003)
+sprite_frames = SubResource("SpriteFrames_skkqp")
+frame_progress = 0.208513
+
+[node name="SinkAnimation" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_nm1qa")
+}
+autoplay = "RESET"
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(80, 15)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = 30.0
+offset_right = 40.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_33p0y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2ua6n")
+step = 1.0
+value = 79.0
+show_percentage = false
+
+[node name="AreaAttack" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="AreaAttackShape" type="CollisionShape2D" parent="AreaAttack"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_p4shl")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="ExplodeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8wkv2")
+volume_db = -5.0
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_o25db")
+volume_db = -10.0
+
+[node name="CollideSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_c016f")
+volume_db = -5.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
+[connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

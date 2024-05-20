@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://dkc1542lywa7"]
+[gd_scene load_steps=14 format=3 uid="uid://dkc1542lywa7"]
 
 [ext_resource type="Script" path="res://Scenes/Ships/ShipExample.gd" id="1_6oncr"]
-[ext_resource type="Texture2D" uid="uid://dnyp2v78p72j3" path="res://Assets/Ships/ship_1.png" id="1_elhvt"]
-[ext_resource type="Texture2D" uid="uid://cavlr3ropi11s" path="res://Assets/Ships/ship_1_up.png" id="2_88fu2"]
+[ext_resource type="Texture2D" uid="uid://vk2be3kr3xys" path="res://Assets/Ships/player_ship_0.png" id="2_rxink"]
 [ext_resource type="AudioStream" uid="uid://dyi5jm7802vi1" path="res://Assets/Audio/Sound_Effects/攻击_船只碰撞/wooden-ship-break-85277.mp3" id="4_i40ip"]
 [ext_resource type="AudioStream" uid="uid://o4h74aij540q" path="res://Assets/Audio/Sound_Effects/船只被摧毁/punch-a-rock-161647.mp3" id="4_n0sfc"]
 [ext_resource type="AudioStream" uid="uid://cpgxreqc3nygu" path="res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3" id="5_4tlmu"]
@@ -14,10 +13,7 @@ size = Vector2(56, 56)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_elhvt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_88fu2")
+"texture": ExtResource("2_rxink")
 }],
 "loop": true,
 "name": &"default",
@@ -76,13 +72,15 @@ collision_mask = 12
 script = ExtResource("1_6oncr")
 move_speed = 12
 max_hp = 15
-attack_range = 120
+attack_range = 60
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ecacv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.43051e-06, 0.488372)
+scale = Vector2(0.386207, 0.37915)
 sprite_frames = SubResource("SpriteFrames_skkqp")
 frame_progress = 0.208513
 

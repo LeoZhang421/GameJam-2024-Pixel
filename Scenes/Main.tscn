@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dhe13dl2lsh1"]
+[gd_scene load_steps=31 format=3 uid="uid://dhe13dl2lsh1"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_t4kyd"]
 [ext_resource type="Texture2D" uid="uid://ch52obihadyen" path="res://Assets/Water+.png" id="2_gwxmh"]
@@ -9,13 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://dp830xcs4unw6" path="res://Scenes/Utility/Monster_Generator.tscn" id="5_ylbvp"]
 [ext_resource type="PackedScene" uid="uid://cctmyju5of6qw" path="res://Scenes/Cursor.tscn" id="6_npyoo"]
 [ext_resource type="PackedScene" uid="uid://dvll5ir0xk07l" path="res://Scenes/Ships/Merchant.tscn" id="7_kaxjd"]
-[ext_resource type="PackedScene" uid="uid://b84h84ik4tm2o" path="res://Scenes/Enemies/EnemyFlagship.tscn" id="7_qgode"]
+[ext_resource type="Script" path="res://Scenes/Enemies/EnemyExample.gd" id="7_nohhg"]
 [ext_resource type="Script" path="res://Scripts/MerchantLayer.gd" id="7_sh4x1"]
 [ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemySpeedboat.tscn" id="8_h8ixh"]
+[ext_resource type="Texture2D" uid="uid://bdkn12tsmkann" path="res://Assets/Enemies/pirate_3.png" id="8_u2ymc"]
 [ext_resource type="AudioStream" uid="uid://vm2k5vryu7d6" path="res://Assets/Audio/music_0003.mp3" id="8_u6pfl"]
 [ext_resource type="Script" path="res://Scripts/Music.gd" id="9_b8i5n"]
+[ext_resource type="AudioStream" uid="uid://o4h74aij540q" path="res://Assets/Audio/Sound_Effects/船只被摧毁/punch-a-rock-161647.mp3" id="9_h1hgp"]
 [ext_resource type="AudioStream" uid="uid://dv7ocusihfkpj" path="res://Assets/Audio/background-0003.mp3" id="9_vqwgq"]
 [ext_resource type="AudioStream" uid="uid://brukou3f6q8q3" path="res://Assets/Audio/pirate_0001.mp3" id="10_m3u06"]
+[ext_resource type="AudioStream" uid="uid://cpgxreqc3nygu" path="res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3" id="10_vvjed"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eohcr"]
 texture = ExtResource("2_gwxmh")
@@ -252,6 +255,80 @@ terrain_set_2/terrain_0/name = "silkroad"
 terrain_set_2/terrain_0/color = Color(0.160784, 0.454902, 0.184314, 1)
 sources/0 = SubResource("TileSetAtlasSource_eohcr")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtkw7"]
+size = Vector2(56, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c84q6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_u2ymc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="Animation" id="Animation_513e5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vq00y"]
+resource_name = "sink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nm1qa"]
+_data = {
+"RESET": SubResource("Animation_513e5"),
+"sink": SubResource("Animation_vq00y")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0mmf"]
+bg_color = Color(0.227451, 0.227451, 0.227451, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4lit"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t0llh"]
+radius = 180.0
+
+[sub_resource type="PackedScene" id="PackedScene_nxdwx"]
+_bundled = {
+"conn_count": 4,
+"conns": PackedInt32Array(5, 0, 51, 50, 2, 0, 0, 5, 0, 53, 52, 2, 0, 0, 7, 0, 55, 54, 2, 0, 0, 10, 0, 55, 56, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("EnemyExample", "collision_layer", "collision_mask", "script", "move_speed", "max_hp", "attack", "attack_range", "collide_damage", "habour_damage", "metadata/_edit_lock_", "Enemy", "Area2D", "CollisionShape2D", "shape", "AnimatedSprite2D", "position", "scale", "sprite_frames", "frame_progress", "SinkAnimation", "libraries", "AnimationPlayer", "HealthBar", "custom_minimum_size", "anchors_preset", "anchor_left", "anchor_right", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "theme_override_styles/background", "theme_override_styles/fill", "step", "value", "show_percentage", "ProgressBar", "AreaAttack", "AreaAttackShape", "unique_name_in_owner", "AttackTimer", "Timer", "ExplodeSound", "stream", "volume_db", "AudioStreamPlayer", "AttackSound", "RerouteTimer", "_on_area_attack_area_entered", "area_entered", "_on_area_attack_area_exited", "area_exited", "_on_attack_timer_timeout", "timeout", "_on_reroute_timer_timeout"),
+"node_count": 11,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 12, 0, -1, 10, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 7, 6, 8, 7, 9, 1, 10, 8, 1, 11, 0, 0, 13, 13, -1, 1, 14, 9, 0, 0, 0, 15, 15, -1, 4, 16, 10, 17, 11, 18, 12, 19, 13, 0, 2, 0, 22, 20, -1, 1, 21, 14, 0, 0, 0, 38, 23, -1, 14, 24, 15, 25, 16, 26, 17, 27, 17, 28, 18, 29, 19, 30, 20, 31, 21, 32, 22, 33, 23, 34, 24, 35, 7, 36, 25, 37, 26, 0, 0, 0, 12, 39, -1, 2, 1, 27, 2, 1, 0, 5, 0, 13, 40, -1, 2, 41, 8, 14, 28, 0, 0, 0, 43, 42, -1, 0, 0, 0, 0, 47, 44, -1, 2, 45, 29, 46, 30, 0, 0, 0, 47, 48, -1, 1, 45, 31, 0, 0, 0, 43, 49, -1, 0, 0),
+"variants": [4, 3, ExtResource("7_nohhg"), 10, 50, 6, 180, 1.0, true, SubResource("RectangleShape2D_mtkw7"), Vector2(-2.79412, -4), Vector2(0.84459, 0.772727), SubResource("SpriteFrames_c84q6"), 0.842161, {
+"": SubResource("AnimationLibrary_nm1qa")
+}, Vector2(80, 15), 5, 0.5, -40.0, 30.0, 40.0, 45.0, 2, SubResource("StyleBoxFlat_x0mmf"), SubResource("StyleBoxFlat_p4lit"), 79.0, false, 0, SubResource("CircleShape2D_t0llh"), ExtResource("9_h1hgp"), -15.0, ExtResource("10_vvjed")],
+"version": 3
+}
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_t4kyd")
 
@@ -287,7 +364,7 @@ start_location = Vector2(500, 200)
 
 [node name="Monster_Generator" parent="TileMap_Test1" instance=ExtResource("5_ylbvp")]
 position = Vector2(500, 1000)
-monster_list_1 = Array[PackedScene]([ExtResource("8_h8ixh"), ExtResource("7_qgode")])
+monster_list_1 = Array[PackedScene]([ExtResource("8_h8ixh"), SubResource("PackedScene_nxdwx")])
 monster_count_1 = Array[int]([10, 2])
 monster_waittime_1 = Array[float]([5.0, 5.0])
 

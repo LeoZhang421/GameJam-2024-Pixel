@@ -43,6 +43,10 @@ func _process(delta):
 		else:
 			movement += delta * move_speed
 			var distance = route[current_index].distance_to(route[current_index+direction])
+			if route[current_index].x <= route[current_index+direction].x:
+				$TextureRect.flip_h = true
+			else:
+				$TextureRect.flip_h = false
 			if movement < distance:
 				position = route[current_index] * (1-movement/distance) + route[current_index+direction] * (movement/distance)
 			else:

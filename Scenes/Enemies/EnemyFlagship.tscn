@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://b84h84ik4tm2o"]
+[gd_scene load_steps=13 format=3 uid="uid://cop64asvp3yqx"]
 
-[ext_resource type="Script" path="res://Scenes/Enemies/EnemyExample.gd" id="1_rfpat"]
-[ext_resource type="Texture2D" uid="uid://bdkn12tsmkann" path="res://Assets/Enemies/pirate_3.png" id="2_uo7c0"]
-[ext_resource type="AudioStream" uid="uid://o4h74aij540q" path="res://Assets/Audio/Sound_Effects/船只被摧毁/punch-a-rock-161647.mp3" id="4_x86i2"]
-[ext_resource type="AudioStream" uid="uid://cpgxreqc3nygu" path="res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3" id="5_p5wpr"]
+[ext_resource type="Script" path="res://Scenes/Enemies/EnemyExample.gd" id="1_kpk62"]
+[ext_resource type="Texture2D" uid="uid://bdkn12tsmkann" path="res://Assets/Enemies/pirate_3.png" id="2_m6yp5"]
+[ext_resource type="AudioStream" uid="uid://o4h74aij540q" path="res://Assets/Audio/Sound_Effects/船只被摧毁/punch-a-rock-161647.mp3" id="4_5dpte"]
+[ext_resource type="AudioStream" uid="uid://cpgxreqc3nygu" path="res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3" id="5_2ahhd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtkw7"]
 size = Vector2(56, 56)
@@ -12,7 +12,7 @@ size = Vector2(56, 56)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_uo7c0")
+"texture": ExtResource("2_m6yp5")
 }],
 "loop": true,
 "name": &"default",
@@ -67,21 +67,23 @@ radius = 180.0
 [node name="EnemyExample" type="Area2D" groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 3
-script = ExtResource("1_rfpat")
+script = ExtResource("1_kpk62")
 move_speed = 10
 max_hp = 50
 attack = 6
 attack_range = 180
+collide_damage = 1.0
+habour_damage = 3
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mtkw7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-0.294115, -0.0845118)
-scale = Vector2(0.708787, 0.634443)
+position = Vector2(-1.41751, -0.688883)
+scale = Vector2(0.779815, 0.674747)
 sprite_frames = SubResource("SpriteFrames_c84q6")
-frame_progress = 0.842161
+frame_progress = 0.0893492
 
 [node name="SinkAnimation" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
@@ -115,14 +117,15 @@ shape = SubResource("CircleShape2D_t0llh")
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="ExplodeSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_x86i2")
+stream = ExtResource("4_5dpte")
 volume_db = -15.0
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_p5wpr")
+stream = ExtResource("5_2ahhd")
 
 [node name="RerouteTimer" type="Timer" parent="."]
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
 [connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

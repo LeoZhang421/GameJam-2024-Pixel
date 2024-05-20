@@ -263,7 +263,7 @@ _data = {
 "pop": SubResource("Animation_55sw4")
 }
 
-[node name="Merchant" type="Area2D" groups=["Ship"]]
+[node name="Merchant" type="Area2D" groups=["Merchant", "Ship"]]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_ttb7b")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bd1apyy4ksaw3"]
+[gd_scene load_steps=14 format=3 uid="uid://xrrsdx3hk7rf"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/EnemyExample.gd" id="1_0j008"]
 [ext_resource type="Texture2D" uid="uid://cyfdf83daleuq" path="res://Assets/Enemies/pirates_1_up.png" id="2_e776h"]
@@ -12,7 +12,7 @@ size = Vector2(56, 56)
 [sub_resource type="SpriteFrames" id="SpriteFrames_c84q6"]
 animations = [{
 "frames": [{
-"duration": 2.0,
+"duration": 1.0,
 "texture": ExtResource("2_e776h")
 }, {
 "duration": 1.0,
@@ -80,9 +80,10 @@ metadata/_edit_lock_ = true
 shape = SubResource("RectangleShape2D_mtkw7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.627451, 0.450704)
+position = Vector2(0.127452, -0.911118)
+scale = Vector2(0.568828, 0.423787)
 sprite_frames = SubResource("SpriteFrames_c84q6")
-frame_progress = 0.842161
+frame_progress = 0.0893492
 
 [node name="SinkAnimation" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
@@ -124,6 +125,7 @@ stream = ExtResource("5_csdv5")
 
 [node name="RerouteTimer" type="Timer" parent="."]
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
 [connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

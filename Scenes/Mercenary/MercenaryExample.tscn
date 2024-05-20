@@ -1,23 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://fm7pglodv4q7"]
+[gd_scene load_steps=14 format=3 uid="uid://htbquav7lyu"]
 
 [ext_resource type="Script" path="res://Scenes/Mercenary/MercenaryExample.gd" id="1_f36dm"]
-[ext_resource type="Texture2D" uid="uid://dnyp2v78p72j3" path="res://Assets/Ships/ship_1.png" id="2_blvf6"]
-[ext_resource type="Texture2D" uid="uid://cavlr3ropi11s" path="res://Assets/Ships/ship_1_up.png" id="3_kla48"]
-[ext_resource type="AudioStream" uid="uid://o4h74aij540q" path="res://Assets/Audio/Sound_Effects/船只被摧毁/punch-a-rock-161647.mp3" id="4_c3gou"]
-[ext_resource type="AudioStream" uid="uid://cpgxreqc3nygu" path="res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3" id="5_3jsjn"]
-[ext_resource type="AudioStream" uid="uid://dyi5jm7802vi1" path="res://Assets/Audio/Sound_Effects/攻击_船只碰撞/wooden-ship-break-85277.mp3" id="6_fmqst"]
+[ext_resource type="Texture2D" uid="uid://dsnhw15w6ood8" path="res://Assets/Ships/mercenary_1.png" id="2_v8t5v"]
+[ext_resource type="AudioStream" uid="uid://o4h74aij540q" path="res://Assets/Audio/Sound_Effects/船只被摧毁/punch-a-rock-161647.mp3" id="4_pr7nn"]
+[ext_resource type="AudioStream" uid="uid://cpgxreqc3nygu" path="res://Assets/Audio/Sound_Effects/攻击_火炮/explosion-sound-effect-4-10999.mp3" id="5_84h37"]
+[ext_resource type="AudioStream" uid="uid://dyi5jm7802vi1" path="res://Assets/Audio/Sound_Effects/攻击_船只碰撞/wooden-ship-break-85277.mp3" id="6_r4vas"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecacv"]
 size = Vector2(56, 56)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_y1nn1"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_skkqp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_blvf6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_kla48")
+"texture": ExtResource("2_v8t5v")
 }],
 "loop": true,
 "name": &"default",
@@ -70,16 +66,25 @@ bg_color = Color(0, 0.776471, 0, 1)
 radius = 180.0
 
 [node name="MercenaryExample" type="Area2D" groups=["Ship"]]
+z_index = 2
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_f36dm")
+move_speed = 20
+max_hp = 25
+attack = 5
+attack_range = 180
+cost = 40
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ecacv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_y1nn1")
+position = Vector2(-2.875, 0.125)
+scale = Vector2(0.47069, 0.415517)
+sprite_frames = SubResource("SpriteFrames_skkqp")
+frame_progress = 0.208513
 
 [node name="SinkAnimation" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
@@ -114,17 +119,20 @@ shape = SubResource("CircleShape2D_p4shl")
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="ExplodeSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_c3gou")
+stream = ExtResource("4_pr7nn")
 volume_db = -5.0
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_3jsjn")
+stream = ExtResource("5_84h37")
 volume_db = -10.0
 
 [node name="CollideSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_fmqst")
+stream = ExtResource("6_r4vas")
 volume_db = -5.0
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
 [connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -74,8 +74,10 @@ collision_mask = 3
 script = ExtResource("1_mwprd")
 move_speed = 12
 max_hp = 10
-attack = 2
+attack = 1
 attack_range = 120
+collide_damage = 0.0
+merchant_kill_self = true
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -87,7 +89,6 @@ scale = Vector2(0.568828, 0.622222)
 sprite_frames = SubResource("SpriteFrames_c84q6")
 frame = 1
 frame_progress = 0.0893492
-flip_h = true
 
 [node name="SinkAnimation" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
@@ -129,6 +130,7 @@ stream = ExtResource("5_8u5nh")
 
 [node name="RerouteTimer" type="Timer" parent="."]
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_entered" from="AreaAttack" to="." method="_on_area_attack_area_entered"]
 [connection signal="area_exited" from="AreaAttack" to="." method="_on_area_attack_area_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

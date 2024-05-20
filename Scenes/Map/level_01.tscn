@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckqhvlh8lruot"]
+[gd_scene load_steps=8 format=3 uid="uid://ckqhvlh8lruot"]
 
 [ext_resource type="Texture2D" uid="uid://cs6rd2nrfy1gj" path="res://Assets/TileMap/punyworld-overworld-tileset.png" id="1_esm24"]
+[ext_resource type="PackedScene" uid="uid://dp830xcs4unw6" path="res://Scenes/Utility/Monster_Generator.tscn" id="2_otetw"]
+[ext_resource type="PackedScene" uid="uid://bahbbbh2aftlk" path="res://Scenes/Enemies/EnemySpeedboat.tscn" id="3_5x8uh"]
+[ext_resource type="PackedScene" uid="uid://cop64asvp3yqx" path="res://Scenes/Enemies/EnemyFlagShip.tscn" id="4_1gio4"]
+[ext_resource type="PackedScene" uid="uid://xrrsdx3hk7rf" path="res://Scenes/Enemies/EnemyExample.tscn" id="5_n6qjr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2lxv"]
 texture = ExtResource("1_esm24")
@@ -992,3 +996,9 @@ layer_1/tile_data = PackedInt32Array(524313, 786435, 1, 458777, 786435, 0, 58984
 layer_2/tile_data = PackedInt32Array(19, 1376259, 4, 65555, 1376259, 4, 65556, 1376259, 4, 131092, 1376259, 4, 131093, 1376259, 4, 196629, 1376259, 4, 196630, 1376259, 4, 262166, 1376259, 4, 262167, 1376259, 4, 327703, 1376259, 4, 327704, 1376259, 4, 262144, 1376259, 4, 262145, 1376259, 4, 262146, 1376259, 4, 262147, 1376259, 4, 262148, 1376259, 4, 262149, 1376259, 4, 262150, 1376259, 4, 327686, 1376259, 4, 327687, 1376259, 4, 327688, 1376259, 4, 327689, 1376259, 4, 327690, 1376259, 4, 393226, 1376259, 4, 393227, 1376259, 4, 393228, 1376259, 4, 393229, 1376259, 4, 393230, 1376259, 4, 458766, 1376259, 4, 458767, 1376259, 4, 458768, 1376259, 4, 458769, 1376259, 4, 458770, 1376259, 4, 524306, 1376259, 4, 524307, 1376259, 4, 524308, 1376259, 4, 524309, 1376259, 4)
 layer_3/tile_data = PackedInt32Array(524310, 1376259, 5, 393240, 1376259, 5)
 layer_4/tile_data = PackedInt32Array(1048600, 1441795, 4, 1048584, 1441795, 4)
+
+[node name="Monster_Generator" parent="." instance=ExtResource("2_otetw")]
+position = Vector2(240, 200)
+monster_list_1 = Array[PackedScene]([ExtResource("3_5x8uh"), ExtResource("4_1gio4"), ExtResource("5_n6qjr")])
+monster_count_1 = Array[int]([1, 1, 1])
+monster_waittime_1 = Array[float]([5.0, 5.0, 5.0])

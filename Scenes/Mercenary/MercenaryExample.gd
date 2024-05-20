@@ -1,14 +1,14 @@
 class_name Mercenary extends Area2D
 
 # control variables
-@export_range(0,500,1) var move_speed: int = 50 # 每帧移动多少像素
+@export_range(0,500,1) var move_speed: int = 50 # 每秒移动多少像素
 @export_range(1,100,1) var max_hp: int = 10
 @export_range(1,40,1) var attack: int = 2
 @export_range(0.0, 10.0) var attack_speed: float = 0.5 # 每秒攻击多少次，越高攻速越快
-@export_range(0, 600, 60) var attack_range: int = 4 * 60 # 60像素的倍数
-@export_range(0.0, 0.5, 1.0) var collide_damage: float = 0.5 #撞击时造成多少倍当前hp的伤害
+@export_range(0, 600, 60) var attack_range: int = 3 * Level.tile_size.x # 60像素的倍数
+@export_range(0.0, 1.0, 0.5) var collide_damage: float = 1.0 #撞击时造成多少倍当前hp的伤害
 @export var start_location: Vector2 = Vector2(500,500)
-@export var cost : int = 40
+@export var cost : int = 10
 
 # inner variables
 var hp: int = 0
@@ -37,8 +37,8 @@ signal died
 
 # basic functions
 func _ready():
-	scale = Vector2(Level.tile_size)/($AnimatedSprite2D.sprite_frames.get_frame_texture("default", 0).get_size())
-	
+	#scale = Vector2(Level.tile_size)/($AnimatedSprite2D.sprite_frames.get_frame_texture("default", 0).get_size())
+	#scale = Vector2(Level.tile_size) / Vector2(102,86)
 	hp = max_hp
 	$AnimatedSprite2D.play()
 	position = start_location
@@ -50,6 +50,7 @@ func _ready():
 	$AttackTimer.wait_time = 1.0 / attack_speed
 	$AttackTimer.start()
 	area_attack_shape.shape.radius = attack_range
+	move_speed *= Level.tile_size.x / 15
 
 func _process(delta):
 	if Level.get_current_phase() == "action":
@@ -60,7 +61,7 @@ func _process(delta):
 			Character.moving_ship = true
 			moving = false
 			var cursor_texture = load("res://Assets/Utility/Select_Cursor_0001.png")
-			main.get_node("Cursor/Sprite2D").scale = Vector2(main.tile_map.tile_set.tile_size)/cursor_texture.get_size()
+			main.get_node("Cursor/Sprite2D").scale = Vector2(Level.tile_size)/cursor_texture.get_size()
 			main.get_node("Cursor/Sprite2D").texture = cursor_texture
 		if Character.moving_ship and mouse_await and not mouse_inside and Input.is_action_just_pressed("click"):
 			print("moving2", self)
@@ -86,6 +87,10 @@ func _process(delta):
 			else:
 				movement += delta * move_speed
 				var distance = move_array[current_index].distance_to(move_array[current_index+1])
+				if move_array[current_index].x <= move_array[current_index+1].x:
+					$AnimatedSprite2D.flip_h = true
+				else:
+					$AnimatedSprite2D.flip_h = false
 				if movement < distance:
 					position = move_array[current_index] * (1-movement/distance) + move_array[current_index+1] * (movement/distance)
 				else:

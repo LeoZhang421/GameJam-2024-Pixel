@@ -4,10 +4,12 @@ class_name Enemy extends Area2D
 @export_range(0,500,1) var move_speed: int = 50 # 每帧移动多少像素
 @export_range(1,100,1) var max_hp: int = 30
 @export_range(1,40,1) var attack: int = 3
-@export_range(0.0, 10.0) var attack_speed: float = 1.0 # 每秒攻击多少次，越高攻速越快
+@export_range(0.0, 10.0) var attack_speed: float = 0.5 # 每秒攻击多少次，越高攻速越快
 @export_range(0, 600, 1) var attack_range: int = 3 * Level.tile_size.x # 60像素的倍数
-@export_range(0.0, 0.5, 1.0) var collide_damage: float = 0.5 #撞击时造成多少倍当前hp的伤害
+@export_range(0.0, 1.0, 0.5) var collide_damage: float = 0.5 #撞击时造成多少倍当前hp的伤害
 @export var start_location: Vector2 = Vector2(1000,500)
+@export_range(0,10,1) var habour_damage: int = 1 # 进入港口时对玩家伤害
+@export var merchant_kill_self: bool = false # 击沉商船时是否击沉自己
 
 # inner variables
 var hp: int = 0
@@ -32,7 +34,7 @@ signal died
 
 # basic functions
 func _ready():
-	scale = Vector2(Level.tile_size)/($AnimatedSprite2D.sprite_frames.get_frame_texture("default", 0).get_size())
+	#scale = Vector2(Level.tile_size)/($AnimatedSprite2D.sprite_frames.get_frame_texture("default", 0).get_size())
 	hp = max_hp
 	$AnimatedSprite2D.play()
 	$HealthBar.max_value = max_hp
@@ -64,12 +66,16 @@ func _process(delta):
 	if moving and move_array:
 		var target_position = move_array[0]
 		direction = (target_position - global_position).normalized()
+		if direction.x >= 0:
+			$AnimatedSprite2D.flip_h = true
+		else:
+			$AnimatedSprite2D.flip_h = false
 		position += direction * move_speed * delta
 		if target_position.distance_to(global_position) <= main.pathfinder.scale/4:
 			move_array.pop_front()
 			if move_array == [] and main.pathfinder.get_harbour_position().has(main.pathfinder.get_tile_center(global_position)):
-				Character.loss_hp(hp)
-				take_damage(self, hp)
+				Character.loss_hp(habour_damage)
+				take_damage(self, 99)
 
 
 # inner functions
@@ -88,6 +94,7 @@ func take_damage(source, damage:int):
 		add_child(smoke_effect)
 		$ExplodeSound.play()
 		sink_animation.play("sink")
+		moving = false
 		await smoke_effect.finished
 		get_parent().remove_child(self)
 		queue_free()
@@ -127,6 +134,14 @@ func attack_event() -> void:
 	$AttackSound.play()
 	target.take_damage(self, attack)
 
+func kill_merchant(merchant) -> void:
+	print(1)
+	merchant.take_damage(self, 99)
+	if merchant_kill_self:
+		take_damage(self, 99)
+		return
+	else:
+		return
 
 # funcion related to signal
 func _on_area_attack_area_entered(enemy:Node):
@@ -197,3 +212,10 @@ func _on_reroute_timer_timeout():
 				temp.pop_front()
 				move_array = temp
 				return
+
+
+func _on_area_entered(enemy):
+	if enemy.is_in_group("Ship") and enemy.is_in_group("Merchant"):
+		kill_merchant(enemy)
+	else:
+		return
