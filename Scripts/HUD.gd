@@ -354,6 +354,9 @@ func _on_turn_count_timer_timeout():
 
 
 func complete_turn():
+	Character.add_gold(Character.future_gold)
+	Character.future_gold = 0
+	mercenary_list.visible = false
 	expand_button_text.self_modulate = Color.WHITE
 	build_button_text.self_modulate = Color.WHITE
 	demolish_button_text.self_modulate = Color.WHITE

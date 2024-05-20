@@ -1,3 +1,6 @@
 res://Scenes/UI/HUD.tscn
 res://Scripts/Character.gd
 res://Scenes/Map/level_03.tscn
+res://Scenes/Map/level_02.tscn
+res://Scenes/Map/level_01.tscn
+res://Scripts/HUD.gd
