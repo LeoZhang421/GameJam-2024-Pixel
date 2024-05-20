@@ -33,8 +33,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if $EnemyLayer.get_child_count() <= 0 && Character.current_hp > 0:
+	if $EnemyLayer.get_child_count() <= 0 && Character.current_hp > 0 && $MerchantLayer.get_child_count() <= 1:
 		$HUD.complete_turn()
+		for child in tile_map.get_children():
+			if child.is_in_group("Monster_Generator"):
+				child.is_cleared = false
 		set_process(false)
 		
 func add_warning():

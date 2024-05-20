@@ -24,6 +24,8 @@ radius = 180.0
 [node name="TurrentExample" type="Area2D" groups=["Building"]]
 collision_mask = 3
 script = ExtResource("1_nwr8v")
+attack_range = 180
+attack = 4
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

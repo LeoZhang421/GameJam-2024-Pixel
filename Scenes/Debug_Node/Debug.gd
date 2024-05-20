@@ -12,9 +12,6 @@ func _process(delta):
 
 
 func _on_button_pressed():
-	Level.current_level += 1
-	Level.current_turn = 1
-	Level.phase["preparation"] = 1
-	Level.phase["action"] = 0
+	Level.complete_level()
 	Character.reset()
 	get_tree().reload_current_scene()

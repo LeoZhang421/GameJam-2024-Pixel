@@ -34,6 +34,7 @@ func complete_phase():
 func complete_turn():
 	current_turn += 1
 	Character.current_built_ships = 0
+	Character.add_gold(100)
 	phase["preparation"] = 1
 	phase["action"] = 0
 	if current_turn > all_turns:

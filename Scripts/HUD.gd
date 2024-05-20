@@ -365,7 +365,7 @@ func complete_turn():
 	Character.current_built_ships = 0
 	main.pathfinder.reload_map_data(main)
 	Level.complete_turn()
-	building_list.visible = false
+	mercenary_list.visible = false
 	if Level.get_current_level() > main.current_level:
 		if Level.get_current_level() > 3:
 			$Level_Control/Turn_Display.set_text("Thanks for playing Defense of the Aqua!")

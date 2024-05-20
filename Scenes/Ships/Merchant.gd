@@ -71,7 +71,7 @@ func _arrive_habour():
 
 func _arrive_dest():
 	moving = false
-	Character.save_gold(30)
+	Character.save_gold(15)
 	label.show()
 	label_animation.play("pop")
 	animation.play("pop")
